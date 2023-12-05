@@ -16,11 +16,11 @@ function closeMenu() {
 }
 const downloadButton = document.getElementById("downloadButton");
 
-const fileURL = "resume.pdf"; 
+const fileURL = "Resume_Lizaveta_Kukharava_UX_Desiger.pdf"; 
 downloadButton.addEventListener("click", function () {
     const anchor = document.createElement("a");
     anchor.href = fileURL;
-    anchor.download = "Resume_Lizaveta_Kukharava_UX_Designer.pdf"; 
+    anchor.download = "Resume_Lizaveta_Kukharava_UX_Designer"; 
 
     document.body.appendChild(anchor);
     anchor.click();
