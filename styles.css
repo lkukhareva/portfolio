@@ -345,7 +345,7 @@ nav ul li a.active {
   text-decoration: none;
 }
 
-.card body {
+.card h5 {
   margin-top: -24px;
   margin-left: 0px;
 }
@@ -460,7 +460,7 @@ nav ul li a.active {
   margin-left: 20px;
 }
 
-.portfolio-card body{
+.portfolio-card h5{
   margin-top: -24px;
   margin-left: 20px;
 }
