@@ -345,11 +345,6 @@ nav ul li a.active {
   text-decoration: none;
 }
 
-.card h5 {
-  margin-top: -24px;
-  margin-left: 0px;
-}
-
 .button-text-icon {
   display: flex;
   padding: 0px 0px 10px 0px;
@@ -456,11 +451,6 @@ nav ul li a.active {
 }
 
 .portfolio-card h4 {
-  margin-top: -24px;
-  margin-left: 20px;
-}
-
-.portfolio-card h5{
   margin-top: -24px;
   margin-left: 20px;
 }
