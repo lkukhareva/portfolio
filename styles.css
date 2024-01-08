@@ -340,6 +340,11 @@ nav ul li a.active {
   margin-left: 0px;
 }
 
+.card a {
+  color: #1d1d1d;
+  text-decoration: none;
+}
+
 .button-text-icon {
   display: flex;
   padding: 0px 0px 10px 0px;
@@ -448,6 +453,11 @@ nav ul li a.active {
 .portfolio-card h4 {
   margin-top: -24px;
   margin-left: 20px;
+}
+
+.portfolio-card a {
+  color: #1d1d1d;
+  text-decoration: none;
 }
 
 .columns-container {
