@@ -309,6 +309,7 @@ nav ul li a.active {
 .card {
   display: flex;
   width: 295px;
+  height: 380px;
   padding: 20px;
   flex-direction: column;
   align-items: flex-start;
@@ -331,13 +332,22 @@ nav ul li a.active {
 }
 
 .card h3 {
-  margin-top: 0px;
-  margin-left: 0px;
+  margin-top: -24px;
+  margin-left: 6px;
 }
 
 .card h4 {
-  margin-top: -24px;
-  margin-left: 0px;
+  margin-top: -28px;
+  margin-left: 6px;
+}
+
+.card h5 {
+  margin-top: 8px;
+  margin-left: 6px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: normal;
+  color: #595959;
 }
 
 .card a {
@@ -446,13 +456,22 @@ nav ul li a.active {
 }
 
 .portfolio-card h3 {
-  margin-top: 8px;
-  margin-left: 20px;
+  margin-top: -24px;
+  margin-left: 12px;
 }
 
 .portfolio-card h4 {
   margin-top: -24px;
-  margin-left: 20px;
+  margin-left: 12px;
+}
+
+.portfolio-card h5 {
+  margin-top: 16px;
+  margin-left: 12px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: normal;
+  color: #595959;
 }
 
 .portfolio-card a {
