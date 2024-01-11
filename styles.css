@@ -276,9 +276,8 @@ nav ul li a.active {
 
 .cards-container {
   display: flex;
-  width: 2000px;
   height: 480px;
-  max-width: 2250px;
+  max-width: 1440px;
   padding: 0px 40px 40px 160px;
   align-items: flex-start;
   justify-content: flex-start;
@@ -714,7 +713,7 @@ button:hover {
   }
 
   .portfolio-card h3 {
-    margin-top: 0px;
+    margin-top: -24px;
     margin-left: 12px;
   }
   
@@ -817,7 +816,6 @@ button:hover {
     color: #F6D196;
     font-size: 34px;
     font-weight: 600;
-    text-transform: uppercase;
   }
   
   h6 {
@@ -978,13 +976,11 @@ button:hover {
   }
 
   .card h3 {
-    margin-top: 0px;
-    margin-left: 0px;
+    margin-top: -24px;
   }
 
   .card h4 {
     margin-top: -32px;
-    margin-left: 0px;
   }
 
   .should-know-about-me {
@@ -1088,14 +1084,22 @@ button:hover {
   }
 
   .portfolio-card h3 {
-    margin-top: -8px;
+    margin-top: -24px;
     margin-left: 20px;
   }
 
   .portfolio-card h4 {
-    margin-top: -24px;
+    margin-top: -28px;
     margin-left: 20px;
   }  
+
+  .portfolio-card h5 {
+    margin-top: 0px;
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #595959;
+  }
 
   .cards-container {
     display: flex;
