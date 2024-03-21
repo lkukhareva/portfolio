@@ -264,8 +264,9 @@ nav ul li a.active {
 }
 
 .title-section {
-  margin-left: 120px;
-  margin-top: 60px;
+  max-width: 960px;
+  width: 60%;
+  margin: 40px auto 20 auto;
 }
 
 .carousel {
@@ -760,7 +761,8 @@ button:hover {
   }
   
   .title {
-    margin-left: 40px;
+    width: 100%;
+    margin: 40px auto 20 auto;
   }
   
   .image img {
@@ -813,7 +815,7 @@ button:hover {
   
   h5 {
     font-family: 'Nunito', sans-serif;
-    color: #F6D196;
+    color: #1d1d1d;
     font-size: 34px;
     font-weight: 600;
   }
@@ -1034,9 +1036,8 @@ button:hover {
   }
 
   .title-section {
-    margin-left: 24px;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    width: 100%;
+    margin: 40px auto 20 auto;
   }
 
   .image img {
