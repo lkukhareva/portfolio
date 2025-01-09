@@ -63,13 +63,15 @@
     <div class="div-17">
       <div class="div-18">
         <div class="column-3">
-          <a href="https://www.behance.net/gallery/216457395/International-Fashion-Show-Website-Redesign" class="div-24" target="_blank"></a>
+          <div class="div-33">
+          <a href="https://www.behance.net/gallery/216457395/International-Fashion-Show-Website-Redesign" class="div-32" target="_blank">
             <img
               loading="lazy"
               srcset="IFDindex.png"
               class="img-3"
             />
           </a>
+        </div>
         </div>
         <div class="column-4">
           <div class="div-19">
@@ -154,12 +156,12 @@
 
     .div-8 {
       display: flex;
-      margin-top: 20px;
+      margin-top: 0px;
       width: 100%;
       max-width: 1185px;
       flex-direction: column;
       align-items: center;
-      padding: 96px 20px 0px 20px;
+      padding: 96px 0px 0px 20px;
     }
     @media (max-width: 991px) {
       .div-8 {
@@ -174,6 +176,7 @@
       font: oblique 700 24px/32px Helvetica, sans-serif;
       max-width: 290px;
       margin-left: 0px;
+      margin-bottom: -24px;
     }
     @media (max-width: 991px) {
       .div-9 {
@@ -341,6 +344,7 @@
         margin-right: 20px;
       }
     }
+
     .column-3 {
       display: flex;
       flex-direction: column;
@@ -355,8 +359,24 @@
         margin-left: 24px;
       }
     }
+
+    .div-33 {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+      gap: 20px
+    }
+
+    @media (max-width: 991px) {
+      .div-33 {
+        max-width: 100%;
+        margin: 20px;
+        gap: 0px;
+      }
+    }
+
     .img-3 {
-      aspect-ratio: 0.90;
+      aspect-ratio: 0.81;
       object-fit: auto;
       object-position: left;
       width: 100%;
@@ -405,7 +425,7 @@
       }
     }
     .img-4 {
-      aspect-ratio: 1.72;
+      aspect-ratio: 1.71;
       object-position: center;
       width: 100%;
     }
@@ -434,6 +454,11 @@
   }
 
   .div-26:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+
+  .div-32:hover{
     transform: scale(1.05);
     transition: transform 0.3s ease;
   }
