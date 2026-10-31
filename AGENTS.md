@@ -8,11 +8,13 @@ link to Behance. Vite is development-only tooling for local preview/live updates
 
 ## Structure
 
-- Root HTML: `index.html`, `about.html`, `work.html`, `cv.html`, `impressum.html`.
+- Root HTML: `index.html`, `about.html`, `work.html`, `impressum.html`.
 - `style.css`: shared colors, header/navigation, footer, accessibility styles.
 - `css/<page>.css`: page-specific layouts; loaded after shared CSS.
-- Images/PDFs and `helvetica_font/`: original media. `assets/` holds the local
+- Images and `helvetica_font/`: original media. `assets/` holds the local
   decorative SVG arrow. Font files are retained but not loaded via `@font-face`.
+- `vite.config.mjs`: multi-page dev server; missing pages return 404 rather than
+  falling back to the homepage.
 - `tests/site.test.mjs`: dependency-free source/content regression checks.
 - `tests/dev-server.test.mjs`: HTTP integration checks using Vite on a temporary
   loopback port; closes the server afterward.
@@ -33,7 +35,7 @@ For source-only checks without installing Vite: `node --test tests/site.test.mjs
 Optional HTML validation:
 
 ```sh
-npx --yes html-validate@11.17.0 --preset standard,a11y index.html about.html work.html cv.html impressum.html
+npx --yes html-validate@11.17.0 --preset standard,a11y index.html about.html work.html impressum.html
 ```
 
 ## Change guidelines

@@ -1,7 +1,7 @@
 # Portfolio
 
-Lizaveta Kukharava's portfolio: five static HTML pages with shared CSS and local
-images/PDFs. No framework or production build step.
+Lizaveta Kukharava's portfolio: four static HTML pages with shared CSS and local
+images. No framework or production build step.
 
 ## View locally
 
@@ -20,9 +20,9 @@ The preview is local to your computer; Vite is only a development tool.
 
 ## Edit and check
 
-- Pages: `index.html`, `about.html`, `work.html`, `cv.html`, `impressum.html`.
+- Pages: `index.html`, `about.html`, `work.html`, `impressum.html`.
 - Shared styling: `style.css`; page layouts: `css/`.
-- Media: root images/PDFs, `assets/`, and `helvetica_font/`.
+- Media: root images, `assets/`, and `helvetica_font/`.
 - Agent guidance: `AGENTS.md`.
 
 ```sh

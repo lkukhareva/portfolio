@@ -16,7 +16,7 @@ test('local preview serves all pages and original assets with the live-update cl
   await server.listen();
   const base = server.resolvedUrls.local[0];
 
-  for (const path of ['', 'index.html', 'about.html', 'work.html', 'cv.html', 'impressum.html']) {
+  for (const path of ['', 'index.html', 'about.html', 'work.html', 'impressum.html']) {
     await t.test(`serves /${path}`, async () => {
       const response = await fetch(new URL(path, base));
       assert.equal(response.status, 200);
@@ -27,7 +27,15 @@ test('local preview serves all pages and original assets with the live-update cl
     });
   }
 
-  for (const path of ['style.css', 'css/about.css', 'assets/section-arrow.svg', 'profile.jpeg', 'CV Lizaveta Kukharava Designer.pdf']) {
+  for (const path of ['cv.html', 'css/cv.css', 'CVimage.png', 'CV Lizaveta Kukharava Designer.pdf', 'CV Lizaveta Kukharava UX Designer.pdf']) {
+    await t.test(`removed resource /${path} returns 404`, async () => {
+      const response = await fetch(new URL(path, base));
+      assert.equal(response.status, 404);
+      await response.arrayBuffer();
+    });
+  }
+
+  for (const path of ['style.css', 'css/about.css', 'assets/section-arrow.svg', 'profile.jpeg']) {
     await t.test(`serves ${path} unchanged`, async () => {
       const response = await fetch(new URL(path, base), { headers: { Accept: 'text/css,*/*;q=0.1' } });
       assert.equal(response.status, 200);

@@ -8,24 +8,31 @@ import test from 'node:test';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = path => readFileSync(join(root, path), 'utf8');
 const hash = value => createHash('sha256').update(value).digest('hex');
-const pages = ['index.html', 'about.html', 'work.html', 'cv.html', 'impressum.html'];
+const pages = ['index.html', 'about.html', 'work.html', 'impressum.html'];
 
-// Fingerprints of the original copy and anchor destinations, before cleanup.
-const original = {
-  'index.html': ['353f80a6d5f26cd40069c4fbd6fc837ebff64f9a4fe0a51e1d5f0837bde5288b', '4d5a6a3c4ffa05edcc8ad73e17d89f811a2f92619f183420a4468cee56e4cd8c'],
-  'about.html': ['811c0a5b59d4e13a0132549f0bcc375d315222baa29b775f97348f140a7d1a64', 'ffc94c94beddc2abf03bd958907d45e532fe798f3a395207becfb37fab9d8cb3'],
-  'work.html': ['d5392118071b1f848c5b38b36ffe745dc2a236cd407de956fb8ad42ec0e176d9', '5f71c0bc83b57fdf071faf849425649382e25cb81b468ff5e2a1d49421878761'],
-  'cv.html': ['d62fa444dcfe13a3b11c48253da74b3e0ea9f09c4814c29b6adf57b40bd70269', '02d71da434375def6c6e9e4fce5d2fbffaae9256d2b10f85237fbfd69960116e'],
-  'impressum.html': ['a5a941876dd428406c06966d499b5df68c859182b701a492e9167b74ee7b1887', 'ffc94c94beddc2abf03bd958907d45e532fe798f3a395207becfb37fab9d8cb3'],
+// Original copy and destinations, minus the intentionally removed CV links/CTA.
+const baseline = {
+  'index.html': ['ee89c302ea16ea9543e086e4aadd876f70e77166da15974516f0de550ce71a76', 'f12b37023af0eb5490d7b66a1f6f03742f4a8616fda12580ac21908714917aef'],
+  'about.html': ['051dfba0f377e9235fa93b116493f6a3d2d1cb28c63a2337285da22b000916d8', '8f9f99982b9f10ba6bd65a4c501d50d884811ca362816f5664541df2689ffa1a'],
+  'work.html': ['d7926037d7797ccf5f059562d8fa0730d66635c1d46f76c206ee8508016aa19e', 'bb58e8ccda76628b8c34c1b6286e97dde9b26447aac9c991ec974aab5c9921ca'],
+  'impressum.html': ['4a74b6b173764657d54b2623a271fdd4460d0302293ca3a3c403dcbf2ffa9d7a', '8f9f99982b9f10ba6bd65a4c501d50d884811ca362816f5664541df2689ffa1a'],
 };
 
 const originalImages = {
   'index.html': ['profile.jpeg', 'assets/section-arrow.svg', 'IFDindex.png', 'Hopappindex.png', 'Cloud9index.png'],
   'about.html': ['profile.jpeg', 'assets/section-arrow.svg', 'andersenoffice.jpg', 'classroom.jpg', 'Laptop.jpg'],
   'work.html': ['IFDwork.png', 'Hopappwork.png', 'Cloud9work.png', 'Rapuhawork.png'],
-  'cv.html': ['CVimage.png'],
   'impressum.html': [],
 };
+
+test('CV page, dedicated assets, and remaining page references are removed', () => {
+  for (const path of ['cv.html', 'css/cv.css', 'CVimage.png', 'CV Lizaveta Kukharava Designer.pdf', 'CV Lizaveta Kukharava UX Designer.pdf']) {
+    assert.equal(existsSync(join(root, path)), false, `${path} must be removed`);
+  }
+  for (const page of pages) {
+    assert.doesNotMatch(read(page), /\bCV\b|CVimage|cv\.html/i, `${page} must not mention the removed CV`);
+  }
+});
 
 function pageText(html) {
   return html
@@ -42,10 +49,10 @@ function pageText(html) {
 for (const page of pages) {
   const html = read(page).replace(/<!--[\s\S]*?-->/g, '');
 
-  test(`${page}: original copy and link destinations are preserved`, () => {
-    assert.equal(hash(pageText(html)), original[page][0]);
+  test(`${page}: copy and link destinations match the approved baseline`, () => {
+    assert.equal(hash(pageText(html)), baseline[page][0]);
     const links = [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)].map(m => decodeURI(m[1]));
-    assert.equal(hash(JSON.stringify(links)), original[page][1]);
+    assert.equal(hash(JSON.stringify(links)), baseline[page][1]);
   });
 
   test(`${page}: document metadata and static navigation`, () => {
