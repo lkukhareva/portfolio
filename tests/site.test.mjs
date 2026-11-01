@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,23 +7,60 @@ import test from 'node:test';
 // Exercise the deployed HTML rather than Astro's source templates.
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const read = path => readFileSync(join(root, path), 'utf8');
-const hash = value => createHash('sha256').update(value).digest('hex');
 const pages = ['index.html', 'about.html', 'work.html', 'impressum.html'];
-
-// Original copy and destinations, minus the intentionally removed CV links/CTA.
-const baseline = {
-  'index.html': ['ee89c302ea16ea9543e086e4aadd876f70e77166da15974516f0de550ce71a76', 'f12b37023af0eb5490d7b66a1f6f03742f4a8616fda12580ac21908714917aef'],
-  'about.html': ['051dfba0f377e9235fa93b116493f6a3d2d1cb28c63a2337285da22b000916d8', '8f9f99982b9f10ba6bd65a4c501d50d884811ca362816f5664541df2689ffa1a'],
-  'work.html': ['d7926037d7797ccf5f059562d8fa0730d66635c1d46f76c206ee8508016aa19e', 'bb58e8ccda76628b8c34c1b6286e97dde9b26447aac9c991ec974aab5c9921ca'],
-  'impressum.html': ['4a74b6b173764657d54b2623a271fdd4460d0302293ca3a3c403dcbf2ffa9d7a', '8f9f99982b9f10ba6bd65a4c501d50d884811ca362816f5664541df2689ffa1a'],
-};
-
-const originalImages = {
-  'index.html': ['profile.jpeg', 'assets/section-arrow.svg', 'IFDindex.png', 'Hopappindex.png', 'Cloud9index.png'],
-  'about.html': ['profile.jpeg', 'assets/section-arrow.svg', 'andersenoffice.jpg', 'classroom.jpg', 'Laptop.jpg'],
-  'work.html': ['IFDwork.png', 'Hopappwork.png', 'Cloud9work.png', 'Rapuhawork.png'],
-  'impressum.html': [],
-};
+const portfolioCopy = [
+  'Empathetic Designer: Meaningful Connections via Design',
+  'lizaveta kukharava',
+  'A growth-oriented professional with a passion for enhancing',
+  'Thrive on driving initiatives that foster innovation, improve',
+  'Excel in dynamic environments, contributing to meaningful change',
+  'Lizaveta is tactful in communicating with clients and colleagues',
+  'She displayed strong professionalism, patience with others and',
+  'Liza was a pleasure to work with',
+  'what i bring to the table',
+  'Known for my easy-going nature, non-conflict attitude, and can-do',
+  'Communication',
+  'Active Listening',
+  'Attention to Detail',
+  'Problem Solving',
+  'Presentation Skills',
+  'UX Research',
+  'Wireframing & Prototyping',
+  'Content Design',
+  'Coding basics',
+  'Analytical thinking',
+  'Growth and improvement',
+  'Empathy and communication',
+  'Going extra mile',
+  'contact@lizaveta.co',
+  'RECENT PROJECTS',
+  'How I redesigned a fashion contest site',
+  'Improving consistency and content structure',
+  'How I redesigned a travel app',
+  'Simplifying the design to reduce overload',
+  'how i created a niche weather app',
+  'Making days on the water safe and fun',
+  'how i created a visual identity for dev team',
+  'Helping a team stand out and present values',
+];
+const behance = [
+  'https://www.behance.net/gallery/216457395/International-Fashion-Show-Website-Redesign',
+  'https://www.behance.net/gallery/163104401/Hop-App-UIUX-Case-Study',
+  'https://www.behance.net/gallery/142352791/Cloud-9-app-UX-Case-Study',
+  'https://www.behance.net/gallery/170639797/Rapuha-Brand-Design',
+];
+const portfolioImages = [
+  'profile.jpeg',
+  'assets/section-arrow.svg',
+  'andersenoffice.jpg',
+  'classroom.jpg',
+  'Laptop.jpg',
+  'assets/section-arrow.svg',
+  'IFDwork.png',
+  'Hopappwork.png',
+  'Cloud9work.png',
+  'Rapuhawork.png',
+];
 
 test('CV page, dedicated assets, and remaining page references are removed', () => {
   for (const path of ['cv.html', 'css/cv.css', 'CVimage.png', 'CV Lizaveta Kukharava Designer.pdf', 'CV Lizaveta Kukharava UX Designer.pdf']) {
@@ -39,7 +75,6 @@ function pageText(html) {
   return html
     .replace(/<head\b[\s\S]*?<\/head>/gi, '')
     .replace(/<(style|script)\b[^>]*>[\s\S]*?<\/\1>/gi, '')
-    .replace(/<h1 class="visually-hidden">[^<]*<\/h1>/g, '')
     .replace(/<[^>]+>/g, ' ')
     .replace(/&quot;/g, '"')
     .replace(/&amp;/g, '&')
@@ -47,87 +82,169 @@ function pageText(html) {
     .trim();
 }
 
-for (const page of pages) {
-  const html = read(page).replace(/<!--[\s\S]*?-->/g, '');
+function assertBalanced(html) {
+  const stack = [];
+  const voidTags = new Set(['meta', 'link', 'img', 'br', 'hr', 'input']);
+  const markup = html.replace(/<(style|script)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
+  for (const match of markup.matchAll(/<(\/?)([a-z][\w-]*)\b[^>]*>/gi)) {
+    const [, closing, tag] = match;
+    if (closing) {
+      assert.equal(stack.pop(), tag, `unexpected closing ${tag}`);
+    } else if (!voidTags.has(tag)) {
+      if (['header', 'main', 'footer'].includes(tag)) {
+        assert.equal(stack.at(-1), 'body', `${tag} belongs directly inside body`);
+      }
+      stack.push(tag);
+    }
+  }
+  assert.deepEqual(stack, [], 'all elements are closed');
+}
 
-  test(`${page}: copy and link destinations match the approved baseline`, () => {
-    assert.equal(hash(pageText(html)), baseline[page][0]);
-    const links = [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)].map(m => decodeURI(m[1]));
-    assert.equal(hash(JSON.stringify(links)), baseline[page][1]);
-  });
+function assertSafeAssets(html) {
+  for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
+    assert.match(tag, /\balt="[^"]*"/, 'every image has an alt attribute');
+    assert.match(tag, /\bsrc="(?!https?:)[^"]+"/, 'images are local and have a src fallback');
+    assert.doesNotMatch(tag, /\bsrcset=/, 'single images do not need srcset');
+  }
+  for (const [, content] of html.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/g)) {
+    if (!content.replace(/<[^>]+>/g, '').trim()) {
+      assert.match(content, /\balt="[^"]+"/, 'image-only links need an accessible name');
+    }
+  }
+  for (const [tag] of html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)) {
+    assert.match(tag, /\brel="[^"]*\bnoopener\b/, 'new tabs cannot control the opener');
+  }
+  for (const [, ref] of html.matchAll(/\b(?:src|href)="([^"]+)"/g)) {
+    if (/^(?:https?:|mailto:|#|\.\/#)/.test(ref)) continue;
+    assert.ok(existsSync(join(root, decodeURI(ref))), `missing local asset: ${ref}`);
+  }
+  assert.doesNotMatch(html, /apiKey=|cdn\.builder\.io/, 'no third-party decoration request or embedded API key');
+}
 
-  test(`${page}: document metadata and static navigation`, () => {
+test('index.html is one scrolling portfolio with hash navigation', () => {
+  const html = read('index.html').replace(/<!--[\s\S]*?-->/g, '');
+  const text = pageText(html);
+  for (const copy of portfolioCopy) assert.ok(text.includes(copy), `missing copy: ${copy}`);
+  assert.doesNotMatch(html, /IFDindex\.png|Hopappindex\.png|Cloud9index\.png/, 'home mosaic is not repeated above the work section');
+  for (const path of ['IFDindex.png', 'Hopappindex.png', 'Cloud9index.png']) {
+    assert.equal(existsSync(join(root, path)), false, `${path} belonged to the removed home mosaic`);
+  }
+
+  const ids = [...html.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map(match => match[1]);
+  assert.deepEqual(ids, ['home', 'about', 'work']);
+  assert.match(html, /<section\b[^>]*id="home"[^>]*aria-label="Home"/);
+  assert.match(html, /<section\b[^>]*id="about"[^>]*aria-label="About"/);
+  assert.match(html, /<section\b[^>]*id="work"[^>]*aria-label="Work"/);
+
+  const headings = [...html.matchAll(/<h([1-3])\b[^>]*>([\s\S]*?)<\/h\1>/g)].map(([, level, content]) => [level, content.replace(/<[^>]+>/g, '').trim()]);
+  assert.deepEqual(headings.filter(([level]) => level === '1'), [['1', 'lizaveta kukharava']]);
+  assert.ok(headings.some(([level, content]) => level === '2' && content === 'what i bring to the table'));
+  assert.ok(headings.some(([level, content]) => level === '2' && content === 'RECENT PROJECTS'));
+  assert.deepEqual(headings.filter(([level]) => level === '3').map(([, content]) => content), [
+    'How I redesigned a fashion contest site',
+    'How I redesigned a travel app',
+    'how i created a niche weather app',
+    'how i created a visual identity for dev team',
+  ]);
+
+  const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+  assert.ok(nav, 'navigation exists');
+  assert.deepEqual([...nav.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)<\/a>/g)].map(match => [match[1], match[2]]), [
+    ['./#home', 'Home'],
+    ['./#about', 'About'],
+    ['./#work', 'Work'],
+  ]);
+  assert.doesNotMatch(nav, /aria-current/, 'the visible section is marked by script, not baked into the HTML');
+  assert.doesNotMatch(html, /index\.html#/);
+
+  const stylesheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)">/g)].map(match => match[1]);
+  assert.deepEqual(stylesheets, ['style.css', 'css/index.css', 'css/about.css', 'css/work.css']);
+  const scripts = [...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>/g)].map(match => match[1]);
+  assert.deepEqual(scripts, ['scroll-nav.js']);
+  assert.equal([...html.matchAll(/<script\b/g)].length, 1);
+  assert.doesNotMatch(read('scroll-nav.js'), /location|history|replaceState|pushState/, 'scrolling must not rewrite the URL');
+
+  const sources = [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)].map(match => match[1]);
+  assert.deepEqual(sources, portfolioImages);
+  const links = [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)].map(match => decodeURI(match[1]));
+  for (const href of behance) assert.ok(links.includes(href), href);
+  assert.ok(links.includes('impressum.html'));
+  assertBalanced(html);
+  assertSafeAssets(html);
+  assert.match(html, /<title>Lizaveta Kukharava, a Berlin-based UX Designer<\/title>/);
+  assert.doesNotMatch(html, /<style\b/);
+});
+
+for (const [page, hash, label] of [['about.html', 'about', 'About'], ['work.html', 'work', 'Work']]) {
+  test(`${page} jumps to /#${hash} without leaving index.html in the address bar`, () => {
+    const html = read(page);
     assert.match(html, /<meta charset="utf-8">/);
     assert.match(html, /<meta name="viewport" content="width=device-width, initial-scale=1">/);
-    assert.match(html, /<link rel="icon" href="Logo.svg" type="image\/svg\+xml">/);
-    const stylesheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)">/g)].map(m => m[1]);
-    assert.deepEqual(stylesheets, ['style.css', `css/${page.replace('.html', '.css')}`], 'shared styles precede page overrides');
-    const title = page === 'impressum.html'
-      ? 'Lizaveta Kukharava | Impressum'
-      : 'Lizaveta Kukharava, a Berlin-based UX Designer';
-    assert.ok(html.includes(`<title>${title}</title>`));
-    assert.match(html, /<meta name="description" content="If you care for your customers and users as much as I do, take a look at my portfolio and reach out to team up and transform your challenges into wins\.">/);
-    const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)?.[1];
-    assert.ok(nav, 'navigation exists');
-    const current = [...nav.matchAll(/<a\b[^>]*aria-current="page"[^>]*>/g)];
-    assert.equal(current.length, page === 'impressum.html' ? 0 : 1);
-    if (current.length) assert.match(current[0][0], new RegExp(`href="${page.replace('.', '\\.')}"`));
-    assert.doesNotMatch(html, /<script\b/, 'static navigation needs no script or clipboard handler');
-  });
-
-  test(`${page}: explicit, balanced structure and landmarks`, () => {
-    // A strict nesting check for these simple, explicitly closed HTML documents,
-    // not a general-purpose HTML validator (optional end tags are not supported).
-    const stack = [];
-    const voidTags = new Set(['meta', 'link', 'img', 'br', 'hr', 'input']);
-    const markup = html.replace(/<(style|script)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
-    for (const match of markup.matchAll(/<(\/?)([a-z][\w-]*)\b[^>]*>/gi)) {
-      const [, closing, tag] = match;
-      if (closing) {
-        assert.equal(stack.pop(), tag, `unexpected closing ${tag}`);
-      } else if (!voidTags.has(tag)) {
-        if (['header', 'main', 'footer'].includes(tag)) {
-          assert.equal(stack.at(-1), 'body', `${tag} belongs directly inside body`);
-        }
-        stack.push(tag);
-      }
-    }
-    assert.deepEqual(stack, [], 'all elements are closed');
-    for (const tag of ['head', 'body', 'header', 'main', 'footer', 'h1']) {
-      assert.equal([...markup.matchAll(new RegExp(`<${tag}\\b`, 'g'))].length, 1, `one ${tag}`);
-    }
-    assert.doesNotMatch(html, /<style\b/, 'page styles belong in external stylesheets');
-  });
-
-  test(`${page}: original imagery is preserved (the shared arrow is now local)`, () => {
-    const sources = [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)].map(m => m[1]);
-    assert.deepEqual(sources, originalImages[page]);
-  });
-
-  test(`${page}: images, assets, and new-tab links are safe`, () => {
-    for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
-      assert.match(tag, /\balt="[^"]*"/, 'every image has an alt attribute');
-      assert.match(tag, /\bsrc="(?!https?:)[^"]+"/, 'images are local and have a src fallback');
-      assert.doesNotMatch(tag, /\bsrcset=/, 'single images do not need srcset');
-    }
-    for (const [, content] of html.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/g)) {
-      if (!content.replace(/<[^>]+>/g, '').trim()) {
-        assert.match(content, /\balt="[^"]+"/, 'image-only links need an accessible name');
-      }
-    }
-    for (const [tag] of html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)) {
-      assert.match(tag, /\brel="[^"]*\bnoopener\b/, 'new tabs cannot control the opener');
-    }
-    for (const [, ref] of html.matchAll(/\b(?:src|href)="([^"]+)"/g)) {
-      if (/^(?:https?:|mailto:|#)/.test(ref)) continue;
-      assert.ok(existsSync(join(root, decodeURI(ref))), `missing local asset: ${ref}`);
-    }
-    assert.doesNotMatch(html, /apiKey=|cdn\.builder\.io/, 'no third-party decoration request or embedded API key');
+    assert.match(html, new RegExp(`<link rel="canonical" href="\\./#${hash}">`));
+    assert.match(html, new RegExp(`<meta http-equiv="refresh" content="0; url=\\./#${hash}">`));
+    assert.match(html, new RegExp(`<script>location\\.replace\\("\\./#${hash}"\\)</script>`));
+    assert.match(html, new RegExp(`<a href="\\./#${hash}">${label}</a>`));
+    assert.doesNotMatch(html, /index\.html#/);
+    assert.equal([...html.matchAll(/<script\b/g)].length, 1);
+    assertBalanced(html);
+    assertSafeAssets(html);
   });
 }
 
+test('impressum stays a separate page and links back to the scroll sections', () => {
+  const html = read('impressum.html').replace(/<!--[\s\S]*?-->/g, '');
+  const text = pageText(html);
+  for (const copy of ['Impressum', 'Angaben gemaess § 5 TMG', 'Lizaveta Kukharava, Berlin', 'contact@lizaveta.co', 'Haftung fuer Inhalte', 'Haftung fuer Links']) {
+    assert.ok(text.includes(copy), `missing impressum copy: ${copy}`);
+  }
+  const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+  assert.deepEqual([...nav.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)<\/a>/g)].map(match => [match[1], match[2]]), [
+    ['./#home', 'Home'],
+    ['./#about', 'About'],
+    ['./#work', 'Work'],
+  ]);
+  assert.doesNotMatch(nav, /aria-current/);
+  assert.match(html, /<a href="impressum\.html" aria-current="page">Impressum<\/a>/);
+  assert.doesNotMatch(html, /<script\b/);
+  assert.doesNotMatch(html, /index\.html#/);
+  const stylesheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)">/g)].map(match => match[1]);
+  assert.deepEqual(stylesheets, ['style.css', 'css/impressum.css']);
+  assert.match(html, /<title>Lizaveta Kukharava \| Impressum<\/title>/);
+  assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
+  assertBalanced(html);
+  assertSafeAssets(html);
+});
+
+test('section styles are scoped and scroll clearance does not depend on motion', () => {
+  for (const [file, scope] of [['css/index.css', '#home'], ['css/about.css', '#about'], ['css/work.css', '#work']]) {
+    const css = read(file);
+    assert.doesNotMatch(css, /(^|\n)\s*\.(?:div|column|img|links|impressum|site-footer)\b/, `${file} has no unscoped layout class`);
+    assert.match(css, new RegExp(`${scope.replace('#', '\\#')} \\.div\\b`));
+  }
+  const shared = read('style.css');
+  assert.match(shared, /#home,\s*#about,\s*#work\s*\{\s*scroll-margin-top:\s*96px;/);
+  assert.match(shared, /nav a\[aria-current="true"\]\s*\{[^}]*font-weight:\s*bold/);
+  assert.match(shared, /scroll-behavior:\s*smooth/);
+  assert.match(shared, /prefers-reduced-motion:\s*reduce\)\s*\{[^}]*scroll-behavior:\s*auto/s);
+  assert.match(read('css/work.css'), /#work \.div-8\s*\{[^}]*margin-top:\s*64px/);
+  assert.doesNotMatch(read('css/about.css'), /\.links\b|\.site-footer\b/);
+  assert.doesNotMatch(read('css/about.css'), /margin-top:\s*417px|#about \.img\s*\{/, 'about no longer reserves space for the duplicate portrait');
+  assert.match(read('css/about.css'), /#about \.quote:nth-child\(odd\)\s*\{[^}]*align-self:\s*start/);
+  assert.match(read('css/about.css'), /#about \.quote:nth-child\(even\)\s*\{[^}]*align-self:\s*end/, 'quotes alternate in chess order');
+  assert.match(read('style.css'), /--content-width:\s*1100px/);
+  assert.match(read('css/about.css'), /#about \.div-8\s*\{[^}]*max-width:\s*var\(--content-width\)/, 'about blocks share one column');
+  assert.match(read('css/about.css'), /#about \.quotes\s*\{[^}]*max-width:\s*none/, 'quotes fill that column instead of a separate box');
+  assert.match(read('css/index.css'), /#home \.div-10\s*\{[^}]*margin-left:\s*0/, 'the hero row uses the same column edges');
+  assert.doesNotMatch(read('css/about.css'), /max-width:\s*1156px|max-width:\s*1151px|width:\s*980px/);
+  assert.doesNotMatch(read('css/work.css'), /width:\s*998px/);
+  assert.match(read('css/work.css'), /width:\s*var\(--content-width\)/);
+  assert.match(read('css/index.css'), /max-width:\s*var\(--content-width\)/);
+  assert.doesNotMatch(read('css/work.css'), /\.links\b|\.site-footer\b/);
+  assert.match(shared, /\.links\s*\{[^}]*margin-top:\s*140px/s);
+});
+
 test('CSS assets exist and known invalid declarations do not return', () => {
-  const cssFiles = ['style.css', ...readdirSync(join(root, 'css')).filter(f => f.endsWith('.css')).map(f => `css/${f}`)];
+  const cssFiles = ['style.css', ...readdirSync(join(root, 'css')).filter(file => file.endsWith('.css')).map(file => `css/${file}`)];
   for (const file of cssFiles) {
     const css = read(file);
     assert.doesNotMatch(css, /var\([^)]*,\s*\)\s*#/);

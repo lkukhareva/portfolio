@@ -37,7 +37,14 @@ for (const [name, start] of [['development', dev], ['production preview', previe
           assert.match(html, /src="\/@vite\/client"/, 'development retains live updates');
         } else {
           assert.equal(html, await readFile(new URL(`dist/${path || 'index.html'}`, root), 'utf8'));
-          assert.doesNotMatch(html, /<script\b/, 'deployed pages need no JavaScript');
+          if (path === 'impressum.html') {
+            assert.doesNotMatch(html, /<script\b/, 'the legal page needs no script');
+          } else if (path === 'about.html' || path === 'work.html') {
+            assert.match(html, /location\.replace\("\.\/#(?:about|work)"\)/);
+          } else {
+            assert.match(html, /src="scroll-nav\.js"/);
+            assert.doesNotMatch(html, /location\.replace|replaceState|pushState/);
+          }
         }
       });
     }

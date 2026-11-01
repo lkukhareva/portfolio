@@ -1,4 +1,4 @@
-    .div {
+    #home .div {
       background-color: var(--beige, #fff0dd);
       display: flex;
       flex-direction: column;
@@ -6,89 +6,88 @@
       justify-content: center;
     }
 
-    .div-8 {
+    #home .div-8 {
       display: flex;
       margin-top: 0px;
       width: 100%;
-      max-width: 1185px;
+      max-width: var(--content-width);
       flex-direction: column;
       align-items: center;
-      padding: 96px 0px 0px 20px;
+      padding: 96px 0 0;
     }
     @media (max-width: 991px) {
-      .div-8 {
+      #home .div-8 {
         max-width: 100%;
         margin-top: 20px;
       }
     }
-    .div-9 {
+    #home .div-9 {
       color: var(--black, #000);
       align-self: stretch;
-      z-index: 10;
       font: oblique 700 24px/32px Helvetica, sans-serif;
       max-width: 290px;
       margin-left: 0px;
-      margin-bottom: -24px;
+      margin-bottom: 16px;
     }
     @media (max-width: 991px) {
-      .div-9 {
+      #home .div-9 {
         max-width: 290px;
         margin-left: 20px;
         margin-bottom: 20px;
       }
     }
-    .div-10 {
+    #home .div-10 {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       margin-top: 0;
-      margin-left: 120px;
+      margin-left: 0;
       width: 100%;
-      max-width: 1039px;
+      max-width: none;
     }
     @media (max-width: 991px) {
-      .div-10 {
+      #home .div-10 {
         width: calc(100% - 20px);
         margin-left: 20px;
       }
     }
-    .div-11 {
+    #home .div-11 {
       gap: 20px;
       display: flex;
       align-items: center;
     }
     @media (max-width: 991px) {
-      .div-11 {
+      #home .div-11 {
         flex-direction: column;
         align-items: stretch;
         gap: 0px;
       }
     }
-    .column {
+    #home .column {
       display: flex;
       flex-direction: column;
       line-height: normal;
       width: 50%;
     }
     @media (max-width: 991px) {
-      .column {
+      #home .column {
         width: calc(100% - 32px);
         margin: 16px;
       }
     }
-    .img {
+    #home .img {
       object-position: center;
       max-width: 450px;
       max-height: 600px;
     }
     @media (max-width: 991px) {
-      .img {
+      #home .img {
         display: flex;
         max-width: min(420px, 100%);
         max-height: none;
       }
     }
-    .column-2 {
+    #home .column-2 {
       display: flex;
       flex-wrap: wrap;
       text-wrap: wrap;
@@ -100,12 +99,12 @@
       overflow-wrap: break-word;
     }
     @media (max-width: 991px) {
-      .column-2 {
+      #home .column-2 {
         width: calc(100% - 20px);
         margin-top: -20px;
       }
     }
-    .div-12 {
+    #home .div-12 {
       display: flex;
       flex-wrap: wrap;
       margin-top: 0;
@@ -113,22 +112,22 @@
       flex-direction: column;
     }
     @media (max-width: 991px) {
-      .div-12 {
+      #home .div-12 {
         max-width: 100%;
         margin-top: 40px;
       }
     }
-    .div-13 {
+    #home .div-13 {
       color: var(--black, #000);
       text-transform: uppercase;
       font: 700 32px Helvetica, sans-serif;
     }
     @media (max-width: 991px) {
-      .div-13 {
+      #home .div-13 {
         max-width: 100%;
       }
     }
-    .div-14 {
+    #home .div-14 {
       color: var(--gray, #4e4d4d);
       margin-top: 24px;
       font: 300 20px/28px Helvetica, sans-serif;
@@ -138,169 +137,7 @@
       overflow-wrap: break-word;
     }
     @media (max-width: 991px) {
-      .div-14 {
+      #home .div-14 {
         max-width: 100%;
       }
     }
-    .div-15 {
-      display: flex;
-      margin-top: 90px;
-      gap: 8px;
-      font-size: 24px;
-      color: var(--black, #000);
-      font-weight: 400;
-      text-transform: uppercase;
-    }
-    @media (max-width: 991px) {
-      .div-15 {
-        margin-top: 40px;
-      }
-    }
-    .div-16 {
-      font-family: Helvetica, sans-serif;
-    }
-    
-    .img-2 {
-      aspect-ratio: 1;
-      object-fit: fill;
-      object-position: center;
-      width: 25px;
-      margin: auto 0;
-    }
-  
-    .div-17 {
-      margin-top: 64px;
-      margin-left: 20px;
-      margin-right: 20px;
-      width: calc(100% - 40px);
-      max-width: 1392px;
-    }
-    @media (max-width: 991px) {
-      .div-17 {
-        max-width: 100%;
-        margin-top: 40px;
-        margin-left: 20px;
-        margin-right: 20px;
-      }
-    }
-    .div-18 {
-      gap: 20px;
-      display: flex;
-    }
-    @media (max-width: 991px) {
-      .div-18 {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0px;
-        margin-right: 20px;
-      }
-    }
-
-    .column-3 {
-      display: flex;
-      flex-direction: column;
-      line-height: normal;
-      width: 50%;
-      margin-left: 40px;
-      gap: 20px
-    }
-    @media (max-width: 991px) {
-      .column-3 {
-        width: calc(100% - 24px);
-        margin-left: 24px;
-      }
-    }
-
-    .div-33 {
-      display: flex;
-      flex-grow: 1;
-      flex-direction: column;
-      gap: 20px
-    }
-
-    @media (max-width: 991px) {
-      .div-33 {
-        max-width: 100%;
-        margin: 20px;
-        gap: 0px;
-      }
-    }
-
-    .img-3 {
-      aspect-ratio: 0.81;
-      object-fit: fill;
-      object-position: left;
-      width: 100%;
-      flex-grow: 1;
-    }
-    @media (max-width: 991px) {
-      .img-3 {
-        max-width: 100%;
-        margin-top: 20px;
-      }
-    }
-    .column-4 {
-      display: flex;
-      flex-direction: column;
-      line-height: normal;
-      width: 50%;
-      margin-left: 20px;
-      margin-right: 20px;
-    }
-    @media (max-width: 991px) {
-      .column-4 {
-        width: calc(100% - 28px);
-        margin-left: 8px;
-      }
-    }
-    .div-19 {
-      display: flex;
-      flex-grow: 1;
-      flex-direction: column;
-      gap: 20px
-    }
-    @media (max-width: 991px) {
-      .div-19 {
-        max-width: 100%;
-        margin: 20px;
-        gap: 0px;
-      }
-    }
-    .img-4 {
-      aspect-ratio: 1.71;
-      object-position: center;
-      width: 100%;
-    }
-    @media (max-width: 991px) {
-      .img-4 {
-        aspect-ratio: 1.80;
-        max-width: 100%;
-      }
-    }
-    .img-5 {
-      aspect-ratio: 1.72;
-      object-fit: fill;
-      object-position: center;
-      width: 100%;
-      margin-top: 20px;
-    }
-    @media (max-width: 991px) {
-      .img-5 {
-        max-width: 100%;
-      }
-    }
-
-    .div-25:hover{
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
-
-  .div-26:hover{
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
-
-  .div-32:hover{
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }

@@ -1,155 +1,19 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+// Old URL. ./#about resolves to /#about at the domain root and /portfolio/#about on Pages.
+const target = './#about';
 ---
 
-<BaseLayout page="about">
-  <main class="div">
-    <div class="div-8">
-      <div class="div-9">
-        &quot;Lizaveta is tactful in communicating with clients and colleagues,
-        non-conflict, sociable, knows how to work in a team.&quot;
-      </div>
-      <div class="div-10">
-        <div class="div-11">
-          <div class="column">
-            <div class="div-12">
-              &quot;She displayed strong professionalism, patience with others and
-              desire to share her knowledge with the team.&quot;
-            </div>
-          </div>
-          <div class="column-2">
-            <img src="profile.jpeg" alt="Lizaveta Kukharava" class="img">
-          </div>
-          <div class="column-3">
-            <div class="div-13">
-              “Liza was a pleasure to work with, she's easygoing, smart and a very
-              responsible worker. She's always focused and determined and isn't
-              afraid to dive into details.”
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="div-14">
-        <h1 class="div-15">what i bring to the table</h1>
-        <img src="assets/section-arrow.svg" alt="" class="img-2">
-      </div>
-      <div class="div-16">
-        <div class="div-17">
-          <div class="column-4">
-            <div class="div-18">
-              Known for my easy-going nature, non-conflict attitude, and can-do
-              spirit, I bring a high level of responsibility and an eagerness to
-              explore new horizons and share insights.
-              <br>
-              <br>
-              My interest in UX design was sparked by the realization that my
-              interaction with customers as a Customer Acquisition Specialist
-              could extend beyond understanding their pain points to actively
-              providing solutions.
-            </div>
-          </div>
-          <div class="column-5">
-            <div class="div-19">
-              <div class="div-20">
-                <div class="column-6">
-                  <div class="div-21">
-                    <div class="div-22">Communication</div>
-                    <div class="div-23">Active Listening</div>
-                    <div class="div-24">Attention to Detail</div>
-                    <div class="div-25">Problem Solving</div>
-                    <div class="div-26">Presentation Skills</div>
-                  </div>
-                </div>
-                <div class="column-7">
-                  <div class="div-27">
-                    <div class="div-28">UX Research</div>
-                    <div class="div-29">Wireframing &amp; Prototyping</div>
-                    <div class="div-30">Content Design</div>
-                    <div class="div-31">Coding basics</div>
-                    <div class="div-32">Analytical thinking</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="div-33">
-        <div class="div-34">
-          <div class="column-8">
-            <div class="div-35">
-              <img loading="lazy" src="andersenoffice.jpg" alt="Andersen lab office" class="img-3">
-              <div class="div-36">
-                Andersen lab office. Credits: Anastasia Andreyko on LinkedIn
-              </div>
-            </div>
-          </div>
-          <div class="column-9">
-            <div class="div-37">
-              <h2 class="div-38">Growth and improvement</h2>
-              <div class="div-39">
-                Seeking independence and market experience, I joined an IT company
-                as a Customer Acquisition Specialist. I grew together with the
-                company, exploring various aspects of the IT process and improving
-                departmental performance by continuously improving myself. My
-                experience and empathy naturally led me to a Team Lead position.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="div-40">
-        <div class="div-41">
-          <div class="column-10">
-            <div class="div-42">
-              <img loading="lazy" src="classroom.jpg" alt="Coding classes at ReDI School Kids program" class="img-4">
-              <div class="div-43">
-                Volunteering for the coding classes at ReDI School Kids program
-              </div>
-            </div>
-          </div>
-          <div class="column-11">
-            <div class="div-44">
-              <h2 class="div-45">Empathy and communication</h2>
-              <div class="div-46">
-                Initially I pursued a degree in language teaching and
-                interpreting. During working with kids, I learned how to
-                communicate clearly, provide feedback, and support children
-                seeking understanding. This experience honed my skills in empathy
-                and communication, which are crucial in UX design.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="div-47">
-        <div class="div-48">
-          <div class="column-12">
-            <div class="div-49">
-              <img loading="lazy" src="Laptop.jpg" alt="Designing an app at home" class="img-5">
-              <div class="div-50">
-                Designing my very first app at home
-              </div>
-            </div>
-          </div>
-          <div class="column-13">
-            <div class="div-51">
-              <h2 class="div-52">Going extra mile</h2>
-              <div class="div-53">
-                Realising I could do more for customers and help solve their
-                problems, I dived into the UX field. I immersed myself in the
-                design process, understanding the importance of research and
-                communication, and created my first app prototypes. This journey
-                has been about constant learning and growth, driving me to create
-                better user experiences every day.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="div-54">
-        Reach out to contact@lizaveta.co to team up and transform your challenges into wins.
-      </div>
-    </div>
-  </main>
-</BaseLayout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lizaveta Kukharava, a Berlin-based UX Designer</title>
+  <link rel="canonical" href={target}>
+  <meta http-equiv="refresh" content={`0; url=${target}`}>
+  <script is:inline>location.replace("./#about")</script>
+</head>
+<body>
+  <p><a href={target}>About</a></p>
+</body>
+</html>

@@ -16,7 +16,7 @@ const normalize = html => html
   .trim();
 
 for (const [page, expected] of Object.entries(baseline.bodies)) {
-  test(`${page}: generated body preserves the pre-migration layout and content`, () => {
+  test(`${page}: generated body matches the approved baseline`, () => {
     const html = readFileSync(new URL(`dist/${page}`, root), 'utf8');
     const body = html.match(/<body>([\s\S]*?)<\/body>/)?.[1];
     assert.ok(body, 'generated body exists');
@@ -31,8 +31,8 @@ for (const [asset, expected] of Object.entries(baseline.assets)) {
   });
 }
 
-test('static output has exactly the original pages and no application JavaScript', () => {
+test('static output keeps the published HTML files and only the scroll-navigation script', () => {
   const files = readdirSync(new URL('dist/', root), { recursive: true });
   assert.deepEqual(files.filter(file => file.endsWith('.html')).sort(), Object.keys(baseline.bodies).sort());
-  assert.deepEqual(files.filter(file => /\.(?:[cm]?js|map)$/.test(file)), []);
+  assert.deepEqual(files.filter(file => /\.(?:[cm]?js|map)$/.test(file)).sort(), ['scroll-nav.js']);
 });

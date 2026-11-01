@@ -3,7 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
-  page: 'index' | 'about' | 'work' | 'impressum';
+  page: 'index' | 'impressum';
   title?: string;
 }
 
@@ -11,6 +11,9 @@ const {
   page,
   title = 'Lizaveta Kukharava, a Berlin-based UX Designer',
 } = Astro.props;
+const stylesheets = page === 'index'
+  ? ['style.css', 'css/index.css', 'css/about.css', 'css/work.css']
+  : ['style.css', 'css/impressum.css'];
 ---
 
 <!DOCTYPE html>
@@ -21,13 +24,12 @@ const {
   <link rel="icon" href="Logo.svg" type="image/svg+xml">
   <title>{title}</title>
   <meta name="description" content="If you care for your customers and users as much as I do, take a look at my portfolio and reach out to team up and transform your challenges into wins.">
-  <!-- Keep the original global cascade and public asset URLs during migration. -->
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href={`css/${page}.css`}>
+  {stylesheets.map((href) => <link rel="stylesheet" href={href} />)}
 </head>
 <body>
-  <Header currentPage={page} />
+  <Header />
   <slot />
   <Footer isImpressum={page === 'impressum'} />
+  {page === 'index' && <script is:inline src="scroll-nav.js"></script>}
 </body>
 </html>

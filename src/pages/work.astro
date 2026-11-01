@@ -1,27 +1,19 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { projects } from '../data/projects';
+// Old URL. ./#work resolves to /#work at the domain root and /portfolio/#work on Pages.
+const target = './#work';
 ---
 
-<BaseLayout page="work">
-  <main class="div">
-    <h1 class="visually-hidden">Work</h1>
-    <ProjectCard project={projects.fashion} classes={{
-      link: 'div-8', row: 'div-9', column: 'column-2',
-      content: 'div-10', title: 'div-11', description: 'div-12',
-    }} />
-    <ProjectCard project={projects.hop} loading="lazy" classes={{
-      link: 'div-13', row: 'div-14', column: 'column-3',
-      content: 'div-15', title: 'div-16', description: 'div-17',
-    }} />
-    <ProjectCard project={projects.cloud} loading="lazy" classes={{
-      link: 'div-18', row: 'div-19', column: 'column-4',
-      content: 'div-20', title: 'div-21', description: 'div-22',
-    }} />
-    <ProjectCard project={projects.rapuha} loading="lazy" classes={{
-      link: 'div-23', row: 'div-24', column: 'column-5',
-      content: 'div-25', title: 'div-26', description: 'div-27',
-    }} />
-  </main>
-</BaseLayout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lizaveta Kukharava, a Berlin-based UX Designer</title>
+  <link rel="canonical" href={target}>
+  <meta http-equiv="refresh" content={`0; url=${target}`}>
+  <script is:inline>location.replace("./#work")</script>
+</head>
+<body>
+  <p><a href={target}>Work</a></p>
+</body>
+</html>

@@ -4,7 +4,6 @@ import type { Project } from '../data/projects';
 interface Props {
   project: Project;
   loading?: 'lazy';
-  // Preserve the existing per-card selectors until the layout is redesigned.
   classes: {
     link: string;
     row: string;
@@ -25,7 +24,7 @@ const { project, classes, loading } = Astro.props;
     </div>
     <div class={classes.column}>
       <div class={classes.content}>
-        <h2 class={classes.title}>{project.title}</h2>
+        <h3 class={classes.title}>{project.title}</h3>
         <div class={classes.description}>{project.description}</div>
       </div>
     </div>

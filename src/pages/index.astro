@@ -1,63 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { projects } from '../data/projects';
+import HomeSection from '../components/HomeSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import WorkSection from '../components/WorkSection.astro';
 ---
 
 <BaseLayout page="index">
-  <main class="div">
-    <div class="div-8">
-      <div class="div-9">
-        Empathetic Designer: Meaningful Connections via Design
-      </div>
-      <div class="div-10">
-        <div class="div-11">
-          <div class="column">
-            <img src="profile.jpeg" alt="Lizaveta Kukharava" class="img">
-          </div>
-          <div class="column-2">
-            <div class="div-12">
-              <h1 class="div-13">lizaveta kukharava</h1>
-              <div class="div-14">
-                A growth-oriented professional with a passion for enhancing
-                customer and user experiences.
-                <br>
-                <br>
-                Thrive on driving initiatives that foster innovation, improve
-                processes, and create value. Eager to support and collaborate.
-                <br>
-                <br>
-                Excel in dynamic environments, contributing to meaningful change
-                and continuous improvement.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="div-15">
-        <h2 class="div-16">RECENT PROJECTS</h2>
-        <img src="assets/section-arrow.svg" alt="" class="img-2">
-      </div>
-    </div>
-    <div class="div-17">
-      <div class="div-18">
-        <div class="column-3">
-          <div class="div-33">
-            <a href={projects.fashion.href} class="div-32" target="_blank" rel="noopener">
-              <img loading="lazy" src={projects.fashion.preview.image} alt={projects.fashion.preview.alt} class="img-3">
-            </a>
-          </div>
-        </div>
-        <div class="column-4">
-          <div class="div-19">
-            <a href={projects.hop.href} class="div-26" target="_blank" rel="noopener">
-              <img loading="lazy" src={projects.hop.preview.image} alt={projects.hop.preview.alt} class="img-4">
-            </a>
-            <a href={projects.cloud.href} class="div-25" target="_blank" rel="noopener">
-              <img loading="lazy" src={projects.cloud.preview.image} alt={projects.cloud.preview.alt} class="img-5">
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+  <main>
+    <HomeSection />
+    <AboutSection />
+    <WorkSection />
   </main>
 </BaseLayout>

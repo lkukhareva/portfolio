@@ -50,6 +50,27 @@ for (const { name, site, base } of deployments) {
         assert.ok(target.pathname.startsWith(prefix), `${ref}: stays inside the Pages base path`);
         localTargets.add(target.href);
       }
+      if (page === 'about.html' || page === 'work.html') {
+        const hash = page === 'about.html' ? '#about' : '#work';
+        const targets = [
+          html.match(/<meta http-equiv="refresh" content="0; url=([^"]+)">/)?.[1],
+          html.match(/location\.replace\("([^"]+)"\)/)?.[1],
+          html.match(/<a href="([^"]+)">/)?.[1],
+        ];
+        for (const target of targets) {
+          assert.ok(target, `${page} is missing a jump target`);
+          const landed = new URL(target, url);
+          assert.equal(landed.pathname, prefix, target);
+          assert.equal(landed.hash, hash, target);
+        }
+        assert.doesNotMatch(html, /index\.html#/);
+      }
+      if (page === '' || page === 'index.html' || page === 'impressum.html') {
+        assert.match(html, /href="\.\/#home"/);
+        assert.match(html, /href="\.\/#about"/);
+        assert.match(html, /href="\.\/#work"/);
+        assert.doesNotMatch(html, /index\.html#/);
+      }
     }
 
     for (const url of localTargets) {

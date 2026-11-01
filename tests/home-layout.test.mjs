@@ -11,11 +11,16 @@ const desktopRule = selector => {
 };
 
 test('homepage intro aligns beside the portrait without fixed vertical offsets', () => {
-  assert.match(desktopRule('.div-11'), /align-items:\s*center\s*;/);
-  assert.match(desktopRule('.column-2'), /margin-top:\s*0\s*;/);
-  assert.match(desktopRule('.div-12'), /margin-top:\s*0\s*;/);
+  assert.match(desktopRule('#home .div-11'), /align-items:\s*center\s*;/);
+  assert.match(desktopRule('#home .column-2'), /margin-top:\s*0\s*;/);
+  assert.match(desktopRule('#home .div-12'), /margin-top:\s*0\s*;/);
+});
+
+test('homepage lead line sits above the portrait instead of covering it', () => {
+  assert.doesNotMatch(desktopRule('#home .div-9'), /margin-bottom:\s*-/);
+  assert.match(desktopRule('#home .div-9'), /margin-bottom:\s*16px/);
 });
 
 test('homepage hero retains the stacked mobile layout', () => {
-  assert.match(css, /@media\s*\(max-width:\s*991px\)\s*\{\s*\.div-11\s*\{[^}]*flex-direction:\s*column\s*;[^}]*align-items:\s*stretch\s*;/);
+  assert.match(css, /@media\s*\(max-width:\s*991px\)\s*\{\s*#home \.div-11\s*\{[^}]*flex-direction:\s*column\s*;[^}]*align-items:\s*stretch\s*;/);
 });

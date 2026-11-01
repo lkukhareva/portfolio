@@ -1,4 +1,4 @@
-    .div {
+    #about .div {
       background-color: var(--beige, #fff0dd);
       display: flex;
       flex-direction: column;
@@ -6,130 +6,57 @@
       justify-content: center;
     }
 
-    .div-8 {
+    #about .div-8 {
       align-self: center;
       display: flex;
       margin-top: 120px;
       width: 100%;
-      max-width: 1244px;
+      max-width: var(--content-width);
+      align-items: stretch;
       flex-direction: column;
       align-items: center;
       justify-content: center;
     }
     @media (max-width: 991px) {
-      .div-8 {
+      #about .div-8 {
         max-width: 100%;
         margin-top: 120px;
       }
     }
-    .div-9 {
-      color: var(--gray, #4e4d4d);
-      align-self: start;
-      max-width: 415px;
-      font: 300 20px/28px Helvetica, sans-serif;
-      margin-left: 80px;
-    }
-    @media (max-width: 991px) {
-      .div-9 {
-        margin-left: 20px;
-      }
-    }
-    .div-10 {
-      align-self: end;
-      justify-content: center;
-      margin-left: 80px;
-      max-width: 1200px;
-    }
-    @media (max-width: 991px) {
-      .div-10 {
-        margin-left: 20px;
-        max-width: 100%;
-        justify-content: left;
-      }
-    }
-    .div-11 {
-      gap: 20px;
-      display: flex;
-    }
-    @media (max-width: 991px) {
-      .div-11 {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0px;
-      }
-    }
-    .column {
-      display: flex;
-      flex-direction: column;
-      line-height: normal;
-      width: 25%;
-      margin-left: 0px;
-    }
-    @media (max-width: 991px) {
-      .column {
-        width: 90%;
-      }
-    }
-    .div-12 {
-      color: var(--gray, #4e4d4d);
-      margin-top: 417px;
-      font: 300 20px/28px Helvetica, sans-serif;
-    }
-    @media (max-width: 991px) {
-      .div-12 {
-        margin-top: 40px;
-      }
-    }
-    .column-2 {
-      display: flex;
-      flex-direction: column;
-      line-height: normal;
-      width: 42%;
-      margin-left: 20px;
-    }
-    @media (max-width: 991px) {
-      .column-2 {
-        width: 100%;
-        margin-left: 0px;
-      }
-    }
-    .img {
-      aspect-ratio: 0.75;
-      object-fit: fill;
-      object-position: center;
-      width: 100%;
-    }
-    @media (max-width: 991px) {
-      .img {
-        max-width: 100%;
-        margin-top: 28px;
-      }
-    }
-    .column-3 {
-      display: flex;
-      flex-direction: column;
-      line-height: normal;
-      width: 33%;
-      margin-left: 0px;
-    }
-    @media (max-width: 991px) {
-      .column-3 {
-        width: 100%;
-      }
-    }
-    .div-13 {
-      color: var(--gray, #4e4d4d);
+    #about .quotes {
       align-self: stretch;
-      margin: auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      width: 100%;
+      max-width: none;
+      padding-inline: 0;
+    }
+    #about .quote {
+      max-width: 440px;
+      margin: 0;
+      color: var(--gray, #4e4d4d);
       font: 300 20px/28px Helvetica, sans-serif;
     }
+    #about .quote:nth-child(odd) {
+      align-self: start;
+    }
+    #about .quote:nth-child(even) {
+      align-self: end;
+    }
     @media (max-width: 991px) {
-      .div-13 {
-        margin-top: 40px;
+      #about .quotes {
+        gap: 40px;
+        padding-inline: 0;
+      }
+      #about .quote {
+        max-width: 85%;
       }
     }
-    .div-14 {
+    #about .div-14 {
       display: flex;
+      justify-content: center;
+      width: 100%;
       margin-top: 80px;
       gap: 8px;
       font-size: 24px;
@@ -138,43 +65,43 @@
       text-transform: uppercase;
     }
     @media (max-width: 991px) {
-      .div-14 {
+      #about .div-14 {
         margin-top: 40px;
       }
     }
-    .div-15 {
+    #about .div-15 {
       font-family: Helvetica, sans-serif;
     }
-    .img-2 {
+    #about .img-2 {
       aspect-ratio: 1;
       object-fit: fill;
       object-position: center;
       width: 25px;
       margin: auto 0;
     }
-    .div-16 {
+    #about .div-16 {
       margin-top: 80px;
       width: 100%;
-      max-width: 1156px;
+      max-width: none;
     }
     @media (max-width: 991px) {
-      .div-16 {
+      #about .div-16 {
         max-width: 100%;
         margin-top: 40px;
       }
     }
-    .div-17 {
+    #about .div-17 {
       gap: 20px;
       display: flex;
     }
     @media (max-width: 991px) {
-      .div-17 {
+      #about .div-17 {
         flex-direction: column;
         align-items: stretch;
         gap: 0px;
       }
     }
-    .column-4 {
+    #about .column-4 {
       display: flex;
       flex-direction: column;
       line-height: normal;
@@ -182,23 +109,23 @@
       margin-left: 0px;
     }
     @media (max-width: 991px) {
-      .column-4 {
+      #about .column-4 {
         width: calc(100% - 40px);
         margin-left: 20px;
         margin-right: 20px;
       }
     }
-    .div-18 {
+    #about .div-18 {
       color: var(--gray, #4e4d4d);
       font: 300 20px/28px Helvetica, sans-serif;
     }
     @media (max-width: 991px) {
-      .div-18 {
+      #about .div-18 {
         max-width: 100%;
         margin-top: 0px;
       }
     }
-    .column-5 {
+    #about .column-5 {
       display: flex;
       flex-direction: column;
       line-height: normal;
@@ -206,7 +133,7 @@
       margin-left: 20px;
     }
     @media (max-width: 991px) {
-      .column-5 {
+      #about .column-5 {
         width: calc(100% - 40px);
         flex-direction: row;
         margin-left: 20px;
@@ -214,23 +141,23 @@
     }
 
     @media (max-width: 991px) {
-      .div-19 {
+      #about .div-19 {
         max-width: 100%;
         margin-top: 20px;
       }
     }
-    .div-20 {
+    #about .div-20 {
       gap: 20px;
       display: flex;
     }
     @media (max-width: 991px) {
-      .div-20 {
+      #about .div-20 {
         flex-direction: row;
         align-items: stretch;
         gap: 0px;
       }
     }
-    .column-6 {
+    #about .column-6 {
       display: flex;
       flex-direction: column;
       line-height: normal;
@@ -238,11 +165,11 @@
       margin-left: 0px;
     }
     @media (max-width: 991px) {
-      .column-6 {
+      #about .column-6 {
         width: 100%;
       }
     }
-    .div-21 {
+    #about .div-21 {
       display: flex;
       flex-grow: 1;
       flex-direction: column;
@@ -252,35 +179,35 @@
       line-height: 140%;
     }
     @media (max-width: 991px) {
-      .div-21 {
+      #about .div-21 {
         margin-top: 40px;
       }
     }
-    .div-22 {
+    #about .div-22 {
       font-family: Helvetica, sans-serif;
     }
-    .div-23 {
+    #about .div-23 {
       font-family: Helvetica, sans-serif;
       margin-top: 8px;
     }
-    .div-24 {
+    #about .div-24 {
       font-family: Helvetica, sans-serif;
       margin-top: 8px;
     }
     @media (max-width: 991px) {
-      .div-24 {
+      #about .div-24 {
         margin-right: 6px;
       }
     }
-    .div-25 {
+    #about .div-25 {
       font-family: Helvetica, sans-serif;
       margin-top: 8px;
     }
-    .div-26 {
+    #about .div-26 {
       font-family: Helvetica, sans-serif;
       margin-top: 8px;
     }
-    .column-7 {
+    #about .column-7 {
       display: flex;
       flex-direction: column;
       line-height: normal;
@@ -288,11 +215,11 @@
       margin-left: 20px;
     }
     @media (max-width: 991px) {
-      .column-7 {
+      #about .column-7 {
         width: 100%;
       }
     }
-    .div-27 {
+    #about .div-27 {
       display: flex;
       flex-grow: 1;
       flex-direction: column;
@@ -302,52 +229,52 @@
       line-height: 140%;
     }
     @media (max-width: 991px) {
-      .div-27 {
+      #about .div-27 {
         margin-top: 40px;
       }
     }
-    .div-28 {
+    #about .div-28 {
       font-family: Helvetica, sans-serif;
     }
-    .div-29 {
-      font-family: Helvetica, sans-serif;
-      margin-top: 8px;
-    }
-    .div-30 {
+    #about .div-29 {
       font-family: Helvetica, sans-serif;
       margin-top: 8px;
     }
-    .div-31 {
+    #about .div-30 {
       font-family: Helvetica, sans-serif;
       margin-top: 8px;
     }
-    .div-32 {
+    #about .div-31 {
       font-family: Helvetica, sans-serif;
       margin-top: 8px;
     }
-    .div-33 {
+    #about .div-32 {
+      font-family: Helvetica, sans-serif;
+      margin-top: 8px;
+    }
+    #about .div-33 {
       margin-top: 75px;
       width: 100%;
-      max-width: 1151px;
+      max-width: none;
     }
     @media (max-width: 991px) {
-      .div-33 {
+      #about .div-33 {
         max-width: 100%;
         margin-top: 40px;
       }
     }
-    .div-34 {
+    #about .div-34 {
       gap: 20px;
       display: flex;
     }
     @media (max-width: 991px) {
-      .div-34 {
+      #about .div-34 {
         flex-direction: column;
         align-items: stretch;
         gap: 0px;
       }
     }
-    .column-8 {
+    #about .column-8 {
       display: flex;
       flex-direction: column;
       line-height: normal;
@@ -355,11 +282,11 @@
       margin-left: 0px;
     }
     @media (max-width: 991px) {
-      .column-8 {
+      #about .column-8 {
         width: 100%;
       }
     }
-    .div-35 {
+    #about .div-35 {
       justify-content: flex-end;
       display: flex;
       flex-grow: 1;
@@ -370,35 +297,35 @@
       line-height: 112.5%;
     }
     @media (max-width: 991px) {
-      .div-35 {
+      #about .div-35 {
         max-width: 100%;
         margin-top: 20px;
       }
     }
-    .img-3 {
+    #about .img-3 {
       aspect-ratio: 1.39;
       object-fit: fill;
       object-position: center;
       width: 100%;
     }
     @media (max-width: 991px) {
-      .img-3 {
+      #about .img-3 {
         max-width: 90%;
         margin-left: 20px;
       }
     }
-    .div-36 {
+    #about .div-36 {
       font-family: Helvetica, sans-serif;
       margin-top: 8px;
       margin-left: 0px;
     }
     @media (max-width: 991px) {
-      .div-36 {
+      #about .div-36 {
         max-width: 100%;
         margin-left: 20px;
       }
     }
-    .column-9 {
+    #about .column-9 {
       display: flex;
       flex-direction: column;
       line-height: normal;
@@ -406,11 +333,11 @@
       margin-left: 20px;
     }
     @media (max-width: 991px) {
-      .column-9 {
+      #about .column-9 {
         width: calc(100% - 40px);
       }
     }
-    .div-37 {
+    #about .div-37 {
       justify-content: flex-start;
       display: flex;
       margin-top: 188px;
@@ -418,53 +345,53 @@
       flex-direction: column;
     }
     @media (max-width: 991px) {
-      .div-37 {
+      #about .div-37 {
         max-width: 100%;
         margin-top: 40px;
       }
     }
-    .div-38 {
+    #about .div-38 {
       color: var(--black, #000);
       font: 700 24px/133% Helvetica, sans-serif;
     }
     @media (max-width: 991px) {
-      .div-38 {
+      #about .div-38 {
         max-width: 100%;
       }
     }
-    .div-39 {
+    #about .div-39 {
       color: var(--gray, #4e4d4d);
       margin-top: 20px;
       font: 300 20px/28px Helvetica, sans-serif;
     }
     @media (max-width: 991px) {
-      .div-39 {
+      #about .div-39 {
         max-width: 100%;
       }
     }
-    .div-40 {
+    #about .div-40 {
       margin-top: 80px;
       width: 100%;
-      max-width: 1151px;
+      max-width: none;
     }
     @media (max-width: 991px) {
-      .div-40 {
+      #about .div-40 {
         max-width: 100%;
         margin-top: 40px;
       }
     }
-    .div-41 {
+    #about .div-41 {
       gap: 20px;
       display: flex;
     }
     @media (max-width: 991px) {
-      .div-41 {
+      #about .div-41 {
         flex-direction: column;
         align-items: stretch;
         gap: 0px;
       }
     }
-    .column-10 {
+    #about .column-10 {
       display: flex;
       flex-direction: column;
       line-height: normal;
@@ -472,11 +399,11 @@
       margin-left: 0px;
     }
     @media (max-width: 991px) {
-      .column-10 {
+      #about .column-10 {
         width: 100%;
       }
     }
-    .div-42 {
+    #about .div-42 {
       justify-content: flex-end;
       display: flex;
       flex-grow: 1;
@@ -487,35 +414,35 @@
       line-height: 112.5%;
     }
     @media (max-width: 991px) {
-      .div-42 {
+      #about .div-42 {
         max-width: 100%;
         margin-top: 20px;
       }
     }
-    .img-4 {
+    #about .img-4 {
       aspect-ratio: 1.39;
       object-fit: fill;
       object-position: center;
       width: 100%;
     }
     @media (max-width: 991px) {
-      .img-4 {
+      #about .img-4 {
         max-width: 90%;
         margin-left: 20px;
       }
     }
-    .div-43 {
+    #about .div-43 {
       font-family: Helvetica, sans-serif;
       margin-top: 8px;
       margin-left: 0px;
     }
     @media (max-width: 991px) {
-      .div-43 {
+      #about .div-43 {
         max-width: 100%;
         margin-left: 20px;
       }
     }
-    .column-11 {
+    #about .column-11 {
       display: flex;
       flex-direction: column;
       line-height: normal;
@@ -523,11 +450,11 @@
       margin-left: 20px;
     }
     @media (max-width: 991px) {
-      .column-11 {
+      #about .column-11 {
         width: calc(100% - 40px);
       }
     }
-    .div-44 {
+    #about .div-44 {
       justify-content: flex-start;
       display: flex;
       margin-top: 216px;
@@ -535,53 +462,53 @@
       flex-direction: column;
     }
     @media (max-width: 991px) {
-      .div-44 {
+      #about .div-44 {
         max-width: 100%;
         margin-top: 40px;
       }
     }
-    .div-45 {
+    #about .div-45 {
       color: var(--black, #000);
       font: 700 24px/133% Helvetica, sans-serif;
     }
     @media (max-width: 991px) {
-      .div-45 {
+      #about .div-45 {
         max-width: 100%;
       }
     }
-    .div-46 {
+    #about .div-46 {
       color: var(--gray, #4e4d4d);
       margin-top: 20px;
       font: 300 20px/28px Helvetica, sans-serif;
     }
     @media (max-width: 991px) {
-      .div-46 {
+      #about .div-46 {
         max-width: 100%;
       }
     }
-    .div-47 {
+    #about .div-47 {
       margin-top: 80px;
       width: 100%;
-      max-width: 1151px;
+      max-width: none;
     }
     @media (max-width: 991px) {
-      .div-47 {
+      #about .div-47 {
         max-width: 100%;
         margin-top: 40px;
       }
     }
-    .div-48 {
+    #about .div-48 {
       gap: 20px;
       display: flex;
     }
     @media (max-width: 991px) {
-      .div-48 {
+      #about .div-48 {
         flex-direction: column;
         align-items: stretch;
         gap: 0px;
       }
     }
-    .column-12 {
+    #about .column-12 {
       display: flex;
       flex-direction: column;
       line-height: normal;
@@ -589,11 +516,11 @@
       margin-left: 0px;
     }
     @media (max-width: 991px) {
-      .column-12 {
+      #about .column-12 {
         width: 100%;
       }
     }
-    .div-49 {
+    #about .div-49 {
       display: flex;
       flex-grow: 1;
       flex-direction: column;
@@ -603,35 +530,35 @@
       line-height: 112.5%;
     }
     @media (max-width: 991px) {
-      .div-49 {
+      #about .div-49 {
         max-width: 100%;
         margin-top: 20px;
       }
     }
-    .img-5 {
+    #about .img-5 {
       aspect-ratio: 1.39;
       object-fit: fill;
       object-position: center;
       width: 100%;
     }
     @media (max-width: 991px) {
-      .img-5 {
+      #about .img-5 {
         max-width: 90%;
         margin-left: 20px;
       }
     }
-    .div-50 {
+    #about .div-50 {
       font-family: Helvetica, sans-serif;
       margin-top: 8px;
       margin-left: 0px;
     }
     @media (max-width: 991px) {
-      .div-50 {
+      #about .div-50 {
         max-width: 100%;
         margin-left: 20px;
       }
     }
-    .column-13 {
+    #about .column-13 {
       display: flex;
       flex-direction: column;
       line-height: normal;
@@ -639,11 +566,11 @@
       margin-left: 20px;
     }
     @media (max-width: 991px) {
-      .column-13 {
+      #about .column-13 {
         width: calc(100% - 40px);
       }
     }
-    .div-51 {
+    #about .div-51 {
       display: flex;
       justify-content: flex-start;
       margin-top: 188px;
@@ -652,66 +579,54 @@
     }
   
     @media (max-width: 991px) {
-      .div-51 {
+      #about .div-51 {
         max-width: 100%;
         margin-top: 40px;
       }
     }
-    .div-52 {
+    #about .div-52 {
       color: var(--black, #000);
       font: 700 24px/133% Helvetica, sans-serif;
     }
     @media (max-width: 991px) {
-      .div-52 {
+      #about .div-52 {
         max-width: 100%;
       }
     }
-    .div-53 {
+    #about .div-53 {
       color: var(--gray, #4e4d4d);
       margin-top: 20px;
       font: 300 20px/28px Helvetica, sans-serif;
     }
     @media (max-width: 991px) {
-      .div-53 {
+      #about .div-53 {
         max-width: 100%;
       }
     }
-    .div-54 {
+    #about .div-54 {
       color: var(--gray, #4e4d4d);
       text-align: center;
       margin-top: 90px;
-      width: 980px;
+      width: 100%;
+      max-width: none;
       font: 700 24px/40px Helvetica, sans-serif;
     }
     @media (max-width: 991px) {
-      .div-54 {
-        max-width: calc(100% - 40px);
+      #about .div-54 {
+        max-width: 100%;
         margin-top: 40px;
-        margin-left: 40px;
+        margin-left: 0;
         text-align: left;
       }
     }
 
-.links {
-  margin-top: 140px;
-}
-
-@media (max-width: 991px) {
-  .links {
-    margin-top: 80px;
-  }
-
-  .impressum {
-    margin-bottom: 16px;
-  }
-}
 
 @media (max-width: 480px) {
-  .div-20 {
+  #about .div-20 {
     flex-direction: column;
   }
 
-  .column-7 {
+  #about .column-7 {
     margin-left: 0;
   }
 }

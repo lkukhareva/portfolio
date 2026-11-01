@@ -4,17 +4,25 @@
 
 Static portfolio for Berlin-based UX designer Lizaveta Kukharava. Astro generates
 HTML/CSS with no client-side application framework, backend, or production Node
-server. Case studies link to Behance. The initial migration preserves the
-original layout and content; redesign and animation work is separate.
+server. Case studies link to Behance. Home, About, and Work are sections of one
+scrolling page. Impressum stays separate. Animation work is separate.
 
 ## Structure
 
-- `src/pages/{index,about,work,impressum}.astro`: page content.
+- `src/pages/index.astro`: scrolling portfolio (`#home`, `#about`, `#work`).
+- `src/pages/{about,work}.astro`: compatibility documents that jump to `./#about`
+  and `./#work`, so the address bar settles on `/#about` or `/portfolio/#about`.
+- `src/pages/impressum.astro`: legal page.
+- `src/components/{Home,About,Work}Section.astro`: section markup.
 - `src/layouts/BaseLayout.astro`: shared document, metadata, stylesheet order.
 - `src/components/`: header, footer, and work project card markup.
 - `src/data/projects.ts`: project copy, destinations, and image references.
-- `public/style.css`: shared colors, header/navigation, footer, accessibility.
-- `public/css/<page>.css`: page-specific layouts; loaded after shared CSS.
+- `public/style.css`: shared colors, header/navigation, footer, scroll clearance.
+- `public/css/{index,about,work}.css`: section layouts, scoped under `#home`,
+  `#about`, and `#work` because the original class names collide.
+- `public/scroll-nav.js`: sets `aria-current="true"` from the visible section.
+  It must not rewrite the URL. Anchors work without it.
+- `public/css/impressum.css`: legal-page layout.
 - `public/`: original images, decorative SVG in `assets/`, and `helvetica_font/`.
   Font files are retained but not loaded via `@font-face`. Public files are copied
   unchanged to preserve rendering and asset URLs during migration.
@@ -25,7 +33,7 @@ original layout and content; redesign and animation work is separate.
   `lizavetakuk.com` (configured in GitHub Pages settings, not in local dev).
 - `dist/`: generated deployable site, ignored along with `.astro/`.
 - `tests/site.test.mjs`: generated HTML/content and CSS regression checks.
-- `tests/migration.test.mjs`: pre-migration body/asset fingerprints and static
+- `tests/migration.test.mjs`: approved body/asset fingerprints and static
   output checks, backed by `tests/fixtures/pre-migration.json`.
 - `tests/dev-server.test.mjs`: HTTP integration checks for Astro development and
   production preview on temporary loopback ports; closes servers afterward.
@@ -68,9 +76,10 @@ npx --yes html-validate@11.17.0 --preset standard,a11y dist/index.html dist/abou
   them. Fingerprints and image lists intentionally protect the original content.
   Update only relevant baselines for intentional changes; do not remove checks
   just to make tests pass.
-- Reuse the shared layout/components and project data. Keep navigation links
-  consistent with static `aria-current="page"` markers; no navigation script is
-  needed. Preserve the published `.html` URLs unless a task plans their migration.
+- Reuse the shared layout/components and project data. Primary navigation uses
+  `./#home`, `./#about`, and `./#work` so both the domain root and the Pages
+  subpath stay on one document. Do not add a client router or SPA fallback.
+  Keep `about.html` and `work.html` as jump documents.
 - Put shared rules in `public/style.css`, not duplicated page styles. Preserve
   stylesheet order, semantic landmarks/headings, image alternatives, focus
   styles, and reduced-motion support.

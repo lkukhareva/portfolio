@@ -1,16 +1,13 @@
 {
   "bodies": {
-    "index.html": "a8ff7cff9c213b88f37287ca91055b03cab3e9f3ae28eeebf508d515029e2ca8",
-    "about.html": "2fc4f6be8ca522708cb89995f69d6e584c053a1292a22b70136e7382bb7fe493",
-    "work.html": "5e213f23c0ebc748225b178ebdfdb68d599d4999e7e0ca03fc07655dd06e54ed",
-    "impressum.html": "c42b957e5b8ac6f0ce715a2afb4ed22d187d77c5c538a05cb8f6dddda1021c86"
+    "index.html": "c6d4cb21e38d3a485873b63e4e2d389bd68a3023395b0a97c0f2ba846df465ca",
+    "about.html": "3ae3797eb28b046ce2e835e2175d88eda80975f4a42c485b88358e53f4dd44b2",
+    "work.html": "d7a7576b06e90d7c4f893eb590f7f9603c17f75e4a9d0f2b5ee92f5815f6e044",
+    "impressum.html": "aacb1b2d8e806e1cd4dc7dbbd327493682a75a1b983e6fc22301777d790838b1"
   },
   "assets": {
-    "Cloud9index.png": "ca2a991f909491323ed40dd176da299257c738a6cbc3fe4230ef63f1c5d803c1",
     "Cloud9work.png": "50e9c22d16a2f0aa8ff3887e7068790ab3a259df254838eceb8d45cf7e7e7787",
-    "Hopappindex.png": "95ebfe9599b100dd1f3710a0909c501ab55c0091e878b4e3c5526ba137dc675e",
     "Hopappwork.png": "260ad6f761fe7c674beeec454a92a6e30e50d5476ce3b02329827d0f53b98a48",
-    "IFDindex.png": "2346b0519e28b100cc2e6c88a9d635496d398cc1456212803bf84eaaff2d32eb",
     "IFDwork.png": "2351ef840df0139a88b98db4a902257a10dd17a173f647e6dfd22f7f2d055439",
     "Laptop.jpg": "aacfcd9fdb3de9e3130b7232bb58cb6148a3971cb414da16f16c51f450b13832",
     "Logo.svg": "d168f121c7f2d00b836758df6ec8b5ea2a15ee84598a5bc2c91fd9c3c219a88c",
@@ -18,10 +15,10 @@
     "andersenoffice.jpg": "7d7003ece0d9bde0bb039b01dab7f0110db5eeb4a4637a0be9bc7bda4beec178",
     "assets/section-arrow.svg": "016b11e5a743bfece940372b5d6e1b170726c3b8e461c538b8ee6635a2195d7c",
     "classroom.jpg": "76f9088959d30ba75b9ed4694183f35112f5dfac6fcc62b755812bc1dfd3b533",
-    "css/about.css": "68c5a6e8ad7f3ee16b49c48e886f5fe762672a2623fa50f6377af3638e0b2130",
+    "css/about.css": "755baa14c081e527124cc35612dbfc99f2df2ae9b48eff71499233119d7fd2f8",
     "css/impressum.css": "5ad7e488e063f1ec729903d23f42d4199b8c610c218644742605e1b217b1539c",
-    "css/index.css": "74fbe38dc45bbafbacf06afbc0320be0a676fd2406d2a96530cbca703c22f6b3",
-    "css/work.css": "9e66de37b452cfbd3a044d4a1fa4376c0b7f9e9b0a4281359516481d7617f996",
+    "css/index.css": "6773c4be96c8cb72985cf5776262dc5d1209a49240603339ef8c58df5e14b98d",
+    "css/work.css": "e95d12907c68ad0237bc711045489681c8b3fe594c23f1f992c099a4422823bf",
     "helvetica_font/Helvetica-Bold.ttf": "05291f9de00325c3a3f1acdf9a35a8ce4b4fd7d32394482ebb1699ba7ac73ed5",
     "helvetica_font/Helvetica-BoldOblique.ttf": "cabd38a14f197df4a7b881528522fffd9a2127b72caae6337899f3bbfa3f4ff2",
     "helvetica_font/Helvetica-Oblique.ttf": "f61fb3caffbd88df1f593810393f504cb93bcaafab2c3a9aff193df8929c64a7",
@@ -30,6 +27,7 @@
     "helvetica_font/helvetica-light-587ebe5a59211.ttf": "8d8b2f230f9949e136bb787117197b08798316a7155ccbcc8ddca8e0238c4e3d",
     "helvetica_font/helvetica-rounded-bold-5871d05ead8de.otf": "cb578b743ef130ad93bee25ea9e105f4c6a806b83e2e3d541d42c4f90a49a408",
     "profile.jpeg": "2e3245305084e10bf06c8a630dcee01cf5ea7902ec609cf258080f64cfc8631b",
-    "style.css": "30733e39e807dea6c07944697b3b1f2d2e7e28fc431f694d99556e937ed7ab7c"
+    "style.css": "692602d15e8cded43344f766092383c6ac563ccb3d192ed7d4cde48e2fc7df85",
+    "scroll-nav.js": "b9ff3d3d7af087e7e5b19d1c748e825aeb667a9be6b67b60c2ba85e592c2e4e7"
   }
 }

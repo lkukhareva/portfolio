@@ -1,4 +1,4 @@
-  .div {
+  #work .div {
     background-color: var(--beige, #fff0dd);
     display: flex;
     flex-direction: column;
@@ -9,35 +9,36 @@
     padding: 32px 0px 0px;
   }
 
-  .div-8 {
-    margin-top: 160px;
-    width: 998px;
+  /* The first card no longer clears the fixed header; the section heading does. */
+  #work .div-8 {
+    margin-top: 64px;
+    width: var(--content-width);
     max-width: 100%;
     text-decoration: none;
   }
 
-  .div-8:hover{
+  #work .div-8:hover{
     transform: scale(1.05);
     transition: transform 0.3s ease;
   }
 
   @media (max-width: 991px) {
-    .div-8 {
+    #work .div-8 {
       margin-top: 48px;
     }
   }
-  .div-9 {
+  #work .div-9 {
     gap: 20px;
     display: flex;
   }
   @media (max-width: 991px) {
-    .div-9 {
+    #work .div-9 {
       flex-direction: column;
       align-items: stretch;
       gap: 0px;
     }
   }
-  .column {
+  #work .column {
     display: flex;
     flex-direction: column;
     line-height: normal;
@@ -45,11 +46,11 @@
     margin-left: 0px;
   }
   @media (max-width: 991px) {
-    .column {
+    #work .column {
       width: 100%;
     }
   }
-  .img {
+  #work .img {
     aspect-ratio: 1.41;
     object-fit: fill;
     object-position: center;
@@ -57,12 +58,12 @@
     flex-grow: 1;
   }
   @media (max-width: 991px) {
-    .img {
+    #work .img {
       max-width: 90%;
       margin: 20px;
     }
   }
-  .column-2 {
+  #work .column-2 {
     display: flex;
     flex-direction: column;
     line-height: normal;
@@ -70,59 +71,59 @@
     margin-left: 20px;
   }
   @media (max-width: 991px) {
-    .column-2 {
+    #work .column-2 {
       width: calc(100% - 40px);
     }
   }
-  .div-10 {
+  #work .div-10 {
     display: flex;
     margin-top: 282px;
     flex-grow: 1;
     flex-direction: column;
   }
   @media (max-width: 991px) {
-    .div-10 {
+    #work .div-10 {
       margin-top: 8px;
     }
   }
-  .div-11 {
+  #work .div-11 {
     color: var(--black, #000);
     text-transform: uppercase;
     font: 700 32px Helvetica, sans-serif;
   }
-  .div-12 {
+  #work .div-12 {
     color: var(--gray, #4e4d4d);
     margin-top: 16px;
     font: 300 20px/140% Helvetica, sans-serif;
   }
-  .div-13 {
+  #work .div-13 {
     margin-top: 160px;
-    width: 998px;
+    width: var(--content-width);
     max-width: 100%;
     text-decoration: none;
   }
 
-  .div-13:hover{
+  #work .div-13:hover{
     transform: scale(1.05);
     transition: transform 0.3s ease;
   }
   @media (max-width: 991px) {
-    .div-13 {
+    #work .div-13 {
       margin-top: 40px;
     }
   }
-  .div-14 {
+  #work .div-14 {
     gap: 20px;
     display: flex;
   }
   @media (max-width: 991px) {
-    .div-14 {
+    #work .div-14 {
       flex-direction: column;
       align-items: stretch;
       gap: 0px;
     }
   }
-  .column-3 {
+  #work .column-3 {
     display: flex;
     flex-direction: column;
     line-height: normal;
@@ -130,11 +131,11 @@
     margin-left: 20px;
   }
   @media (max-width: 991px) {
-    .column-3 {
+    #work .column-3 {
       width: calc(100% - 40px);
     }
   }
-  .div-15 {
+  #work .div-15 {
     display: flex;
     margin-top: 282px;
     flex-grow: 1;
@@ -142,56 +143,56 @@
     flex-direction: column;
   }
   @media (max-width: 991px) {
-    .div-15 {
+    #work .div-15 {
       margin-top: 8px;
     }
   }
-  .div-16 {
+  #work .div-16 {
     color: var(--black, #000);
     text-transform: uppercase;
     margin-left: -4px;
     font: 700 32px Helvetica, sans-serif;
   }
   @media (max-width: 991px) {
-    .div-16 {
+    #work .div-16 {
       max-width: 90%;
     }
   }
 
-  .div-17 {
+  #work .div-17 {
     color: var(--gray, #4e4d4d);
     margin-top: 16px;
     font: 300 20px/140% Helvetica, sans-serif;
   }
-  .div-18 {
+  #work .div-18 {
     margin-top: 160px;
-    width: 998px;
+    width: var(--content-width);
     max-width: 100%;
     text-decoration: none;
   }
 
-  .div-18:hover{
+  #work .div-18:hover{
     transform: scale(1.05);
     transition: transform 0.3s ease;
   }
 
   @media (max-width: 991px) {
-    .div-18 {
+    #work .div-18 {
       margin-top: 40px;
     }
   }
-  .div-19 {
+  #work .div-19 {
     gap: 20px;
     display: flex;
   }
   @media (max-width: 991px) {
-    .div-19 {
+    #work .div-19 {
       flex-direction: column;
       align-items: stretch;
       gap: 0px;
     }
   }
-  .column-4 {
+  #work .column-4 {
     display: flex;
     flex-direction: column;
     line-height: normal;
@@ -199,59 +200,59 @@
     margin-left: 20px;
   }
   @media (max-width: 991px) {
-    .column-4 {
+    #work .column-4 {
       width: calc(100% - 40px);
     }
   }
-  .div-20 {
+  #work .div-20 {
     display: flex;
     margin-top: 282px;
     flex-grow: 1;
     flex-direction: column;
   }
   @media (max-width: 991px) {
-    .div-20 {
+    #work .div-20 {
       margin-top: 8px;
     }
   }
-  .div-21 {
+  #work .div-21 {
     color: var(--black, #000);
     text-transform: uppercase;
     font: 700 32px Helvetica, sans-serif;
   }
-  .div-22 {
+  #work .div-22 {
     color: var(--gray, #4e4d4d);
     margin-top: 16px;
     font: 300 20px/140% Helvetica, sans-serif;
   }
-  .div-23 {
+  #work .div-23 {
     margin-top: 160px;
-    width: 998px;
+    width: var(--content-width);
     max-width: 100%;
     text-decoration: none;
   }
-  .div-23:hover {
+  #work .div-23:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
   }
   @media (max-width: 991px) {
-    .div-23 {
+    #work .div-23 {
       margin-top: 40px;
       text-decoration: none;
     }
   }
-  .div-24 {
+  #work .div-24 {
     gap: 20px;
     display: flex;
   }
   @media (max-width: 991px) {
-    .div-24 {
+    #work .div-24 {
       flex-direction: column;
       align-items: stretch;
       gap: 0px;
     }
   }
-  .column-5 {
+  #work .column-5 {
     display: flex;
     flex-direction: column;
     line-height: normal;
@@ -259,46 +260,29 @@
     margin-left: 20px;
   }
   @media (max-width: 991px) {
-    .column-5 {
+    #work .column-5 {
       width: calc(100% - 40px);
     }
   }
-  .div-25 {
+  #work .div-25 {
     display: flex;
     margin-top: 282px;
     flex-grow: 1;
     flex-direction: column;
   }
   @media (max-width: 991px) {
-    .div-25 {
+    #work .div-25 {
       margin-top: 8px;
     }
   }
-  .div-26 {
+  #work .div-26 {
     color: var(--black, #000);
     text-transform: uppercase;
     font: 700 32px Helvetica, sans-serif;
   }
-  .div-27 {
+  #work .div-27 {
     color: var(--gray, #4e4d4d);
     margin-top: 16px;
     font: 300 20px/140% Helvetica, sans-serif;
   }
 
-.site-footer {
-  padding-bottom: 24px;
-}
-
-.links {
-  margin-top: 140px;
-}
-
-@media (max-width: 991px) {
-  .links {
-    margin-top: 80px;
-  }
-
-  .impressum {
-    margin-bottom: 16px;
-  }
-}
