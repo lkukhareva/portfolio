@@ -5,7 +5,8 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
-const root = fileURLToPath(new URL('../', import.meta.url));
+// Exercise the deployed HTML rather than Astro's source templates.
+const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const read = path => readFileSync(join(root, path), 'utf8');
 const hash = value => createHash('sha256').update(value).digest('hex');
 const pages = ['index.html', 'about.html', 'work.html', 'impressum.html'];
@@ -59,7 +60,13 @@ for (const page of pages) {
     assert.match(html, /<meta charset="utf-8">/);
     assert.match(html, /<meta name="viewport" content="width=device-width, initial-scale=1">/);
     assert.match(html, /<link rel="icon" href="Logo.svg" type="image\/svg\+xml">/);
-    assert.match(html, /<link rel="stylesheet" href="style.css">/);
+    const stylesheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)">/g)].map(m => m[1]);
+    assert.deepEqual(stylesheets, ['style.css', `css/${page.replace('.html', '.css')}`], 'shared styles precede page overrides');
+    const title = page === 'impressum.html'
+      ? 'Lizaveta Kukharava | Impressum'
+      : 'Lizaveta Kukharava, a Berlin-based UX Designer';
+    assert.ok(html.includes(`<title>${title}</title>`));
+    assert.match(html, /<meta name="description" content="If you care for your customers and users as much as I do, take a look at my portfolio and reach out to team up and transform your challenges into wins\.">/);
     const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)?.[1];
     assert.ok(nav, 'navigation exists');
     const current = [...nav.matchAll(/<a\b[^>]*aria-current="page"[^>]*>/g)];

@@ -55,6 +55,7 @@
     .div-11 {
       gap: 20px;
       display: flex;
+      align-items: center;
     }
     @media (max-width: 991px) {
       .div-11 {
@@ -94,7 +95,7 @@
       flex-direction: column;
       line-height: normal;
       margin-left: 20px;
-      margin-top: 40px;
+      margin-top: 0;
       word-wrap: break-word;
       overflow-wrap: break-word;
     }
@@ -107,7 +108,7 @@
     .div-12 {
       display: flex;
       flex-wrap: wrap;
-      margin-top: 256px;
+      margin-top: 0;
       flex-grow: 1;
       flex-direction: column;
     }

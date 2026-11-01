@@ -1,0 +1,33 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  page: 'index' | 'about' | 'work' | 'impressum';
+  title?: string;
+}
+
+const {
+  page,
+  title = 'Lizaveta Kukharava, a Berlin-based UX Designer',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="Logo.svg" type="image/svg+xml">
+  <title>{title}</title>
+  <meta name="description" content="If you care for your customers and users as much as I do, take a look at my portfolio and reach out to team up and transform your challenges into wins.">
+  <!-- Keep the original global cascade and public asset URLs during migration. -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href={`css/${page}.css`}>
+</head>
+<body>
+  <Header currentPage={page} />
+  <slot />
+  <Footer isImpressum={page === 'impressum'} />
+</body>
+</html>

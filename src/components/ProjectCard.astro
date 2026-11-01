@@ -1,0 +1,33 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  loading?: 'lazy';
+  // Preserve the existing per-card selectors until the layout is redesigned.
+  classes: {
+    link: string;
+    row: string;
+    column: string;
+    content: string;
+    title: string;
+    description: string;
+  };
+}
+
+const { project, classes, loading } = Astro.props;
+---
+
+<a href={project.href} class={classes.link} target="_blank" rel="noopener">
+  <div class={classes.row}>
+    <div class="column">
+      <img loading={loading} src={project.image} alt="" class="img">
+    </div>
+    <div class={classes.column}>
+      <div class={classes.content}>
+        <h2 class={classes.title}>{project.title}</h2>
+        <div class={classes.description}>{project.description}</div>
+      </div>
+    </div>
+  </div>
+</a>

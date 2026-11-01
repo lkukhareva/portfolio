@@ -1,0 +1,15 @@
+---
+interface Props {
+  currentPage: 'index' | 'about' | 'work' | 'impressum';
+}
+
+const { currentPage } = Astro.props;
+---
+
+<header>
+  <nav aria-label="Primary">
+    <a href="index.html" aria-current={currentPage === 'index' ? 'page' : undefined}>Index</a>
+    <a href="about.html" aria-current={currentPage === 'about' ? 'page' : undefined}>About</a>
+    <a href="work.html" aria-current={currentPage === 'work' ? 'page' : undefined}>Work</a>
+  </nav>
+</header>
