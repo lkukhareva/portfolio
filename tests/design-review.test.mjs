@@ -20,6 +20,15 @@ test('the contact email is a mailto link in About, Impressum, and the footer', (
   }
 });
 
+test('a skip link opens the body, ahead of every focusable element, and targets main', () => {
+  for (const html of [index, impressum]) {
+    const body = html.match(/<body>([\s\S]*)<\/body>/)[1];
+    assert.match(body, /^\s*<a href="#main" class="skip-link">/);
+    assert.match(body, /<main\b[^>]*\bid="main"/);
+  }
+  assert.match(read('style.css'), /\.skip-link\s*\{[^}]*top:\s*-100px/);
+  assert.match(read('style.css'), /\.skip-link:focus\s*\{[^}]*top:\s*8px/);
+});
 
 test('content images are compressed and reserve their layout space', () => {
   assert.match(read('style.css'), /img\s*\{[^}]*height:\s*auto/);

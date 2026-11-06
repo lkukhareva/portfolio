@@ -27,6 +27,7 @@ const stylesheets = page === 'index'
   {stylesheets.map((href) => <link rel="stylesheet" href={href} />)}
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
   <Header />
   <slot />
   <Footer isImpressum={page === 'impressum'} />
