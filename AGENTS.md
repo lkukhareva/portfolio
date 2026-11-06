@@ -35,7 +35,8 @@ scrolling page. Impressum stays separate. Animation work is separate.
   `lizavetakuk.com` (configured in GitHub Pages settings, not in local dev).
 - `dist/`: generated deployable site, ignored along with `.astro/`.
 - `tests/site.test.mjs`: generated HTML structure, copy, links, assets, and
-  published-file checks.
+  published-file checks. `tests/design-review.test.mjs`: contact links, skip
+  link, image weight/dimensions, card labels, and list semantics.
 - `tests/scroll-nav.test.mjs`: section-highlighting script behavior.
 - `tests/dev-server.test.mjs`: HTTP integration checks for Astro development and
   production preview on temporary loopback ports; closes servers afterward.
@@ -61,7 +62,7 @@ silently changing URLs. Static hosting must retain normal file/404 behavior, not
 an SPA fallback. There is no server adapter or production runtime.
 
 For narrower output-only checks after building:
-`node --test tests/site.test.mjs`.
+`node --test tests/site.test.mjs tests/design-review.test.mjs`.
 
 Optional HTML validation after building:
 
