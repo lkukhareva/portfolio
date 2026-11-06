@@ -50,16 +50,16 @@ const behance = [
   'https://www.behance.net/gallery/170639797/Rapuha-Brand-Design',
 ];
 const portfolioImages = [
-  'profile.jpeg',
+  'profile.webp',
   'assets/section-arrow.svg',
   'andersenoffice.jpg',
-  'classroom.jpg',
-  'Laptop.jpg',
+  'classroom.webp',
+  'Laptop.webp',
   'assets/section-arrow.svg',
-  'IFDwork.png',
-  'Hopappwork.png',
-  'Cloud9work.png',
-  'Rapuhawork.png',
+  'IFDwork.webp',
+  'Hopappwork.webp',
+  'Cloud9work.webp',
+  'Rapuhawork.webp',
 ];
 
 function pageText(html) {

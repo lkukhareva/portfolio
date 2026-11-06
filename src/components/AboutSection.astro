@@ -4,21 +4,21 @@ const craftSkills = ['UX Research', 'Wireframing & Prototyping', 'Content Design
 
 const stories = [
   {
-    image: 'andersenoffice.jpg',
+    image: 'andersenoffice.jpg', width: 800, height: 534,
     alt: 'Andersen lab office',
     caption: 'Andersen lab office. Credits: Anastasia Andreyko on LinkedIn',
     title: 'Growth and improvement',
     text: 'Seeking independence and market experience, I joined an IT company as a Customer Acquisition Specialist. I grew together with the company, exploring various aspects of the IT process and improving departmental performance by continuously improving myself. My experience and empathy naturally led me to a Team Lead position.',
   },
   {
-    image: 'classroom.jpg',
+    image: 'classroom.webp', width: 1100, height: 674,
     alt: 'Coding classes at ReDI School Kids program',
     caption: 'Volunteering for the coding classes at ReDI School Kids program',
     title: 'Empathy and communication',
     text: 'Initially I pursued a degree in language teaching and interpreting. During working with kids, I learned how to communicate clearly, provide feedback, and support children seeking understanding. This experience honed my skills in empathy and communication, which are crucial in UX design.',
   },
   {
-    image: 'Laptop.jpg',
+    image: 'Laptop.webp', width: 1100, height: 810,
     alt: 'Designing an app at home',
     caption: 'Designing my very first app at home',
     title: 'Going extra mile',
@@ -77,7 +77,7 @@ const stories = [
   {stories.map((story) => (
     <article class="story">
       <figure class="story-media">
-        <img loading="lazy" src={story.image} alt={story.alt} class="story-image">
+        <img loading="lazy" src={story.image} alt={story.alt} width={story.width} height={story.height} class="story-image">
         <figcaption class="story-caption">{story.caption}</figcaption>
       </figure>
       <div class="story-body">

@@ -32,9 +32,8 @@ Development and production preview bind to loopback and reject port conflicts.
 - Original media: `public/`, including `assets/` and `helvetica_font/`.
 - Astro configuration: `astro.config.mjs`; agent guidance: `AGENTS.md`.
 
-CSS and images remain unprocessed in `public/` to preserve the current rendering
-and public URLs. Image optimization and CSS restructuring can be adopted during
-the redesign; they are not required for this migration.
+CSS and images are served unprocessed from `public/`. Photos and project images
+are pre-compressed WebP files with fixed `width`/`height` attributes.
 
 ```sh
 npm run check    # Astro/TypeScript diagnostics

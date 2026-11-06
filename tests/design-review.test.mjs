@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
@@ -12,6 +12,17 @@ const impressum = read('impressum.html');
 
 
 
+test('content images are compressed and reserve their layout space', () => {
+  assert.match(read('style.css'), /img\s*\{[^}]*height:\s*auto/);
+  const photos = [...index.matchAll(/<img\b[^>]*>/g)].map(([tag]) => tag)
+    .filter(tag => !tag.includes('section-arrow.svg'));
+  assert.equal(photos.length, 8);
+  for (const tag of photos) {
+    assert.match(tag, /\bwidth="\d+" height="\d+"/, tag);
+    const src = tag.match(/\bsrc="([^"]+)"/)[1];
+    assert.ok(statSync(join(root, src)).size < 400_000, `${src} is under 400 KB`);
+  }
+});
 
 
 test('skills are lists with explicit list semantics', () => {

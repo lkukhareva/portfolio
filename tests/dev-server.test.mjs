@@ -57,7 +57,7 @@ for (const [name, start] of [['development', dev], ['production preview', previe
       });
     }
 
-    for (const path of ['style.css', 'css/about.css', 'assets/section-arrow.svg', 'profile.jpeg']) {
+    for (const path of ['style.css', 'css/about.css', 'assets/section-arrow.svg', 'profile.webp']) {
       await t.test(`serves ${path} unchanged`, async () => {
         const response = await fetch(new URL(path, base));
         assert.equal(response.status, 200);

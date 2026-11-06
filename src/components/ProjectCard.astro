@@ -10,7 +10,7 @@ const { project, loading } = Astro.props;
 ---
 
 <a href={project.href} class="project-card" target="_blank" rel="noopener">
-  <img loading={loading} src={project.image} alt="" class="project-image">
+  <img loading={loading} src={project.image} alt="" width="1100" height="782" class="project-image">
   <div class="project-body">
     <h3 class="project-title">{project.title}</h3>
     <p class="project-description">{project.description}</p>
