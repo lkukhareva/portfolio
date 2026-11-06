@@ -42,6 +42,16 @@ test('content images are compressed and reserve their layout space', () => {
   }
 });
 
+test('project cards announce Behance and a new tab, and react to keyboard focus', () => {
+  const cards = [...index.matchAll(/<a\b[^>]*target="_blank"[^>]*>([\s\S]*?)<\/a>/g)]
+    .map(([, content]) => content).filter(content => content.includes('<h3'));
+  assert.equal(cards.length, 4);
+  for (const card of cards) {
+    assert.match(card, /Case study on Behance <span aria-hidden="true">↗<\/span>/);
+    assert.match(card, /<span class="visually-hidden">\(opens in new tab\)<\/span>/);
+  }
+  assert.match(read('css/work.css'), /\.project-card:focus-visible\s*\{[^}]*transform:\s*scale\(1\.05\)/);
+});
 
 test('skills are lists with explicit list semantics', () => {
   const about = index.match(/<section\b[^>]*id="about"[\s\S]*?<\/section>/)[0];

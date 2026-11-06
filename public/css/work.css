@@ -18,7 +18,8 @@
   margin-top: 64px;
 }
 
-.project-card:hover {
+.project-card:hover,
+.project-card:focus-visible {
   transform: scale(1.05);
 }
 
@@ -37,6 +38,13 @@
   margin-top: 16px;
   color: var(--gray);
   font: 300 20px/140% Helvetica, sans-serif;
+}
+
+.project-cta {
+  display: inline-block;
+  margin-top: 16px;
+  font: 400 20px/140% Helvetica, sans-serif;
+  text-decoration: underline;
 }
 
 @media (max-width: 991px) {
