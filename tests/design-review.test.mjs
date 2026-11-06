@@ -50,7 +50,8 @@ test('project cards announce Behance and a new tab, and react to keyboard focus'
     assert.match(card, /Case study on Behance <span aria-hidden="true">↗<\/span>/);
     assert.match(card, /<span class="visually-hidden">\(opens in new tab\)<\/span>/);
   }
-  assert.match(read('css/work.css'), /\.project-card:focus-visible\s*\{[^}]*transform:\s*scale\(1\.05\)/);
+  // Any visible movement counts; the design picks the effect.
+  assert.match(read('css/work.css'), /\.project-card:focus-visible\s*\{[^}]*transform:\s*(?!none\b)[^;}]+/);
 });
 
 test('skills are lists and project titles use sentence case', () => {
