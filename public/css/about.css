@@ -1,63 +1,108 @@
 .about {
   padding-top: 120px;
-  color: var(--gray);
-  font: 300 20px/28px Helvetica, sans-serif;
 }
 
-/* Quotes alternate left and right in chess order. */
+/* Portrait as a round sticker beside quotes on sticker notes. */
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  align-items: center;
+  gap: 56px;
+}
+
+.about-portrait {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center 30%;
+  border: 8px solid var(--lime);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--ink), 10px 10px 0 4px var(--ink);
+}
+
 .quotes {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 28px;
 }
 
 .quote {
-  max-width: 440px;
+  padding: 20px 26px;
+  border: 3px solid var(--ink);
+  border-radius: 20px;
+  background-color: var(--cream);
+  box-shadow: 6px 6px 0 var(--ink);
+  color: var(--ink);
+  font-size: 20px;
+  font-style: italic;
 }
 
 .quote:nth-child(even) {
-  align-self: flex-end;
-}
-
-.about .section-label {
-  margin-top: 80px;
-  color: var(--black);
+  background-color: var(--lime);
+  margin-left: 24px;
 }
 
 .strengths {
   display: grid;
   grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
-  gap: 40px;
-  margin-top: 80px;
+  gap: 48px;
+  margin-top: 64px;
 }
 
 .strengths-text p + p {
-  margin-top: 28px;
+  margin-top: 20px;
 }
 
 .skills {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 12px;
+  align-content: start;
 }
 
 .skill-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
-  font-weight: 400;
 }
 
-/* Photo stories: image and caption beside a vertically centered text block. */
+.skill-list li {
+  padding: 6px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background-color: var(--cream);
+  color: var(--blue);
+  font: 400 16px/1.2 var(--display);
+}
+
+.skill-list + .skill-list li {
+  background-color: var(--lime);
+  color: var(--ink);
+}
+
+/* Photo stories as polaroids, alternating sides. */
 .story {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
-  gap: 40px;
-  margin-top: 80px;
+  gap: 56px;
+  margin-top: 104px;
+}
+
+.story-media {
+  padding: 14px 14px 18px;
+  border: 3px solid var(--ink);
+  background-color: var(--cream);
+  box-shadow: 8px 8px 0 var(--ink);
+  color: var(--ink);
+}
+
+.story:nth-of-type(even) .story-media {
+  order: 2;
 }
 
 .story-image {
@@ -67,49 +112,53 @@
 }
 
 .story-caption {
-  margin-top: 8px;
-  font-size: 16px;
-  line-height: 1.125;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.3;
 }
 
 .story-title {
-  color: var(--black);
-  font: 700 24px/32px Helvetica, sans-serif;
+  color: var(--lime);
+  font: 400 clamp(30px, 3.6vw, 46px)/1.05 var(--display);
 }
 
 .story-text {
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .about-contact {
-  margin-top: 90px;
+  margin-top: 120px;
   text-align: center;
-  font: 700 24px/40px Helvetica, sans-serif;
+  font: 400 clamp(26px, 3.4vw, 40px)/1.3 var(--display);
 }
 
-@media (max-width: 991px) {
-  .quotes {
-    gap: 40px;
-  }
-
-  .quote {
-    max-width: 85%;
-  }
-
-  .about .section-label,
-  .strengths,
-  .story,
-  .about-contact {
-    margin-top: 40px;
-  }
-
+@media (max-width: 820px) {
+  .about-intro,
   .strengths,
   .story {
     grid-template-columns: minmax(0, 1fr);
-    gap: 20px;
+    gap: 32px;
+  }
+
+  .about-portrait {
+    max-width: 280px;
+    margin-inline: auto;
+  }
+
+  .quote:nth-child(even) {
+    margin-left: 0;
+  }
+
+  .story {
+    margin-top: 72px;
+  }
+
+  .story:nth-of-type(even) .story-media {
+    order: 0;
   }
 
   .about-contact {
+    margin-top: 72px;
     text-align: left;
   }
 }
