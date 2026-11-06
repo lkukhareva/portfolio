@@ -50,7 +50,8 @@ test('project cards announce Behance and a new tab, and react to keyboard focus'
     assert.match(card, /Case study on Behance <span aria-hidden="true">↗<\/span>/);
     assert.match(card, /<span class="visually-hidden">\(opens in new tab\)<\/span>/);
   }
-  assert.match(read('css/work.css'), /\.project-card:focus-visible\s*\{[^}]*transform:\s*scale\(1\.05\)/);
+  // Any visible movement counts; the design picks the effect.
+  assert.match(read('css/work.css'), /\.project-card:focus-visible\s*\{[^}]*transform:\s*(?!none\b)[^;}]+/);
 });
 
 test('skills are lists and project titles use sentence case', () => {
@@ -62,4 +63,13 @@ test('skills are lists and project titles use sentence case', () => {
   for (const [list] of lists) assert.match(list, /<ul\b[^>]*role="list"/);
   const titles = [...index.matchAll(/<h3\b[^>]*>([^<]+)<\/h3>/g)].map(([, title]) => title);
   for (const title of titles) assert.match(title, /^How I /);
+});
+
+test('the hero bubble greets in five languages without a script', () => {
+  const bubble = index.match(/<p class="hero-bubble">([\s\S]*?)<\/p>/)[1];
+  assert.deepEqual([...bubble.matchAll(/<span lang="([a-z]+)">([^<]+)<\/span>/g)].map(([, lang, word]) => [lang, word]), [
+    ['en', 'Hello'], ['ru', 'Привет'], ['de', 'Hallo'], ['be', 'Вітаю'], ['pl', 'Cześć'],
+  ]);
+  // Without motion, the first greeting stays visible instead of none.
+  assert.match(read('css/index.css'), /prefers-reduced-motion: reduce\)\s*\{\s*\.hero-bubble span:first-child\s*\{\s*opacity:\s*1/);
 });

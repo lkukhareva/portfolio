@@ -1,16 +1,22 @@
 .legal {
   --content-width: 882px;
-  padding-top: 144px;
-  font: 300 20px/28px Helvetica, sans-serif;
+  padding-top: 200px;
 }
 
 .legal h1,
 .legal h2 {
-  font: 400 24px Helvetica, sans-serif;
+  color: var(--lime);
+  font-family: var(--display);
+  font-weight: 400;
+}
+
+.legal h1 {
+  font-size: 56px;
 }
 
 .legal h2 {
   margin-top: 40px;
+  font-size: 26px;
 }
 
 .legal p {

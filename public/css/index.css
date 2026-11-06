@@ -1,46 +1,164 @@
-/* Hero: kicker line, then portrait beside the introduction. */
+/* Hero: cream LiKUK with a lime drop shadow, a cream bubble cycling
+   greetings in five languages,
+   and a lime glass sphere, then the introduction on a cream sticker. */
 .hero {
-  padding-top: 96px;
+  padding-top: 150px;
+}
+
+.hero-stage {
+  position: relative;
+  container-type: inline-size;
+  padding-top: 14cqi;
+}
+
+.hero-wordmark {
+  color: var(--cream);
+  font: 400 34cqi/0.9 var(--display);
+  letter-spacing: -0.02em;
+  text-align: center;
+  text-shadow: 0.035em 0.035em 0 var(--lime), 0.07em 0.07em 0 var(--ink);
+  user-select: none;
+}
+
+.hero-bubble {
+  position: absolute;
+  top: 0;
+  left: 8%;
+  z-index: 2;
+  display: grid;
+  padding: 0.25em 0.55em 0.35em;
+  border: 3px solid var(--ink);
+  border-radius: 50% 50% 46% 54% / 60% 55% 45% 40%;
+  background-color: var(--cream);
+  box-shadow: 6px 6px 0 var(--ink);
+  color: var(--blue);
+  font: 400 8cqi/1 var(--display);
+  animation: bubble-bob 4s ease-in-out infinite;
+}
+
+/* Five words share one cell, so the bubble fits the widest; each shows for
+   2s of a 10s loop. */
+.hero-bubble span {
+  grid-area: 1 / 1;
+  text-align: center;
+  opacity: 0;
+  animation: greeting 10s ease-in-out infinite both;
+}
+
+/* Bagel has no ś or ć; set the whole Polish word in Rubik, like the Cyrillic. */
+.hero-bubble [lang="pl"] {
+  font-family: "Rubik Black", var(--display);
+}
+
+.hero-bubble span:nth-child(2) { animation-delay: 2s; }
+.hero-bubble span:nth-child(3) { animation-delay: 4s; }
+.hero-bubble span:nth-child(4) { animation-delay: 6s; }
+.hero-bubble span:nth-child(5) { animation-delay: 8s; }
+
+.hero-bubble::after {
+  content: "";
+  position: absolute;
+  top: 92%;
+  left: 30%;
+  width: 0.4em;
+  height: 0.6em;
+  border: 3px solid var(--ink);
+  border-top: 0;
+  border-radius: 0 0 0.35em 0.05em;
+  background-color: var(--cream);
+  transform: skewX(14deg);
+}
+
+.hero-sphere {
+  position: absolute;
+  top: 2cqi;
+  right: 6%;
+  width: 16cqi;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, rgb(255 255 240 / 0.95) 0 5%, transparent 24%),
+    radial-gradient(circle at 50% 50%, rgb(200 240 110 / 0.7), rgb(140 200 40 / 0.9) 60%, rgb(70 120 10));
+  box-shadow:
+    inset -1.2cqi -1.6cqi 2.4cqi rgb(20 50 0 / 0.45),
+    0 2cqi 3cqi rgb(5 15 50 / 0.45);
+  backdrop-filter: blur(6px);
+  animation: sphere-drift 6s ease-in-out infinite;
+}
+
+.hero-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 12px 48px;
+  margin-top: 100px;
+  padding: 40px;
+  border: 3px solid var(--ink);
+  border-radius: 32px;
+  background-color: var(--cream);
+  box-shadow: 10px 10px 0 var(--ink);
+  color: var(--ink);
 }
 
 .hero-kicker {
-  max-width: 290px;
-  margin-bottom: 16px;
-  font: oblique 700 24px/32px Helvetica, sans-serif;
-}
-
-.hero-body {
-  display: grid;
-  grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
-  align-items: center;
-  gap: 40px;
-}
-
-.hero-portrait {
-  width: 100%;
+  grid-column: 1;
+  color: var(--blue);
+  font: 400 clamp(26px, 3.2vw, 38px)/1.1 var(--display);
 }
 
 .hero-name {
-  font: 700 32px Helvetica, sans-serif;
+  grid-column: 1;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.hero-intro p {
-  margin-top: 28px;
-  color: var(--gray);
-  font: 300 20px/28px Helvetica, sans-serif;
+.hero-text {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: 20px;
 }
 
-.hero-intro .hero-name + p {
-  margin-top: 24px;
+.hero-text p + p {
+  margin-top: 14px;
 }
 
-@media (max-width: 991px) {
-  .hero-body {
-    grid-template-columns: minmax(0, 1fr);
+@keyframes bubble-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6%); }
+}
+
+@keyframes greeting {
+  0% { opacity: 0; transform: translateY(25%); }
+  4%, 18% { opacity: 1; transform: translateY(0); }
+  22%, 100% { opacity: 0; transform: translateY(-25%); }
+}
+
+@keyframes sphere-drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-10%, 12%); }
+}
+
+/* Without motion, the greeting stays on the first word. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bubble span:first-child {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 820px) {
+  .hero {
+    padding-top: 140px;
   }
 
-  .hero-portrait {
-    max-width: 420px;
+  .hero-intro {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 64px;
+    padding: 24px;
+  }
+
+  .hero-text {
+    grid-column: 1;
+    grid-row: auto;
   }
 }
