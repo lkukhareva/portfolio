@@ -94,7 +94,8 @@ nav a[aria-current="true"] {
 nav a:hover,
 .links a:hover,
 .impressum a:hover {
-  color: gray;
+  color: var(--gray);
+  text-decoration: underline;
 }
 
 a:focus-visible {
