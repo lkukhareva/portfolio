@@ -17,9 +17,11 @@ scrolling page. Impressum stays separate. Animation work is separate.
 - `src/layouts/BaseLayout.astro`: shared document, metadata, stylesheet order.
 - `src/components/`: header, footer, and work project card markup.
 - `src/data/projects.ts`: project copy, destinations, and image references.
-- `public/style.css`: shared colors, header/navigation, footer, scroll clearance.
-- `public/css/{index,about,work}.css`: section layouts, scoped under `#home`,
-  `#about`, and `#work` because the original class names collide.
+- `public/style.css`: shared colors, `.container` column and gutter, section
+  labels, header/navigation, footer, scroll clearance.
+- `public/css/{index,about,work}.css`: hero, about (quotes, strengths, stories),
+  and project-card layouts. Class names are per component (`hero-*`, `story-*`,
+  `project-*`); do not reintroduce exported `div-N`/`column-N`/`img-N` names.
 - `public/scroll-nav.js`: sets `aria-current="true"` from the visible section.
   It must not rewrite the URL. Anchors work without it.
 - `public/css/impressum.css`: legal-page layout.
@@ -79,7 +81,8 @@ npx --yes html-validate@11.17.0 --preset standard,a11y dist/index.html dist/abou
   `./#home`, `./#about`, and `./#work` so both the domain root and the Pages
   subpath stay on one document. Do not add a client router or SPA fallback.
   Keep `about.html` and `work.html` as jump documents.
-- Put shared rules in `public/style.css`, not duplicated page styles. Preserve
+- Put shared rules in `public/style.css`, not duplicated page styles. Lay out
+  with grid/flex and `.container`, not fixed offsets or per-item copies. Preserve
   stylesheet order, semantic landmarks/headings, image alternatives, focus
   styles, and reduced-motion support.
 - Keep assets local; do not embed credentials or introduce third-party image URLs.

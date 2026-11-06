@@ -4,29 +4,15 @@ import type { Project } from '../data/projects';
 interface Props {
   project: Project;
   loading?: 'lazy';
-  classes: {
-    link: string;
-    row: string;
-    column: string;
-    content: string;
-    title: string;
-    description: string;
-  };
 }
 
-const { project, classes, loading } = Astro.props;
+const { project, loading } = Astro.props;
 ---
 
-<a href={project.href} class={classes.link} target="_blank" rel="noopener">
-  <div class={classes.row}>
-    <div class="column">
-      <img loading={loading} src={project.image} alt="" class="img">
-    </div>
-    <div class={classes.column}>
-      <div class={classes.content}>
-        <h3 class={classes.title}>{project.title}</h3>
-        <div class={classes.description}>{project.description}</div>
-      </div>
-    </div>
+<a href={project.href} class="project-card" target="_blank" rel="noopener">
+  <img loading={loading} src={project.image} alt="" class="project-image">
+  <div class="project-body">
+    <h3 class="project-title">{project.title}</h3>
+    <p class="project-description">{project.description}</p>
   </div>
 </a>

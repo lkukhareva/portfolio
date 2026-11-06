@@ -206,3 +206,15 @@ test('static output publishes only the four pages and the scroll-navigation scri
   assert.deepEqual(files.filter(file => file.endsWith('.html')).sort(), [...pages].sort());
   assert.deepEqual(files.filter(file => /\.(?:[cm]?js|map)$/.test(file)), ['scroll-nav.js']);
 });
+
+test('markup and styles use named components, not exported div-N/column-N/img-N classes', () => {
+  const generated = /^(?:div|column|img)(?:-\d+)?$/;
+  for (const page of pages) {
+    for (const [, classes] of read(page).matchAll(/\bclass="([^"]+)"/g)) {
+      for (const name of classes.split(/\s+/)) assert.doesNotMatch(name, generated, `${page}: class="${classes}"`);
+    }
+  }
+  for (const file of ['style.css', 'css/index.css', 'css/about.css', 'css/work.css', 'css/impressum.css']) {
+    assert.doesNotMatch(read(file), /\.(?:div|column|img)(?:-\d+)?(?![\w-])/, file);
+  }
+});

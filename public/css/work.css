@@ -1,287 +1,49 @@
-  #work .div {
-    background-color: var(--beige, #fff0dd);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 24px;
-    color: var(--black, #000);
-    font-weight: 300;
-    padding: 32px 0px 0px;
-  }
+.work {
+  padding-top: 32px;
+}
 
-  /* The first card no longer clears the fixed header; the section heading does. */
-  #work .div-8 {
-    margin-top: 64px;
-    width: var(--content-width);
-    max-width: 100%;
-    text-decoration: none;
-  }
+/* Whole-card links: image beside a vertically centered text block. */
+.project-card {
+  display: grid;
+  grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
+  align-items: center;
+  gap: 40px;
+  margin-top: 160px;
+  color: var(--black);
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
 
-  #work .div-8:hover{
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
+.section-label + .project-card {
+  margin-top: 64px;
+}
 
-  @media (max-width: 991px) {
-    #work .div-8 {
-      margin-top: 48px;
-    }
-  }
-  #work .div-9 {
+.project-card:hover {
+  transform: scale(1.05);
+}
+
+.project-image {
+  width: 100%;
+  aspect-ratio: 1.41;
+  object-fit: cover;
+}
+
+.project-title {
+  font: 700 32px Helvetica, sans-serif;
+  text-transform: uppercase;
+}
+
+.project-description {
+  margin-top: 16px;
+  color: var(--gray);
+  font: 300 20px/140% Helvetica, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .project-card,
+  .section-label + .project-card {
+    grid-template-columns: minmax(0, 1fr);
     gap: 20px;
-    display: flex;
+    margin-top: 48px;
   }
-  @media (max-width: 991px) {
-    #work .div-9 {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0px;
-    }
-  }
-  #work .column {
-    display: flex;
-    flex-direction: column;
-    line-height: normal;
-    width: 58%;
-    margin-left: 0px;
-  }
-  @media (max-width: 991px) {
-    #work .column {
-      width: 100%;
-    }
-  }
-  #work .img {
-    aspect-ratio: 1.41;
-    object-fit: fill;
-    object-position: center;
-    width: 100%;
-    flex-grow: 1;
-  }
-  @media (max-width: 991px) {
-    #work .img {
-      max-width: 90%;
-      margin: 20px;
-    }
-  }
-  #work .column-2 {
-    display: flex;
-    flex-direction: column;
-    line-height: normal;
-    width: 42%;
-    margin-left: 20px;
-  }
-  @media (max-width: 991px) {
-    #work .column-2 {
-      width: calc(100% - 40px);
-    }
-  }
-  #work .div-10 {
-    display: flex;
-    margin-top: 282px;
-    flex-grow: 1;
-    flex-direction: column;
-  }
-  @media (max-width: 991px) {
-    #work .div-10 {
-      margin-top: 8px;
-    }
-  }
-  #work .div-11 {
-    color: var(--black, #000);
-    text-transform: uppercase;
-    font: 700 32px Helvetica, sans-serif;
-  }
-  #work .div-12 {
-    color: var(--gray, #4e4d4d);
-    margin-top: 16px;
-    font: 300 20px/140% Helvetica, sans-serif;
-  }
-  #work .div-13 {
-    margin-top: 160px;
-    width: var(--content-width);
-    max-width: 100%;
-    text-decoration: none;
-  }
-
-  #work .div-13:hover{
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
-  @media (max-width: 991px) {
-    #work .div-13 {
-      margin-top: 40px;
-    }
-  }
-  #work .div-14 {
-    gap: 20px;
-    display: flex;
-  }
-  @media (max-width: 991px) {
-    #work .div-14 {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0px;
-    }
-  }
-  #work .column-3 {
-    display: flex;
-    flex-direction: column;
-    line-height: normal;
-    width: 42%;
-    margin-left: 20px;
-  }
-  @media (max-width: 991px) {
-    #work .column-3 {
-      width: calc(100% - 40px);
-    }
-  }
-  #work .div-15 {
-    display: flex;
-    margin-top: 282px;
-    flex-grow: 1;
-    padding-left: 4px;
-    flex-direction: column;
-  }
-  @media (max-width: 991px) {
-    #work .div-15 {
-      margin-top: 8px;
-    }
-  }
-  #work .div-16 {
-    color: var(--black, #000);
-    text-transform: uppercase;
-    margin-left: -4px;
-    font: 700 32px Helvetica, sans-serif;
-  }
-  @media (max-width: 991px) {
-    #work .div-16 {
-      max-width: 90%;
-    }
-  }
-
-  #work .div-17 {
-    color: var(--gray, #4e4d4d);
-    margin-top: 16px;
-    font: 300 20px/140% Helvetica, sans-serif;
-  }
-  #work .div-18 {
-    margin-top: 160px;
-    width: var(--content-width);
-    max-width: 100%;
-    text-decoration: none;
-  }
-
-  #work .div-18:hover{
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
-
-  @media (max-width: 991px) {
-    #work .div-18 {
-      margin-top: 40px;
-    }
-  }
-  #work .div-19 {
-    gap: 20px;
-    display: flex;
-  }
-  @media (max-width: 991px) {
-    #work .div-19 {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0px;
-    }
-  }
-  #work .column-4 {
-    display: flex;
-    flex-direction: column;
-    line-height: normal;
-    width: 42%;
-    margin-left: 20px;
-  }
-  @media (max-width: 991px) {
-    #work .column-4 {
-      width: calc(100% - 40px);
-    }
-  }
-  #work .div-20 {
-    display: flex;
-    margin-top: 282px;
-    flex-grow: 1;
-    flex-direction: column;
-  }
-  @media (max-width: 991px) {
-    #work .div-20 {
-      margin-top: 8px;
-    }
-  }
-  #work .div-21 {
-    color: var(--black, #000);
-    text-transform: uppercase;
-    font: 700 32px Helvetica, sans-serif;
-  }
-  #work .div-22 {
-    color: var(--gray, #4e4d4d);
-    margin-top: 16px;
-    font: 300 20px/140% Helvetica, sans-serif;
-  }
-  #work .div-23 {
-    margin-top: 160px;
-    width: var(--content-width);
-    max-width: 100%;
-    text-decoration: none;
-  }
-  #work .div-23:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
-  @media (max-width: 991px) {
-    #work .div-23 {
-      margin-top: 40px;
-      text-decoration: none;
-    }
-  }
-  #work .div-24 {
-    gap: 20px;
-    display: flex;
-  }
-  @media (max-width: 991px) {
-    #work .div-24 {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0px;
-    }
-  }
-  #work .column-5 {
-    display: flex;
-    flex-direction: column;
-    line-height: normal;
-    width: 42%;
-    margin-left: 20px;
-  }
-  @media (max-width: 991px) {
-    #work .column-5 {
-      width: calc(100% - 40px);
-    }
-  }
-  #work .div-25 {
-    display: flex;
-    margin-top: 282px;
-    flex-grow: 1;
-    flex-direction: column;
-  }
-  @media (max-width: 991px) {
-    #work .div-25 {
-      margin-top: 8px;
-    }
-  }
-  #work .div-26 {
-    color: var(--black, #000);
-    text-transform: uppercase;
-    font: 700 32px Helvetica, sans-serif;
-  }
-  #work .div-27 {
-    color: var(--gray, #4e4d4d);
-    margin-top: 16px;
-    font: 300 20px/140% Helvetica, sans-serif;
-  }
+}
