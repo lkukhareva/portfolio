@@ -64,3 +64,12 @@ test('skills are lists and project titles use sentence case', () => {
   const titles = [...index.matchAll(/<h3\b[^>]*>([^<]+)<\/h3>/g)].map(([, title]) => title);
   for (const title of titles) assert.match(title, /^How I /);
 });
+
+test('the hero bubble greets in five languages without a script', () => {
+  const bubble = index.match(/<p class="hero-bubble">([\s\S]*?)<\/p>/)[1];
+  assert.deepEqual([...bubble.matchAll(/<span lang="([a-z]+)">([^<]+)<\/span>/g)].map(([, lang, word]) => [lang, word]), [
+    ['en', 'Hello'], ['ru', 'Привет'], ['de', 'Hallo'], ['be', 'Вітаю'], ['pl', 'Cześć'],
+  ]);
+  // Without motion, the first greeting stays visible instead of none.
+  assert.match(read('css/index.css'), /prefers-reduced-motion: reduce\)\s*\{\s*\.hero-bubble span:first-child\s*\{\s*opacity:\s*1/);
+});
