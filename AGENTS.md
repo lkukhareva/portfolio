@@ -15,19 +15,25 @@ scrolling page. Impressum stays separate. Animation work is separate.
 - `src/pages/impressum.astro`: legal page.
 - `src/components/{Home,About,Work}Section.astro`: section markup.
 - `src/layouts/BaseLayout.astro`: shared document, metadata, stylesheet order.
-- `src/components/`: header, footer, and work project card markup.
+- `src/components/`: header (contact links, then the Primary nav), footer, and
+  work project card markup.
 - `src/data/projects.ts`: project copy, destinations, and image references.
-- `public/style.css`: shared colors, `.container` column and gutter, section
-  labels, header/navigation, footer, scroll clearance.
-- `public/css/{index,about,work}.css`: hero, about (quotes, strengths, stories),
+- `public/style.css`: `@font-face` rules, shared colors (blue page, cream type,
+  lime accents), `.container` column and gutter, section labels, header contacts,
+  the Primary nav as a fixed bottom pill, footer, scroll clearance.
+- `public/css/{index,about,work}.css`: hero (decorative LiKUK wordmark, greeting
+  bubble, CSS sphere, intro card), about (portrait, quotes, strengths, stories),
   and project-card layouts. Class names are per component (`hero-*`, `story-*`,
   `project-*`); do not reintroduce exported `div-N`/`column-N`/`img-N` names.
 - `public/scroll-nav.js`: sets `aria-current="true"` from the visible section.
   It must not rewrite the URL. Anchors work without it.
 - `public/css/impressum.css`: legal-page layout.
-- `public/`: original images, decorative SVG in `assets/`, and `helvetica_font/`.
-  Font files are retained but not loaded via `@font-face`. Public files are copied
-  unchanged to preserve rendering and asset URLs during migration.
+- `public/fonts/`: self-hosted OFL woff2 subsets with their licence texts, loaded
+  from `public/style.css`: Bagel Fat One (display), Fraunces (body text), and
+  Rubik Black for display text in Polish and Cyrillic, which Bagel lacks.
+- `public/`: original images, decorative SVG in `assets/`, and `helvetica_font/`
+  (retained, no longer loaded). Public files are copied unchanged to preserve
+  rendering and asset URLs.
 - `astro.config.mjs`: static output with file-format `.html` routes; loopback
   development/preview on port 3000, rejecting port conflicts.
 - `.github/workflows/deploy.yml`: single-job GitHub Pages deployment from `master`,
@@ -36,7 +42,8 @@ scrolling page. Impressum stays separate. Animation work is separate.
 - `dist/`: generated deployable site, ignored along with `.astro/`.
 - `tests/site.test.mjs`: generated HTML structure, copy, links, assets, and
   published-file checks. `tests/design-review.test.mjs`: contact links, skip
-  link, image weight/dimensions, card labels, and list semantics.
+  link, image weight/dimensions, card labels and focus movement, list semantics,
+  and the greeting bubble's languages and reduced-motion fallback.
 - `tests/scroll-nav.test.mjs`: section-highlighting script behavior.
 - `tests/dev-server.test.mjs`: HTTP integration checks for Astro development and
   production preview on temporary loopback ports; closes servers afterward.
@@ -86,6 +93,12 @@ npx --yes html-validate@11.17.0 --preset standard,a11y dist/index.html dist/abou
   with grid/flex and `.container`, not fixed offsets or per-item copies. Preserve
   stylesheet order, semantic landmarks/headings, image alternatives, focus
   styles, and reduced-motion support.
+- The greeting bubble cycles its five words (`lang` on each) in CSS only; the
+  published script list is limited to `scroll-nav.js`. Under reduced motion it
+  shows the first word. Text in a script Bagel Fat One lacks needs a covering
+  self-hosted font (see `public/fonts/`); check the glyphs before adding words.
+- State indicators (current section, focus) need 3:1 contrast; lime on cream
+  does not reach it.
 - Keep assets local; do not embed credentials or introduce third-party image URLs.
 - Add regression tests for behavior changes. Run `npm run check` and `npm test`
   before finishing. HTTP/source checks do not prove visual or screen-reader
