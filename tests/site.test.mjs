@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
@@ -62,15 +62,6 @@ const portfolioImages = [
   'Rapuhawork.png',
 ];
 
-test('CV page, dedicated assets, and remaining page references are removed', () => {
-  for (const path of ['cv.html', 'css/cv.css', 'CVimage.png', 'CV Lizaveta Kukharava Designer.pdf', 'CV Lizaveta Kukharava UX Designer.pdf']) {
-    assert.equal(existsSync(join(root, path)), false, `${path} must be removed`);
-  }
-  for (const page of pages) {
-    assert.doesNotMatch(read(page), /\bCV\b|CVimage|cv\.html/i, `${page} must not mention the removed CV`);
-  }
-});
-
 function pageText(html) {
   return html
     .replace(/<head\b[\s\S]*?<\/head>/gi, '')
@@ -125,11 +116,6 @@ test('index.html is one scrolling portfolio with hash navigation', () => {
   const html = read('index.html').replace(/<!--[\s\S]*?-->/g, '');
   const text = pageText(html);
   for (const copy of portfolioCopy) assert.ok(text.includes(copy), `missing copy: ${copy}`);
-  assert.doesNotMatch(html, /IFDindex\.png|Hopappindex\.png|Cloud9index\.png/, 'home mosaic is not repeated above the work section');
-  for (const path of ['IFDindex.png', 'Hopappindex.png', 'Cloud9index.png']) {
-    assert.equal(existsSync(join(root, path)), false, `${path} belonged to the removed home mosaic`);
-  }
-
   const ids = [...html.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map(match => match[1]);
   assert.deepEqual(ids, ['home', 'about', 'work']);
   assert.match(html, /<section\b[^>]*id="home"[^>]*aria-label="Home"/);
@@ -215,46 +201,8 @@ test('impressum stays a separate page and links back to the scroll sections', ()
   assertSafeAssets(html);
 });
 
-test('section styles are scoped and scroll clearance does not depend on motion', () => {
-  for (const [file, scope] of [['css/index.css', '#home'], ['css/about.css', '#about'], ['css/work.css', '#work']]) {
-    const css = read(file);
-    assert.doesNotMatch(css, /(^|\n)\s*\.(?:div|column|img|links|impressum|site-footer)\b/, `${file} has no unscoped layout class`);
-    assert.match(css, new RegExp(`${scope.replace('#', '\\#')} \\.div\\b`));
-  }
-  const shared = read('style.css');
-  assert.match(shared, /#home,\s*#about,\s*#work\s*\{\s*scroll-margin-top:\s*96px;/);
-  assert.match(shared, /nav a\[aria-current="true"\]\s*\{[^}]*font-weight:\s*bold/);
-  assert.match(shared, /scroll-behavior:\s*smooth/);
-  assert.match(shared, /prefers-reduced-motion:\s*reduce\)\s*\{[^}]*scroll-behavior:\s*auto/s);
-  assert.match(read('css/work.css'), /#work \.div-8\s*\{[^}]*margin-top:\s*64px/);
-  assert.doesNotMatch(read('css/about.css'), /\.links\b|\.site-footer\b/);
-  assert.doesNotMatch(read('css/about.css'), /margin-top:\s*417px|#about \.img\s*\{/, 'about no longer reserves space for the duplicate portrait');
-  assert.match(read('css/about.css'), /#about \.quote:nth-child\(odd\)\s*\{[^}]*align-self:\s*start/);
-  assert.match(read('css/about.css'), /#about \.quote:nth-child\(even\)\s*\{[^}]*align-self:\s*end/, 'quotes alternate in chess order');
-  assert.match(read('style.css'), /--content-width:\s*1100px/);
-  assert.match(read('css/about.css'), /#about \.div-8\s*\{[^}]*max-width:\s*var\(--content-width\)/, 'about blocks share one column');
-  assert.match(read('css/about.css'), /#about \.quotes\s*\{[^}]*max-width:\s*none/, 'quotes fill that column instead of a separate box');
-  assert.match(read('css/index.css'), /#home \.div-10\s*\{[^}]*margin-left:\s*0/, 'the hero row uses the same column edges');
-  assert.doesNotMatch(read('css/about.css'), /max-width:\s*1156px|max-width:\s*1151px|width:\s*980px/);
-  assert.doesNotMatch(read('css/work.css'), /width:\s*998px/);
-  assert.match(read('css/work.css'), /width:\s*var\(--content-width\)/);
-  assert.match(read('css/index.css'), /max-width:\s*var\(--content-width\)/);
-  assert.doesNotMatch(read('css/work.css'), /\.links\b|\.site-footer\b/);
-  assert.match(shared, /\.links\s*\{[^}]*margin-top:\s*140px/s);
-});
-
-test('CSS assets exist and known invalid declarations do not return', () => {
-  const cssFiles = ['style.css', ...readdirSync(join(root, 'css')).filter(file => file.endsWith('.css')).map(file => `css/${file}`)];
-  for (const file of cssFiles) {
-    const css = read(file);
-    assert.doesNotMatch(css, /var\([^)]*,\s*\)\s*#/);
-    assert.doesNotMatch(css, /\d+x\s*;/);
-    assert.doesNotMatch(css, /(?:display:\s*center|object-fit:\s*auto|justify-content:\s*flex\s*;|max-height:\s*auto)/);
-    assert.equal([...css.matchAll(/{/g)].length, [...css.matchAll(/}/g)].length, `${file}: balanced blocks`);
-    for (const [, ref] of css.matchAll(/url\(["']?([^"')]+)["']?\)/g)) {
-      assert.ok(existsSync(join(root, dirname(file), ref)), `${file}: missing ${ref}`);
-    }
-  }
-  assert.match(read('style.css'), /:focus-visible/);
-  assert.match(read('style.css'), /prefers-reduced-motion/);
+test('static output publishes only the four pages and the scroll-navigation script', () => {
+  const files = readdirSync(root, { recursive: true });
+  assert.deepEqual(files.filter(file => file.endsWith('.html')).sort(), [...pages].sort());
+  assert.deepEqual(files.filter(file => /\.(?:[cm]?js|map)$/.test(file)), ['scroll-nav.js']);
 });

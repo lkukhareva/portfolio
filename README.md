@@ -41,11 +41,10 @@ npm run check    # Astro/TypeScript diagnostics
 npm test         # fresh static build, then all regression and HTTP checks
 ```
 
-Tests exercise the generated HTML and both local servers. They protect copy,
-links, metadata, accessibility structure, asset bytes, page markup, 404s, and
-port-conflict behavior. `tests/fixtures/pre-migration.json` records the approved
-body and asset fingerprints. Intentional redesign changes require updating the
-relevant baselines, not weakening unrelated checks.
+Tests exercise the generated HTML, the scroll-navigation script, and both local
+servers. They protect copy, links, metadata, accessibility structure, published
+files, 404s, and port-conflict behavior. Intentional redesign changes require
+updating the relevant expectations, not weakening unrelated checks.
 
 ## Build and deploy
 

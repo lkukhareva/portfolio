@@ -32,13 +32,12 @@ scrolling page. Impressum stays separate. Animation work is separate.
   using Node.js/npm and the configured Pages origin/base path. Custom domain:
   `lizavetakuk.com` (configured in GitHub Pages settings, not in local dev).
 - `dist/`: generated deployable site, ignored along with `.astro/`.
-- `tests/site.test.mjs`: generated HTML/content and CSS regression checks.
-- `tests/migration.test.mjs`: approved body/asset fingerprints and static
-  output checks, backed by `tests/fixtures/pre-migration.json`.
+- `tests/site.test.mjs`: generated HTML structure, copy, links, assets, and
+  published-file checks.
+- `tests/scroll-nav.test.mjs`: section-highlighting script behavior.
 - `tests/dev-server.test.mjs`: HTTP integration checks for Astro development and
   production preview on temporary loopback ports; closes servers afterward.
-- `tests/pages-workflow.test.mjs`: deployment trigger, validation, artifact, and
-  security contract checks. `tests/pages-build.test.mjs` exercises the deployment
+- `tests/pages-build.test.mjs` exercises the deployment
   build flags and page/asset URLs at both a custom-domain root and a repo subpath.
 
 ## Commands
@@ -60,7 +59,7 @@ silently changing URLs. Static hosting must retain normal file/404 behavior, not
 an SPA fallback. There is no server adapter or production runtime.
 
 For narrower output-only checks after building:
-`node --test tests/site.test.mjs tests/migration.test.mjs`.
+`node --test tests/site.test.mjs`.
 
 Optional HTML validation after building:
 
@@ -73,9 +72,9 @@ npx --yes html-validate@11.17.0 --preset standard,a11y dist/index.html dist/abou
 - Keep static output and minimal dependencies. Prefer Astro components, CSS, and
   selective vanilla JavaScript over introducing a client framework or router.
 - Preserve wording, images, layout, and link destinations unless the task changes
-  them. Fingerprints and image lists intentionally protect the original content.
-  Update only relevant baselines for intentional changes; do not remove checks
-  just to make tests pass.
+  them. Copy and image lists in the tests protect the content; update only the
+  relevant entries for intentional changes, and do not remove checks just to make
+  tests pass. Test behavior and output, not exact CSS/YAML text or file hashes.
 - Reuse the shared layout/components and project data. Primary navigation uses
   `./#home`, `./#about`, and `./#work` so both the domain root and the Pages
   subpath stay on one document. Do not add a client router or SPA fallback.
