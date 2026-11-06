@@ -38,9 +38,9 @@ const portfolioCopy = [
   'Improving consistency and content structure',
   'How I redesigned a travel app',
   'Simplifying the design to reduce overload',
-  'how i created a niche weather app',
+  'How I created a niche weather app',
   'Making days on the water safe and fun',
-  'how i created a visual identity for dev team',
+  'How I created a visual identity for dev team',
   'Helping a team stand out and present values',
 ];
 const behance = [
@@ -129,8 +129,8 @@ test('index.html is one scrolling portfolio with hash navigation', () => {
   assert.deepEqual(headings.filter(([level]) => level === '3').map(([, content]) => content), [
     'How I redesigned a fashion contest site',
     'How I redesigned a travel app',
-    'how i created a niche weather app',
-    'how i created a visual identity for dev team',
+    'How I created a niche weather app',
+    'How I created a visual identity for dev team',
   ]);
 
   const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)?.[1];

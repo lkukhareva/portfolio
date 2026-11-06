@@ -53,11 +53,13 @@ test('project cards announce Behance and a new tab, and react to keyboard focus'
   assert.match(read('css/work.css'), /\.project-card:focus-visible\s*\{[^}]*transform:\s*scale\(1\.05\)/);
 });
 
-test('skills are lists with explicit list semantics', () => {
+test('skills are lists and project titles use sentence case', () => {
   const about = index.match(/<section\b[^>]*id="about"[\s\S]*?<\/section>/)[0];
   const lists = [...about.matchAll(/<ul\b[^>]*>([\s\S]*?)<\/ul>/g)];
   assert.equal(lists.length, 2);
   assert.deepEqual(lists.map(([, items]) => items.match(/<li\b/g).length), [5, 5]);
   // list-style: none drops list semantics in WebKit unless the role is explicit.
   for (const [list] of lists) assert.match(list, /<ul\b[^>]*role="list"/);
+  const titles = [...index.matchAll(/<h3\b[^>]*>([^<]+)<\/h3>/g)].map(([, title]) => title);
+  for (const title of titles) assert.match(title, /^How I /);
 });

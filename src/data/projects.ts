@@ -14,13 +14,13 @@ export const projects = {
   cloud: {
     href: 'https://www.behance.net/gallery/142352791/Cloud-9-app-UX-Case-Study',
     image: 'Cloud9work.webp',
-    title: 'how i created a niche weather app',
+    title: 'How I created a niche weather app',
     description: 'Making days on the water safe and fun',
   },
   rapuha: {
     href: 'https://www.behance.net/gallery/170639797/Rapuha-Brand-Design',
     image: 'Rapuhawork.webp',
-    title: 'how i created a visual identity for dev team',
+    title: 'How I created a visual identity for dev team',
     description: 'Helping a team stand out and present values',
   },
 } as const;
