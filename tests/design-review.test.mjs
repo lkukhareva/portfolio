@@ -9,7 +9,16 @@ const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const read = path => readFileSync(join(root, path), 'utf8');
 const index = read('index.html');
 const impressum = read('impressum.html');
+const mailto = '<a href="mailto:contact@lizaveta.co">contact@lizaveta.co</a>';
 
+test('the contact email is a mailto link in About, Impressum, and the footer', () => {
+  assert.ok(index.match(/<section\b[^>]*id="about"[\s\S]*?<\/section>/)[0].includes(mailto));
+  assert.ok(impressum.match(/<main\b[\s\S]*?<\/main>/)[0].includes(mailto));
+  for (const html of [index, impressum]) {
+    const footer = html.match(/<footer\b[\s\S]*?<\/footer>/)[0];
+    assert.match(footer, /<a href="mailto:contact@lizaveta\.co">Email<\/a>/);
+  }
+});
 
 
 test('content images are compressed and reserve their layout space', () => {

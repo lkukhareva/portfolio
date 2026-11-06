@@ -54,6 +54,11 @@ img {
   height: auto;
 }
 
+main a[href^="mailto:"] {
+  color: inherit;
+  text-decoration: underline;
+}
+
 header {
   background-color: var(--beige);
   padding: 16px 12px;
