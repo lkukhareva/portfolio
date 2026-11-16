@@ -12,8 +12,9 @@
   margin-top: 32px;
 }
 
-/* Whole-card links as cream stickers that lift on hover. The text row takes
-   any spare height, so the Behance links line up across a row. */
+/* Whole-card links as cream stickers that lift on hover. Only things that can
+   be clicked cast the hard ink shadow; the intro card and bubble stay flat.
+   The text row takes any spare height, so the Behance links line up. */
 .project-card {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -22,7 +23,7 @@
   border: 4px solid var(--ink);
   border-radius: 36px;
   background-color: var(--cream);
-  box-shadow: 12px 12px 0 var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
   color: var(--ink);
   text-decoration: none;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -31,15 +32,15 @@
 /* Keyboard focus keeps the card's own corners, not the generic link radius. */
 .project-card:focus-visible {
   border-radius: 36px;
-  transform: translate(-4px, -4px);
-  box-shadow: 16px 16px 0 var(--lime), 16px 16px 0 3px var(--ink);
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0 var(--lime), 11px 11px 0 3px var(--ink);
 }
 
 /* Lift on hover only where hover exists, so a tap does not leave it stuck. */
 @media (hover: hover) {
   .project-card:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 16px 16px 0 var(--lime), 16px 16px 0 3px var(--ink);
+    transform: translate(-3px, -3px);
+    box-shadow: 11px 11px 0 var(--lime), 11px 11px 0 3px var(--ink);
   }
 }
 

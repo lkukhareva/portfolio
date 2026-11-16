@@ -279,13 +279,14 @@ nav a:focus-visible {
   gap: 16px;
   margin-top: 140px;
   color: var(--cream);
-  font: 400 clamp(32px, 5vw, 56px)/1 var(--display);
+  /* A step above the project titles, not a shout over them. */
+  font: 400 clamp(28px, 3.4vw, 40px)/1.1 var(--display);
   text-align: center;
   text-transform: lowercase;
 }
 
 .section-label h2 {
-  padding: 0.14em 0.4em 0.22em;
+  padding: 0.18em 0.45em 0.24em;
   border: 3px solid var(--ink);
   border-radius: 0.4em;
   background-color: var(--lime);
@@ -294,7 +295,7 @@ nav a:focus-visible {
 
 /* The black arrow artwork, turned cream. */
 .section-label img {
-  width: clamp(28px, 4vw, 44px);
+  width: clamp(24px, 2.8vw, 34px);
   filter: invert(1);
 }
 
