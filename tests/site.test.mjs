@@ -32,7 +32,7 @@ const portfolioCopy = [
   'Growth and improvement',
   'Empathy and communication',
   'Going extra mile',
-  'contact@lizaveta.co',
+  'contact@lizavetakuk.com',
   'RECENT PROJECTS',
   'How I redesigned a fashion contest site',
   'Improving consistency and content structure',
@@ -180,7 +180,7 @@ for (const [page, hash, label] of [['about.html', 'about', 'About'], ['work.html
 test('impressum stays a separate page and links back to the scroll sections', () => {
   const html = read('impressum.html').replace(/<!--[\s\S]*?-->/g, '');
   const text = pageText(html);
-  for (const copy of ['Impressum', 'Angaben gemaess § 5 TMG', 'Lizaveta Kukharava, Berlin', 'contact@lizaveta.co', 'Haftung fuer Inhalte', 'Haftung fuer Links']) {
+  for (const copy of ['Impressum', 'Angaben gemaess § 5 TMG', 'Lizaveta Kukharava, Berlin', 'contact@lizavetakuk.com', 'Haftung fuer Inhalte', 'Haftung fuer Links']) {
     assert.ok(text.includes(copy), `missing impressum copy: ${copy}`);
   }
   const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)?.[1];
