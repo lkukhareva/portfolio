@@ -110,6 +110,16 @@ test('copy is typographic, readable, and in story order', () => {
   ]);
 });
 
+test('the introduction offers a direct way to the work, without a second email ask', () => {
+  const home = index.match(/<section\b[^>]*id="home"[\s\S]*?<\/section>/)[0];
+  const links = [...home.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)];
+  assert.deepEqual(links.map(([, href]) => href), ['./#work']);
+  assert.match(links[0][2], /^See my work(?:&nbsp;|\u00a0)<span aria-hidden="true">↓<\/span>$/);
+  // All four case studies share one grid, so they can sit two to a row.
+  const grid = index.match(/<div class="project-grid">([\s\S]*?)<\/div>\s*<p class="work-contact">/)[1];
+  assert.equal(grid.match(/class="project-card"/g).length, 4);
+});
+
 test('her name leads the introduction, and the display face is preloaded', () => {
   const intro = index.match(/<div class="hero-intro">([\s\S]*?)<\/div>\s*<\/section>/)[1];
   // No eyebrow above the heading: the h1 opens the card and the tagline follows it.
