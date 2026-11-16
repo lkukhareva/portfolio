@@ -37,7 +37,7 @@
   font-size: 20px;
 }
 
-.quote:nth-child(even) {
+.quote:nth-of-type(even) {
   background-color: var(--lime);
   margin-left: 24px;
 }
@@ -60,11 +60,17 @@
   align-content: start;
 }
 
-/* Headings, not colour, tell the two groups apart. */
+/* Headings, not colour, name the quotes and tell the two skill groups apart. */
+.quotes-heading,
 .skill-heading {
   margin-bottom: 14px;
   color: var(--lime);
   font: 400 22px/1.2 var(--display);
+}
+
+/* The quotes stack with a wider gap; pull the label back to the same 14px. */
+.quotes-heading {
+  margin-bottom: -14px;
 }
 
 .skill-list {
@@ -140,7 +146,7 @@
     margin-inline: auto;
   }
 
-  .quote:nth-child(even) {
+  .quote:nth-of-type(even) {
     margin-left: 0;
   }
 

@@ -88,11 +88,17 @@ test('skills are headed lists and project titles use sentence case', () => {
   assert.deepEqual([...about.matchAll(/<h3 class="skill-heading">([^<]+)<\/h3>\s*(?:<!--[\s\S]*?-->\s*)?<ul\b/g)].map(([, heading]) => heading), ['Soft skills', 'Hard skills']);
   const titles = [...index.matchAll(/<h3 class="project-title">([^<]+)<\/h3>/g)].map(([, title]) => title);
   assert.equal(titles.length, 4);
-  for (const title of titles) assert.match(title, /^How I /);
+  // Titles name the project; the first-person "How I" line follows as the description.
+  const descriptions = [...index.matchAll(/<p class="project-description">([^<]+)<\/p>/g)].map(([, text]) => text);
+  assert.equal(descriptions.length, 4);
+  for (const text of descriptions) assert.match(text, /^How I /);
+  assert.equal(new Set(titles.map(title => title.split(' ')[0])).size, 4, 'each title opens with a different project name');
 });
 
 test('copy is typographic, readable, and in story order', () => {
   const main = index.match(/<main\b[\s\S]*?<\/main>/)[0];
+  // The unattributed quotes say whose feedback they are, without adding names.
+  assert.match(main, /<div class="quotes">\s*<h3 class="quotes-heading">Feedback from colleagues and clients<\/h3>\s*<blockquote\b/);
   // Quotations use curly marks only, never straight or entity quotes.
   for (const [, quote] of main.matchAll(/<blockquote\b[^>]*>([\s\S]*?)<\/blockquote>/g)) {
     assert.match(quote.trim(), /^“[\s\S]+”$/);

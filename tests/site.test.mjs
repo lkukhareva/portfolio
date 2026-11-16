@@ -34,14 +34,15 @@ const portfolioCopy = [
   'Going the extra mile',
   'contact@lizavetakuk.com',
   'Recent projects',
-  'How I redesigned a fashion contest site',
-  'Improving consistency and content structure',
-  'How I redesigned a travel app',
-  'Simplifying the design to reduce overload',
-  'How I created a niche weather app',
-  'Making days on the water safe and fun',
-  'How I created a visual identity for a dev team',
-  'Helping a team stand out and present values',
+  'International Fashion Show website',
+  'How I redesigned a fashion contest site, improving consistency and content structure.',
+  'Hop travel app',
+  'How I redesigned a travel app, simplifying the design to reduce overload.',
+  'Cloud 9 weather app',
+  'How I created a niche weather app, making days on the water safe and fun.',
+  'Rapuha brand identity',
+  'How I created a visual identity for a dev team, helping it stand out and present its values.',
+  'Feedback from colleagues and clients',
 ];
 const behance = [
   'https://www.behance.net/gallery/216457395/International-Fashion-Show-Website-Redesign',
@@ -136,10 +137,10 @@ test('index.html is one scrolling portfolio with hash navigation', () => {
   assert.ok(headings.some(([level, content]) => level === '2' && content === 'Recent projects'));
   const projectTitles = [...html.matchAll(/<h3 class="project-title">([^<]+)<\/h3>/g)].map(([, title]) => title);
   assert.deepEqual(projectTitles, [
-    'How I redesigned a fashion contest site',
-    'How I redesigned a travel app',
-    'How I created a niche weather app',
-    'How I created a visual identity for a dev team',
+    'International Fashion Show website',
+    'Hop travel app',
+    'Cloud 9 weather app',
+    'Rapuha brand identity',
   ]);
 
   const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)?.[1];
