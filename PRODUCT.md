@@ -40,7 +40,7 @@ Polish).
 
 ## Capabilities and Constraints
 
-- Static Astro site: one scrolling page (Home, About, Work) plus a separate
+- Static Astro site: one scrolling page (Home, Work, About) plus a separate
   Impressum. No client framework, backend, or server runtime. `about.html` and
   `work.html` stay as jump documents for older links.
 - Full case studies stay on Behance; the site does not host them.

@@ -1,28 +1,29 @@
 ---
 const softSkills = ['Communication', 'Active Listening', 'Attention to Detail', 'Problem Solving', 'Presentation Skills'];
-const craftSkills = ['UX Research', 'Wireframing & Prototyping', 'Content Design', 'Coding basics', 'Analytical thinking'];
+const craftSkills = ['UX Research', 'Wireframing & Prototyping', 'Content Design', 'Coding Basics', 'Analytical Thinking'];
 
+// Chronological: teaching, then the IT company, then UX.
 const stories = [
+  {
+    image: 'classroom.webp', width: 1100, height: 674,
+    alt: 'A coding class in the ReDI School Kids program',
+    caption: 'Volunteering at ReDI School’s coding classes for kids',
+    title: 'Empathy and communication',
+    text: 'I first studied language teaching and interpreting. Working with kids, I learned to communicate clearly, give feedback, and help them understand new ideas. This experience honed my empathy and communication, which are crucial in UX design.',
+  },
   {
     image: 'andersenoffice.jpg', width: 800, height: 534,
     alt: 'Andersen lab office',
-    caption: 'Andersen lab office. Credits: Anastasia Andreyko on LinkedIn',
+    caption: 'Andersen lab office. Photo: Anastasia Andreyko on LinkedIn',
     title: 'Growth and improvement',
-    text: 'Seeking independence and market experience, I joined an IT company as a Customer Acquisition Specialist. I grew together with the company, exploring various aspects of the IT process and improving departmental performance by continuously improving myself. My experience and empathy naturally led me to a Team Lead position.',
-  },
-  {
-    image: 'classroom.webp', width: 1100, height: 674,
-    alt: 'Coding classes at ReDI School Kids program',
-    caption: 'Volunteering for the coding classes at ReDI School Kids program',
-    title: 'Empathy and communication',
-    text: 'Initially I pursued a degree in language teaching and interpreting. During working with kids, I learned how to communicate clearly, provide feedback, and support children seeking understanding. This experience honed my skills in empathy and communication, which are crucial in UX design.',
+    text: 'Seeking independence and market experience, I joined an IT company as a Customer Acquisition Specialist. I grew with the company, explored different parts of the IT process, and improved my department’s performance while continuously developing my own skills. My experience and empathy led me to a Team Lead position.',
   },
   {
     image: 'Laptop.webp', width: 1100, height: 810,
     alt: 'Designing an app at home',
     caption: 'Designing my very first app at home',
-    title: 'Going extra mile',
-    text: 'Realising I could do more for customers and help solve their problems, I dived into the UX field. I immersed myself in the design process, understanding the importance of research and communication, and created my first app prototypes. This journey has been about constant learning and growth, driving me to create better user experiences every day.',
+    title: 'Going the extra mile',
+    text: 'Realizing I could do more for customers and help solve their problems, I dived into the UX field. I immersed myself in the design process, understanding the importance of research and communication, and created my first app prototypes. This journey has been about constant learning and growth, driving me to create better user experiences every day.',
   },
 ];
 ---
@@ -32,12 +33,12 @@ const stories = [
     <img loading="lazy" src="profile.webp" alt="Lizaveta Kukharava" width="900" height="1098" class="about-portrait">
     <div class="quotes">
       <blockquote class="quote">
-        &quot;Lizaveta is tactful in communicating with clients and colleagues,
-        non-conflict, sociable, knows how to work in a team.&quot;
+        “Lizaveta is tactful in communicating with clients and colleagues,
+        non-conflict, sociable, knows how to work in a team.”
       </blockquote>
       <blockquote class="quote">
-        &quot;She displayed strong professionalism, patience with others and
-        desire to share her knowledge with the team.&quot;
+        “She displayed strong professionalism, patience with others and
+        desire to share her knowledge with the team.”
       </blockquote>
       <blockquote class="quote">
         “Liza was a pleasure to work with, she's easygoing, smart and a very
@@ -48,13 +49,13 @@ const stories = [
   </div>
 
   <div class="section-label">
-    <h2>what i bring to the table</h2>
+    <h2>What I bring to the table</h2>
     <img src="assets/section-arrow.svg" alt="">
   </div>
   <div class="strengths">
     <div class="strengths-text">
       <p>
-        Known for my easy-going nature, non-conflict attitude, and can-do
+        Known for my easy-going nature, non-confrontational attitude, and can-do
         spirit, I bring a high level of responsibility and an eagerness to
         explore new horizons and share insights.
       </p>
@@ -89,8 +90,4 @@ const stories = [
       </div>
     </article>
   ))}
-
-  <p class="about-contact">
-    Reach out to <a href="mailto:contact@lizavetakuk.com">contact@lizavetakuk.com</a> to team up and transform your challenges into wins.
-  </p>
 </section>

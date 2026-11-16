@@ -4,12 +4,13 @@
 
 Static portfolio for Berlin-based UX designer Lizaveta Kukharava. Astro generates
 HTML/CSS with no client-side application framework, backend, or production Node
-server. Case studies link to Behance. Home, About, and Work are sections of one
+server. Case studies link to Behance. Home, Work, and About are sections of one
 scrolling page. Impressum stays separate. Animation work is separate.
 
 ## Structure
 
-- `src/pages/index.astro`: scrolling portfolio (`#home`, `#about`, `#work`).
+- `src/pages/index.astro`: scrolling portfolio (`#home`, `#work`, `#about`); the Primary nav
+  follows the same order, which `scroll-nav.js` relies on.
 - `src/pages/{about,work}.astro`: compatibility documents that jump to `./#about`
   and `./#work`, so the address bar settles on `/#about` or `/portfolio/#about`.
 - `src/pages/impressum.astro`: legal page.

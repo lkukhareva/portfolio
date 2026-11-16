@@ -149,6 +149,7 @@ main a[href^="mailto:"] {
   padding: 0;
   list-style: none;
   font: 400 24px/1.25 var(--display);
+  text-transform: lowercase;
 }
 
 .header-contacts a {

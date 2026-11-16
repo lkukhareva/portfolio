@@ -11,8 +11,11 @@ const index = read('index.html');
 const impressum = read('impressum.html');
 const mailto = '<a href="mailto:contact@lizavetakuk.com">contact@lizavetakuk.com</a>';
 
-test('the contact email is a mailto link in About, Impressum, and the footer', () => {
-  assert.ok(index.match(/<section\b[^>]*id="about"[\s\S]*?<\/section>/)[0].includes(mailto));
+test('the contact email is a mailto link after the projects, in Impressum, and in the footer', () => {
+  const work = index.match(/<section\b[^>]*id="work"[\s\S]*?<\/section>/)[0];
+  assert.ok(work.includes(mailto));
+  assert.ok(work.indexOf(mailto) > work.lastIndexOf('class="project-card"'), 'the ask follows the last case study');
+  assert.ok(!index.match(/<section\b[^>]*id="about"[\s\S]*?<\/section>/)[0].includes(mailto), 'one inline ask, not two');
   assert.ok(impressum.match(/<main\b[\s\S]*?<\/main>/)[0].includes(mailto));
   for (const html of [index, impressum]) {
     const footer = html.match(/<footer\b[\s\S]*?<\/footer>/)[0];
@@ -63,6 +66,25 @@ test('skills are lists and project titles use sentence case', () => {
   for (const [list] of lists) assert.match(list, /<ul\b[^>]*role="list"/);
   const titles = [...index.matchAll(/<h3\b[^>]*>([^<]+)<\/h3>/g)].map(([, title]) => title);
   for (const title of titles) assert.match(title, /^How I /);
+});
+
+test('copy is typographic, readable, and in story order', () => {
+  const main = index.match(/<main\b[\s\S]*?<\/main>/)[0];
+  // Quotations use curly marks only, never straight or entity quotes.
+  for (const [, quote] of main.matchAll(/<blockquote\b[^>]*>([\s\S]*?)<\/blockquote>/g)) {
+    assert.match(quote.trim(), /^“[\s\S]+”$/);
+    assert.doesNotMatch(quote, /"|&quot;/);
+  }
+  // CSS lowercases display labels; the source keeps normal case for assistive technology.
+  for (const [, heading] of main.matchAll(/<h2\b[^>]*>([^<]+)<\/h2>/g)) {
+    assert.notEqual(heading, heading.toUpperCase(), `all-caps heading: ${heading}`);
+  }
+  const header = index.match(/<ul class="header-contacts"[\s\S]*?<\/ul>/)[0];
+  assert.deepEqual([...header.matchAll(/<a\b[^>]*>([^<]+)<\/a>/g)].map(([, label]) => label), ['Email', 'LinkedIn', 'Behance']);
+  // Stories run in life order: teaching, the IT company, then UX.
+  assert.deepEqual([...main.matchAll(/<h2 class="story-title">([^<]+)<\/h2>/g)].map(([, title]) => title), [
+    'Empathy and communication', 'Growth and improvement', 'Going the extra mile',
+  ]);
 });
 
 test('the hero bubble greets in five languages without a script', () => {

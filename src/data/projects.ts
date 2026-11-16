@@ -20,7 +20,7 @@ export const projects = {
   rapuha: {
     href: 'https://www.behance.net/gallery/170639797/Rapuha-Brand-Design',
     image: 'Rapuhawork.webp',
-    title: 'How I created a visual identity for dev team',
+    title: 'How I created a visual identity for a dev team',
     description: 'Helping a team stand out and present values',
   },
 } as const;

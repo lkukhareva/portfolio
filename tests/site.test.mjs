@@ -11,14 +11,13 @@ const pages = ['index.html', 'about.html', 'work.html', 'impressum.html'];
 const portfolioCopy = [
   'Empathetic Designer: Meaningful Connections via Design',
   'lizaveta kukharava',
-  'A growth-oriented professional with a passion for enhancing',
-  'Thrive on driving initiatives that foster innovation, improve',
-  'Excel in dynamic environments, contributing to meaningful change',
+  'I’m a UX designer based in Berlin.',
+  'I speak English, Russian, German, Belarusian, and Polish',
   'Lizaveta is tactful in communicating with clients and colleagues',
   'She displayed strong professionalism, patience with others and',
   'Liza was a pleasure to work with',
-  'what i bring to the table',
-  'Known for my easy-going nature, non-conflict attitude, and can-do',
+  'What I bring to the table',
+  'Known for my easy-going nature, non-confrontational attitude, and can-do',
   'Communication',
   'Active Listening',
   'Attention to Detail',
@@ -27,20 +26,20 @@ const portfolioCopy = [
   'UX Research',
   'Wireframing & Prototyping',
   'Content Design',
-  'Coding basics',
-  'Analytical thinking',
+  'Coding Basics',
+  'Analytical Thinking',
   'Growth and improvement',
   'Empathy and communication',
-  'Going extra mile',
+  'Going the extra mile',
   'contact@lizavetakuk.com',
-  'RECENT PROJECTS',
+  'Recent projects',
   'How I redesigned a fashion contest site',
   'Improving consistency and content structure',
   'How I redesigned a travel app',
   'Simplifying the design to reduce overload',
   'How I created a niche weather app',
   'Making days on the water safe and fun',
-  'How I created a visual identity for dev team',
+  'How I created a visual identity for a dev team',
   'Helping a team stand out and present values',
 ];
 const behance = [
@@ -50,16 +49,16 @@ const behance = [
   'https://www.behance.net/gallery/170639797/Rapuha-Brand-Design',
 ];
 const portfolioImages = [
-  'profile.webp',
-  'assets/section-arrow.svg',
-  'andersenoffice.jpg',
-  'classroom.webp',
-  'Laptop.webp',
   'assets/section-arrow.svg',
   'IFDwork.webp',
   'Hopappwork.webp',
   'Cloud9work.webp',
   'Rapuhawork.webp',
+  'profile.webp',
+  'assets/section-arrow.svg',
+  'classroom.webp',
+  'andersenoffice.jpg',
+  'Laptop.webp',
 ];
 
 function pageText(html) {
@@ -117,30 +116,33 @@ test('index.html is one scrolling portfolio with hash navigation', () => {
   const text = pageText(html);
   for (const copy of portfolioCopy) assert.ok(text.includes(copy), `missing copy: ${copy}`);
   const ids = [...html.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map(match => match[1]);
-  assert.deepEqual(ids, ['home', 'about', 'work']);
+  // Work follows the intro so hiring teams reach the case studies first.
+  assert.deepEqual(ids, ['home', 'work', 'about']);
   assert.match(html, /<section\b[^>]*id="home"[^>]*aria-label="Home"/);
   assert.match(html, /<section\b[^>]*id="about"[^>]*aria-label="About"/);
   assert.match(html, /<section\b[^>]*id="work"[^>]*aria-label="Work"/);
 
   const headings = [...html.matchAll(/<h([1-3])\b[^>]*>([\s\S]*?)<\/h\1>/g)].map(([, level, content]) => [level, content.replace(/<[^>]+>/g, '').trim()]);
   assert.deepEqual(headings.filter(([level]) => level === '1'), [['1', 'lizaveta kukharava']]);
-  assert.ok(headings.some(([level, content]) => level === '2' && content === 'what i bring to the table'));
-  assert.ok(headings.some(([level, content]) => level === '2' && content === 'RECENT PROJECTS'));
+  assert.ok(headings.some(([level, content]) => level === '2' && content === 'What I bring to the table'));
+  assert.ok(headings.some(([level, content]) => level === '2' && content === 'Recent projects'));
   assert.deepEqual(headings.filter(([level]) => level === '3').map(([, content]) => content), [
     'How I redesigned a fashion contest site',
     'How I redesigned a travel app',
     'How I created a niche weather app',
-    'How I created a visual identity for dev team',
+    'How I created a visual identity for a dev team',
   ]);
 
   const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)?.[1];
   assert.ok(nav, 'navigation exists');
   assert.deepEqual([...nav.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)<\/a>/g)].map(match => [match[1], match[2]]), [
     ['./#home', 'Home'],
-    ['./#about', 'About'],
     ['./#work', 'Work'],
+    ['./#about', 'About'],
   ]);
   assert.doesNotMatch(nav, /aria-current/, 'the visible section is marked by script, not baked into the HTML');
+  // scroll-nav.js treats later links as later sections, so the nav follows document order.
+  assert.deepEqual([...nav.matchAll(/href="\.\/#([^"]+)"/g)].map(match => match[1]), ids);
   assert.doesNotMatch(html, /index\.html#/);
 
   const stylesheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)">/g)].map(match => match[1]);
@@ -186,8 +188,8 @@ test('impressum stays a separate page and links back to the scroll sections', ()
   const nav = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)?.[1];
   assert.deepEqual([...nav.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)<\/a>/g)].map(match => [match[1], match[2]]), [
     ['./#home', 'Home'],
-    ['./#about', 'About'],
     ['./#work', 'Work'],
+    ['./#about', 'About'],
   ]);
   assert.doesNotMatch(nav, /aria-current/);
   assert.match(html, /<a href="impressum\.html" aria-current="page">Impressum<\/a>/);

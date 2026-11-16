@@ -7,10 +7,14 @@ const ordered = [projects.fashion, projects.hop, projects.cloud, projects.rapuha
 
 <section id="work" class="work container" aria-label="Work">
   <div class="section-label">
-    <h2>RECENT PROJECTS</h2>
+    <h2>Recent projects</h2>
     <img src="assets/section-arrow.svg" alt="">
   </div>
   {ordered.map((project, index) => (
     <ProjectCard project={project} loading={index === 0 ? undefined : 'lazy'} />
   ))}
+
+  <p class="work-contact">
+    Reach out to <a href="mailto:contact@lizavetakuk.com">contact@lizavetakuk.com</a> to team up and transform your challenges into wins.
+  </p>
 </section>
