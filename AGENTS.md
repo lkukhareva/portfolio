@@ -21,7 +21,8 @@ scrolling page. Impressum stays separate. Animation work is separate.
 - `src/data/projects.ts`: project copy, destinations, and image references.
 - `public/style.css`: `@font-face` rules, shared colors (blue page, cream type,
   lime accents), `.container` column and gutter, section labels, header contacts,
-  the Primary nav as a fixed bottom pill, footer, scroll clearance.
+  the Primary nav as a fixed bottom pill (44px touch targets), footer (its lime
+  band runs under the pill), scroll clearance.
 - `public/css/{index,about,work}.css`: hero (decorative LiKUK wordmark, greeting
   bubble, CSS sphere, intro card), about (portrait, quotes, strengths, stories),
   and project-card layouts. Class names are per component (`hero-*`, `story-*`,

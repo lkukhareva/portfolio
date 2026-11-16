@@ -66,7 +66,6 @@
 
 body {
   margin: 0;
-  padding-bottom: 96px;
   background-color: var(--blue);
   color: var(--cream);
   font: 400 19px/1.55 var(--text);
@@ -74,8 +73,10 @@ body {
   overflow-x: clip;
 }
 
+/* Keyboard focus and find-in-page stop above the fixed nav pill. */
 html {
   scroll-behavior: smooth;
+  scroll-padding-bottom: 104px;
 }
 
 #home,
@@ -141,6 +142,8 @@ main a[href^="mailto:"] {
   text-decoration: underline;
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
+  /* The address is one long word; let it wrap on the narrowest screens. */
+  overflow-wrap: anywhere;
 }
 
 /* Contacts stacked top left in the page flow; section nav floats as a pill. */
@@ -222,7 +225,8 @@ nav a:focus-visible {
   flex-direction: column;
   align-items: center;
   margin-top: 140px;
-  padding: 56px var(--gutter) 40px;
+  /* The lime band runs under the fixed nav pill, so the last link clears it. */
+  padding: 56px var(--gutter) 112px;
   border-block: 4px solid var(--ink);
   background-color: var(--lime);
   color: var(--ink);
@@ -252,11 +256,13 @@ nav a:focus-visible {
 }
 
 .impressum {
-  margin-top: 28px;
+  margin-top: 16px;
   font-size: 16px;
 }
 
 .impressum a {
+  display: inline-block;
+  padding: 12px 4px;
   color: var(--ink);
 }
 
@@ -305,8 +311,22 @@ nav a:focus-visible {
     left: var(--gutter);
   }
 
+  /* One row instead of a stack frees the top of a phone screen; the
+     padding makes each contact a 44px-tall target. */
+  .site-header {
+    top: 6px;
+  }
+
   .header-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
     font-size: 20px;
+  }
+
+  .header-contacts a {
+    display: inline-block;
+    padding-block: 10px;
   }
 
   nav a {
@@ -316,6 +336,22 @@ nav a:focus-visible {
 
   .section-label {
     margin-top: 88px;
+  }
+}
+
+/* Touch: nav links grow to 44px-tall targets. */
+@media (pointer: coarse) {
+  nav a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+/* Landscape phones: keep the pill low so it covers less of a short screen. */
+@media (max-height: 500px) {
+  nav {
+    bottom: 8px;
   }
 }
 

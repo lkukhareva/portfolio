@@ -64,6 +64,7 @@ const portfolioImages = [
 function pageText(html) {
   return html
     .replace(/<head\b[\s\S]*?<\/head>/gi, '')
+    .replace(/<wbr>/gi, '')
     .replace(/<(style|script)\b[^>]*>[\s\S]*?<\/\1>/gi, '')
     .replace(/<[^>]+>/g, ' ')
     .replace(/&quot;/g, '"')
@@ -74,7 +75,7 @@ function pageText(html) {
 
 function assertBalanced(html) {
   const stack = [];
-  const voidTags = new Set(['meta', 'link', 'img', 'br', 'hr', 'input']);
+  const voidTags = new Set(['meta', 'link', 'img', 'br', 'hr', 'input', 'wbr']);
   const markup = html.replace(/<(style|script)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
   for (const match of markup.matchAll(/<(\/?)([a-z][\w-]*)\b[^>]*>/gi)) {
     const [, closing, tag] = match;

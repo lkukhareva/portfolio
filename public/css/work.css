@@ -19,10 +19,19 @@
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.project-card:hover,
+/* Keyboard focus keeps the card's own corners, not the generic link radius. */
 .project-card:focus-visible {
+  border-radius: 36px;
   transform: translate(-4px, -4px);
   box-shadow: 16px 16px 0 var(--lime), 16px 16px 0 3px var(--ink);
+}
+
+/* Lift on hover only where hover exists, so a tap does not leave it stuck. */
+@media (hover: hover) {
+  .project-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 16px 16px 0 var(--lime), 16px 16px 0 3px var(--ink);
+  }
 }
 
 .project-image {

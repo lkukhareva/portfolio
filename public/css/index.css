@@ -168,3 +168,10 @@
     margin-top: 20px;
   }
 }
+
+/* The header contacts sit in one row here, so the hero can start higher. */
+@media (max-width: 720px) {
+  .hero {
+    padding-top: 76px;
+  }
+}

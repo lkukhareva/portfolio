@@ -26,3 +26,10 @@
 .legal h1 + p {
   margin-top: 32px;
 }
+
+/* Phones show the header contacts in one row, so less clearance is needed. */
+@media (max-width: 720px) {
+  .legal {
+    padding-top: 120px;
+  }
+}

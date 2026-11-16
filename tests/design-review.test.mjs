@@ -13,8 +13,10 @@ const mailto = '<a href="mailto:contact@lizavetakuk.com">contact@lizavetakuk.com
 
 test('the contact email is a mailto link after the projects, in Impressum, and in the footer', () => {
   const work = index.match(/<section\b[^>]*id="work"[\s\S]*?<\/section>/)[0];
-  assert.ok(work.includes(mailto));
-  assert.ok(work.indexOf(mailto) > work.lastIndexOf('class="project-card"'), 'the ask follows the last case study');
+  // The large inline address may break after the @ rather than mid-domain.
+  const workMailto = '<a href="mailto:contact@lizavetakuk.com">contact@<wbr>lizavetakuk.com</a>';
+  assert.ok(work.includes(workMailto));
+  assert.ok(work.indexOf(workMailto) > work.lastIndexOf('class="project-card"'), 'the ask follows the last case study');
   assert.ok(!index.match(/<section\b[^>]*id="about"[\s\S]*?<\/section>/)[0].includes(mailto), 'one inline ask, not two');
   assert.ok(impressum.match(/<main\b[\s\S]*?<\/main>/)[0].includes(mailto));
   for (const html of [index, impressum]) {
@@ -50,11 +52,29 @@ test('project cards announce Behance and a new tab, and react to keyboard focus'
     .map(([, content]) => content).filter(content => content.includes('<h3'));
   assert.equal(cards.length, 4);
   for (const card of cards) {
-    assert.match(card, /Case study on Behance <span aria-hidden="true">↗<\/span>/);
+    // A no-break space keeps the arrow with its word on narrow cards.
+    assert.match(card, /Case study on Behance(?:&nbsp;|\u00a0)<span aria-hidden="true">↗<\/span>/);
     assert.match(card, /<span class="visually-hidden">\(opens in new tab\)<\/span>/);
   }
   // Any visible movement counts; the design picks the effect.
   assert.match(read('css/work.css'), /\.project-card:focus-visible\s*\{[^}]*transform:\s*(?!none\b)[^;}]+/);
+});
+
+test('touch, focus, and the fixed nav are accounted for on small screens', () => {
+  const style = read('style.css');
+  const work = read('css/work.css');
+  // Hover lift is limited to devices that hover, so a tap cannot leave it stuck.
+  const hoverBlock = work.match(/@media \(hover: hover\)\s*\{([\s\S]*?)\n\}/)?.[1] ?? '';
+  assert.match(hoverBlock, /\.project-card:hover/);
+  assert.equal(work.match(/\.project-card:hover/g).length, 1, 'no hover rule outside the hover media query');
+  // Focus keeps the card's corners instead of the generic link radius.
+  assert.match(work, /\.project-card:focus-visible\s*\{[^}]*border-radius:\s*36px/);
+  // Touch targets in the fixed nav reach 44px.
+  const coarse = style.match(/@media \(pointer: coarse\)\s*\{([\s\S]*?)\n\}/)?.[1] ?? '';
+  assert.match(coarse, /nav a\s*\{[^}]*min-height:\s*(4[4-9]|[5-9]\d)px/);
+  // Focused elements scroll clear of the pill, and the footer band runs under it.
+  assert.match(style, /html\s*\{[^}]*scroll-padding-bottom:\s*\d+px/);
+  assert.doesNotMatch(style.match(/body\s*\{[^}]*\}/)[0], /padding-bottom/);
 });
 
 test('skills are headed lists and project titles use sentence case', () => {
