@@ -92,6 +92,9 @@
 .hero-intro {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  /* The second row absorbs any extra height from a long intro, so the name
+     and tagline stay together at the top beside the text. */
+  grid-template-rows: auto 1fr;
   gap: 0 48px;
   margin-top: 56px;
   padding: 40px;
@@ -105,7 +108,6 @@
 /* Her name leads in the display face; the tagline follows in the text face. */
 .hero-name {
   grid-column: 1;
-  align-self: end;
   color: var(--blue);
   font: 400 clamp(40px, 5.4vw, 68px)/0.95 var(--display);
 }
@@ -158,6 +160,7 @@
 
   .hero-intro {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
     margin-top: 48px;
     padding: 24px;
   }

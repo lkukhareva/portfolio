@@ -1,10 +1,11 @@
-/* A wider interval than the Work coda above, so About reads as a new section. */
+/* Same opening as Work: the section label carries the wide interval. */
 .about {
-  padding-top: 160px;
+  padding-top: 16px;
 }
 
 /* Portrait as a round sticker beside quotes on sticker notes. */
 .about-intro {
+  margin-top: 72px;
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
   align-items: center;
@@ -127,10 +128,6 @@
 }
 
 @media (max-width: 820px) {
-  .about {
-    padding-top: 112px;
-  }
-
   .about-intro,
   .strengths,
   .story {

@@ -137,6 +137,12 @@ a {
   color: var(--cream);
 }
 
+/* Selected text takes the palette, not the browser default. */
+::selection {
+  background-color: var(--lime);
+  color: var(--ink);
+}
+
 main a[href^="mailto:"] {
   color: var(--lime);
   text-decoration: underline;

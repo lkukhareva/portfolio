@@ -16,6 +16,7 @@ const portfolioCopy = [
   'Lizaveta is tactful in communicating with clients and colleagues',
   'She displayed strong professionalism, patience with others and',
   'Liza was a pleasure to work with',
+  'About me',
   'What I bring to the table',
   'Known for my easy-going nature, non-confrontational attitude, and can-do',
   'Communication',
@@ -54,6 +55,7 @@ const portfolioImages = [
   'Hopappwork.webp',
   'Cloud9work.webp',
   'Rapuhawork.webp',
+  'assets/section-arrow.svg',
   'profile.webp',
   'assets/section-arrow.svg',
   'classroom.webp',
@@ -126,6 +128,11 @@ test('index.html is one scrolling portfolio with hash navigation', () => {
   const headings = [...html.matchAll(/<h([1-3])\b[^>]*>([\s\S]*?)<\/h\1>/g)].map(([, level, content]) => [level, content.replace(/<[^>]+>/g, '').trim()]);
   assert.deepEqual(headings.filter(([level]) => level === '1'), [['1', 'Lizaveta Kukharava']]);
   assert.ok(headings.some(([level, content]) => level === '2' && content === 'What I bring to the table'));
+  // Each section the nav names opens with a visible heading.
+  for (const id of ['work', 'about']) {
+    const section = html.match(new RegExp(`<section\\b[^>]*id="${id}"[\\s\\S]*?</section>`))[0];
+    assert.match(section, /^<section\b[^>]*>\s*<div class="section-label">\s*<h2>/, `${id} opens with its label`);
+  }
   assert.ok(headings.some(([level, content]) => level === '2' && content === 'Recent projects'));
   const projectTitles = [...html.matchAll(/<h3 class="project-title">([^<]+)<\/h3>/g)].map(([, title]) => title);
   assert.deepEqual(projectTitles, [
