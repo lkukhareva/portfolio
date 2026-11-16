@@ -87,6 +87,19 @@ test('copy is typographic, readable, and in story order', () => {
   ]);
 });
 
+test('her name leads the introduction, and the display face is preloaded', () => {
+  const intro = index.match(/<div class="hero-intro">([\s\S]*?)<\/div>\s*<\/section>/)[1];
+  // No eyebrow above the heading: the h1 opens the card and the tagline follows it.
+  assert.match(intro, /^\s*<h1 class="hero-name">Lizaveta Kukharava<\/h1>\s*<p class="hero-tagline">Empathetic Designer: Meaningful Connections via Design<\/p>/);
+  for (const html of [index, impressum]) {
+    assert.match(html, /<link rel="preload" href="fonts\/bagel-fat-one\.woff2" as="font" type="font\/woff2" crossorigin>/);
+  }
+  // Fraunces ships upright only, so nothing may ask the browser to fake an italic.
+  for (const sheet of ['style.css', 'css/index.css', 'css/about.css', 'css/work.css']) {
+    assert.doesNotMatch(read(sheet), /font-style:\s*italic/, sheet);
+  }
+});
+
 test('the hero bubble greets in five languages without a script', () => {
   const bubble = index.match(/<p class="hero-bubble">([\s\S]*?)<\/p>/)[1];
   assert.deepEqual([...bubble.matchAll(/<span lang="([a-z]+)">([^<]+)<\/span>/g)].map(([, lang, word]) => [lang, word]), [

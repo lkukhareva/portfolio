@@ -2,18 +2,19 @@
    greetings in five languages,
    and a lime glass sphere, then the introduction on a cream sticker. */
 .hero {
-  padding-top: 150px;
+  padding-top: 120px;
 }
 
 .hero-stage {
   position: relative;
   container-type: inline-size;
-  padding-top: 14cqi;
+  padding-top: 12cqi;
 }
 
 .hero-wordmark {
   color: var(--cream);
-  font: 400 34cqi/0.9 var(--display);
+  /* Sized so the introduction, with her name, reaches the first screen. */
+  font: 400 28cqi/0.9 var(--display);
   letter-spacing: -0.02em;
   text-align: center;
   text-shadow: 0.035em 0.035em 0 var(--lime), 0.07em 0.07em 0 var(--ink);
@@ -89,8 +90,8 @@
 .hero-intro {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 12px 48px;
-  margin-top: 100px;
+  gap: 0 48px;
+  margin-top: 56px;
   padding: 40px;
   border: 3px solid var(--ink);
   border-radius: 32px;
@@ -99,18 +100,21 @@
   color: var(--ink);
 }
 
-.hero-kicker {
-  grid-column: 1;
-  color: var(--blue);
-  font: 400 clamp(26px, 3.2vw, 38px)/1.1 var(--display);
-}
-
+/* Her name leads in the display face; the tagline follows in the text face. */
 .hero-name {
   grid-column: 1;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  align-self: end;
+  color: var(--blue);
+  font: 400 clamp(40px, 5.4vw, 68px)/0.95 var(--display);
+}
+
+.hero-tagline {
+  grid-column: 1;
+  align-self: start;
+  margin-top: 12px;
+  font-size: clamp(21px, 2vw, 24px);
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 .hero-text {
@@ -153,12 +157,13 @@
 
   .hero-intro {
     grid-template-columns: minmax(0, 1fr);
-    margin-top: 64px;
+    margin-top: 48px;
     padding: 24px;
   }
 
   .hero-text {
     grid-column: 1;
     grid-row: auto;
+    margin-top: 20px;
   }
 }

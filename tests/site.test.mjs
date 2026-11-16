@@ -10,7 +10,7 @@ const read = path => readFileSync(join(root, path), 'utf8');
 const pages = ['index.html', 'about.html', 'work.html', 'impressum.html'];
 const portfolioCopy = [
   'Empathetic Designer: Meaningful Connections via Design',
-  'lizaveta kukharava',
+  'Lizaveta Kukharava',
   'I’m a UX designer based in Berlin.',
   'I speak English, Russian, German, Belarusian, and Polish',
   'Lizaveta is tactful in communicating with clients and colleagues',
@@ -123,7 +123,7 @@ test('index.html is one scrolling portfolio with hash navigation', () => {
   assert.match(html, /<section\b[^>]*id="work"[^>]*aria-label="Work"/);
 
   const headings = [...html.matchAll(/<h([1-3])\b[^>]*>([\s\S]*?)<\/h\1>/g)].map(([, level, content]) => [level, content.replace(/<[^>]+>/g, '').trim()]);
-  assert.deepEqual(headings.filter(([level]) => level === '1'), [['1', 'lizaveta kukharava']]);
+  assert.deepEqual(headings.filter(([level]) => level === '1'), [['1', 'Lizaveta Kukharava']]);
   assert.ok(headings.some(([level, content]) => level === '2' && content === 'What I bring to the table'));
   assert.ok(headings.some(([level, content]) => level === '2' && content === 'Recent projects'));
   assert.deepEqual(headings.filter(([level]) => level === '3').map(([, content]) => content), [

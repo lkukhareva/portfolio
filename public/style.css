@@ -97,6 +97,13 @@ h1,
 h2,
 h3 {
   font: inherit;
+  text-wrap: balance;
+}
+
+p,
+blockquote,
+figcaption {
+  text-wrap: pretty;
 }
 
 /* One centered column with the same side gutter on every screen size. */

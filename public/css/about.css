@@ -35,7 +35,6 @@
   box-shadow: 6px 6px 0 var(--ink);
   color: var(--ink);
   font-size: 20px;
-  font-style: italic;
 }
 
 .quote:nth-child(even) {
