@@ -57,14 +57,17 @@ test('project cards announce Behance and a new tab, and react to keyboard focus'
   assert.match(read('css/work.css'), /\.project-card:focus-visible\s*\{[^}]*transform:\s*(?!none\b)[^;}]+/);
 });
 
-test('skills are lists and project titles use sentence case', () => {
+test('skills are headed lists and project titles use sentence case', () => {
   const about = index.match(/<section\b[^>]*id="about"[\s\S]*?<\/section>/)[0];
   const lists = [...about.matchAll(/<ul\b[^>]*>([\s\S]*?)<\/ul>/g)];
   assert.equal(lists.length, 2);
   assert.deepEqual(lists.map(([, items]) => items.match(/<li\b/g).length), [5, 5]);
   // list-style: none drops list semantics in WebKit unless the role is explicit.
   for (const [list] of lists) assert.match(list, /<ul\b[^>]*role="list"/);
-  const titles = [...index.matchAll(/<h3\b[^>]*>([^<]+)<\/h3>/g)].map(([, title]) => title);
+  // A visible heading names each group, so colour does not have to.
+  assert.deepEqual([...about.matchAll(/<h3 class="skill-heading">([^<]+)<\/h3>\s*(?:<!--[\s\S]*?-->\s*)?<ul\b/g)].map(([, heading]) => heading), ['Soft skills', 'Hard skills']);
+  const titles = [...index.matchAll(/<h3 class="project-title">([^<]+)<\/h3>/g)].map(([, title]) => title);
+  assert.equal(titles.length, 4);
   for (const title of titles) assert.match(title, /^How I /);
 });
 
@@ -105,6 +108,16 @@ test('the hero bubble greets in five languages without a script', () => {
   assert.deepEqual([...bubble.matchAll(/<span lang="([a-z]+)">([^<]+)<\/span>/g)].map(([, lang, word]) => [lang, word]), [
     ['en', 'Hello'], ['ru', 'Привет'], ['de', 'Hallo'], ['be', 'Вітаю'], ['pl', 'Cześć'],
   ]);
+  // Motion that starts on its own must stop within five seconds (WCAG 2.2.2).
+  for (const sheet of ['style.css', 'css/index.css', 'css/about.css', 'css/work.css']) {
+    assert.doesNotMatch(read(sheet), /\binfinite\b/, sheet);
+  }
+  const css = read('css/index.css');
+  const seconds = value => Number.parseFloat(value);
+  const wordLength = seconds(css.match(/\.hero-bubble span\s*\{[^}]*animation:\s*greeting\s+([\d.]+)s/)[1]);
+  const lastDelay = Math.max(...[...css.matchAll(/\.hero-bubble span:nth-child\(\d\)\s*\{\s*animation-delay:\s*([\d.]+)s/g)].map(([, delay]) => seconds(delay)));
+  const bookend = seconds(css.match(/\.hero-bubble span:first-child\s*\{[^}]*animation:\s*greeting-bookend\s+([\d.]+)s/)[1]);
+  assert.ok(Math.max(lastDelay + wordLength, bookend) <= 5, 'the greeting settles within five seconds');
   // Without motion, the first greeting stays visible instead of none.
   assert.match(read('css/index.css'), /prefers-reduced-motion: reduce\)\s*\{\s*\.hero-bubble span:first-child\s*\{\s*opacity:\s*1/);
 });

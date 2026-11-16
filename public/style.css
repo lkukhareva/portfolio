@@ -267,18 +267,17 @@ nav a:focus-visible {
   gap: 16px;
   margin-top: 140px;
   color: var(--cream);
-  font: 400 clamp(36px, 6.5vw, 72px)/1 var(--display);
+  font: 400 clamp(32px, 5vw, 56px)/1 var(--display);
   text-align: center;
   text-transform: lowercase;
 }
 
 .section-label h2 {
-  padding: 0.1em 0.35em 0.2em;
+  padding: 0.14em 0.4em 0.22em;
   border: 3px solid var(--ink);
   border-radius: 0.4em;
   background-color: var(--lime);
   color: var(--ink);
-  box-shadow: 6px 6px 0 var(--ink);
 }
 
 /* The black arrow artwork, turned cream. */

@@ -67,14 +67,20 @@ const stories = [
       </p>
     </div>
     <div class="skills">
-      <!-- [html-validate-disable-next no-redundant-role -- WebKit drops list semantics with list-style: none] -->
-      <ul class="skill-list" role="list">
-        {softSkills.map((skill) => <li>{skill}</li>)}
-      </ul>
-      <!-- [html-validate-disable-next no-redundant-role -- WebKit drops list semantics with list-style: none] -->
-      <ul class="skill-list" role="list">
-        {craftSkills.map((skill) => <li>{skill}</li>)}
-      </ul>
+      <div class="skill-group">
+        <h3 class="skill-heading">Soft skills</h3>
+        <!-- [html-validate-disable-next no-redundant-role -- WebKit drops list semantics with list-style: none] -->
+        <ul class="skill-list" role="list">
+          {softSkills.map((skill) => <li>{skill}</li>)}
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-heading">Hard skills</h3>
+        <!-- [html-validate-disable-next no-redundant-role -- WebKit drops list semantics with list-style: none] -->
+        <ul class="skill-list" role="list">
+          {craftSkills.map((skill) => <li>{skill}</li>)}
+        </ul>
+      </div>
     </div>
   </div>
 

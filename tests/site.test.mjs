@@ -126,7 +126,8 @@ test('index.html is one scrolling portfolio with hash navigation', () => {
   assert.deepEqual(headings.filter(([level]) => level === '1'), [['1', 'Lizaveta Kukharava']]);
   assert.ok(headings.some(([level, content]) => level === '2' && content === 'What I bring to the table'));
   assert.ok(headings.some(([level, content]) => level === '2' && content === 'Recent projects'));
-  assert.deepEqual(headings.filter(([level]) => level === '3').map(([, content]) => content), [
+  const projectTitles = [...html.matchAll(/<h3 class="project-title">([^<]+)<\/h3>/g)].map(([, title]) => title);
+  assert.deepEqual(projectTitles, [
     'How I redesigned a fashion contest site',
     'How I redesigned a travel app',
     'How I created a niche weather app',

@@ -34,16 +34,20 @@
   box-shadow: 6px 6px 0 var(--ink);
   color: var(--blue);
   font: 400 8cqi/1 var(--display);
-  animation: bubble-bob 4s ease-in-out infinite;
 }
 
-/* Five words share one cell, so the bubble fits the widest; each shows for
-   2s of a 10s loop. */
+/* Five words share one cell, so the bubble fits the widest. The greeting
+   plays once, a word a second, and settles back on Hello: the motion stops
+   within five seconds, so it needs no pause control (WCAG 2.2.2). */
 .hero-bubble span {
   grid-area: 1 / 1;
   text-align: center;
   opacity: 0;
-  animation: greeting 10s ease-in-out infinite both;
+  animation: greeting 1.3s ease-in-out both;
+}
+
+.hero-bubble span:first-child {
+  animation: greeting-bookend 5s ease-in-out both;
 }
 
 /* Bagel has no ś or ć; set the whole Polish word in Rubik, like the Cyrillic. */
@@ -51,10 +55,10 @@
   font-family: "Rubik Black", var(--display);
 }
 
-.hero-bubble span:nth-child(2) { animation-delay: 2s; }
-.hero-bubble span:nth-child(3) { animation-delay: 4s; }
-.hero-bubble span:nth-child(4) { animation-delay: 6s; }
-.hero-bubble span:nth-child(5) { animation-delay: 8s; }
+.hero-bubble span:nth-child(2) { animation-delay: 0.7s; }
+.hero-bubble span:nth-child(3) { animation-delay: 1.7s; }
+.hero-bubble span:nth-child(4) { animation-delay: 2.7s; }
+.hero-bubble span:nth-child(5) { animation-delay: 3.7s; }
 
 .hero-bubble::after {
   content: "";
@@ -83,8 +87,6 @@
   box-shadow:
     inset -1.2cqi -1.6cqi 2.4cqi rgb(20 50 0 / 0.45),
     0 2cqi 3cqi rgb(5 15 50 / 0.45);
-  backdrop-filter: blur(6px);
-  animation: sphere-drift 6s ease-in-out infinite;
 }
 
 .hero-intro {
@@ -127,20 +129,19 @@
   margin-top: 14px;
 }
 
-@keyframes bubble-bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6%); }
-}
-
+/* Each word: in over 0.3s, held 0.7s, out over 0.3s as the next comes in. */
 @keyframes greeting {
   0% { opacity: 0; transform: translateY(25%); }
-  4%, 18% { opacity: 1; transform: translateY(0); }
-  22%, 100% { opacity: 0; transform: translateY(-25%); }
+  23%, 77% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-25%); }
 }
 
-@keyframes sphere-drift {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-10%, 12%); }
+/* Hello opens and closes the sequence: out at 0.7–1s, back at 4.7–5s. */
+@keyframes greeting-bookend {
+  0%, 14% { opacity: 1; transform: translateY(0); }
+  20% { opacity: 0; transform: translateY(-25%); }
+  94% { opacity: 0; transform: translateY(25%); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 /* Without motion, the greeting stays on the first word. */

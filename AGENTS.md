@@ -94,9 +94,10 @@ npx --yes html-validate@11.17.0 --preset standard,a11y dist/index.html dist/abou
   with grid/flex and `.container`, not fixed offsets or per-item copies. Preserve
   stylesheet order, semantic landmarks/headings, image alternatives, focus
   styles, and reduced-motion support.
-- The greeting bubble cycles its five words (`lang` on each) in CSS only; the
-  published script list is limited to `scroll-nav.js`. Under reduced motion it
-  shows the first word. Text in a script Bagel Fat One lacks needs a covering
+- The greeting bubble plays its five words (`lang` on each) once in CSS only and
+  settles on Hello; the published script list is limited to `scroll-nav.js`.
+  Motion that starts by itself must stop within five seconds (WCAG 2.2.2), so
+  no looping animation. Under reduced motion it shows the first word. Text in a script Bagel Fat One lacks needs a covering
   self-hosted font (see `public/fonts/`); check the glyphs before adding words.
 - State indicators (current section, focus) need 3:1 contrast; lime on cream
   does not reach it.
