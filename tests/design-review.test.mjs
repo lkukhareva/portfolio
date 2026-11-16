@@ -56,6 +56,19 @@ test('project cards announce Behance and a new tab, and react to keyboard focus'
     assert.match(card, /Case study on Behance(?:&nbsp;|\u00a0)<span aria-hidden="true">↗<\/span>/);
     assert.match(card, /<span class="visually-hidden">\(opens in new tab\)<\/span>/);
   }
+  // Each card is named by its title and destination; the sentence describes it.
+  const links = [...index.matchAll(/<a\b[^>]*class="project-card"[^>]*>/g)].map(([tag]) => tag);
+  assert.equal(links.length, 4);
+  const ids = new Set();
+  for (const tag of links) {
+    const [, title, cta] = tag.match(/aria-labelledby="(\S+-title) (\S+-cta)"/);
+    const [, description] = tag.match(/aria-describedby="(\S+-description)"/);
+    for (const id of [title, cta, description]) {
+      assert.equal(index.match(new RegExp(`id="${id}"`, 'g'))?.length, 1, `${id} exists once`);
+      ids.add(id);
+    }
+  }
+  assert.equal(ids.size, 12);
   // Any visible movement counts; the design picks the effect.
   assert.match(read('css/work.css'), /\.project-card:focus-visible\s*\{[^}]*transform:\s*(?!none\b)[^;}]+/);
 });
@@ -86,10 +99,10 @@ test('skills are headed lists and project titles use sentence case', () => {
   for (const [list] of lists) assert.match(list, /<ul\b[^>]*role="list"/);
   // A visible heading names each group, so colour does not have to.
   assert.deepEqual([...about.matchAll(/<h3 class="skill-heading">([^<]+)<\/h3>\s*(?:<!--[\s\S]*?-->\s*)?<ul\b/g)].map(([, heading]) => heading), ['Soft skills', 'Hard skills']);
-  const titles = [...index.matchAll(/<h3 class="project-title">([^<]+)<\/h3>/g)].map(([, title]) => title);
+  const titles = [...index.matchAll(/<h3 class="project-title"[^>]*>([^<]+)<\/h3>/g)].map(([, title]) => title);
   assert.equal(titles.length, 4);
   // Titles name the project; the first-person "How I" line follows as the description.
-  const descriptions = [...index.matchAll(/<p class="project-description">([^<]+)<\/p>/g)].map(([, text]) => text);
+  const descriptions = [...index.matchAll(/<p class="project-description"[^>]*>([^<]+)<\/p>/g)].map(([, text]) => text);
   assert.equal(descriptions.length, 4);
   for (const text of descriptions) assert.match(text, /^How I /);
   assert.equal(new Set(titles.map(title => title.split(' ')[0])).size, 4, 'each title opens with a different project name');
@@ -111,7 +124,8 @@ test('copy is typographic, readable, and in story order', () => {
   const header = index.match(/<ul class="header-contacts"[\s\S]*?<\/ul>/)[0];
   assert.deepEqual([...header.matchAll(/<a\b[^>]*>([^<]+)<\/a>/g)].map(([, label]) => label), ['Email', 'LinkedIn', 'Behance']);
   // Stories run in life order: teaching, the IT company, then UX.
-  assert.deepEqual([...main.matchAll(/<h2 class="story-title">([^<]+)<\/h2>/g)].map(([, title]) => title), [
+  // Story titles sit one level below the About headings, not beside them.
+  assert.deepEqual([...main.matchAll(/<h3 class="story-title">([^<]+)<\/h3>/g)].map(([, title]) => title), [
     'Empathy and communication', 'Growth and improvement', 'Going the extra mile',
   ]);
 });

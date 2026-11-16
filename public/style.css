@@ -313,15 +313,11 @@ nav a:focus-visible {
 }
 
 @media (max-width: 720px) {
-  .site-header {
-    top: 16px;
-    left: var(--gutter);
-  }
-
   /* One row instead of a stack frees the top of a phone screen; the
      padding makes each contact a 44px-tall target. */
   .site-header {
     top: 6px;
+    left: var(--gutter);
   }
 
   .header-contacts {

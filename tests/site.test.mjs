@@ -135,7 +135,7 @@ test('index.html is one scrolling portfolio with hash navigation', () => {
     assert.match(section, /^<section\b[^>]*>\s*<div class="section-label">\s*<h2>/, `${id} opens with its label`);
   }
   assert.ok(headings.some(([level, content]) => level === '2' && content === 'Recent projects'));
-  const projectTitles = [...html.matchAll(/<h3 class="project-title">([^<]+)<\/h3>/g)].map(([, title]) => title);
+  const projectTitles = [...html.matchAll(/<h3 class="project-title"[^>]*>([^<]+)<\/h3>/g)].map(([, title]) => title);
   assert.deepEqual(projectTitles, [
     'International Fashion Show website',
     'Hop travel app',

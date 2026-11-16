@@ -2,7 +2,7 @@
 import ProjectCard from './ProjectCard.astro';
 import { projects } from '../data/projects';
 
-const ordered = [projects.fashion, projects.hop, projects.cloud, projects.rapuha];
+const ordered = (['fashion', 'hop', 'cloud', 'rapuha'] as const).map((key) => [key, projects[key]] as const);
 ---
 
 <section id="work" class="work container" aria-label="Work">
@@ -11,12 +11,12 @@ const ordered = [projects.fashion, projects.hop, projects.cloud, projects.rapuha
     <img src="assets/section-arrow.svg" alt="">
   </div>
   <div class="project-grid">
-    {ordered.map((project, index) => (
-      <ProjectCard project={project} loading={index < 2 ? undefined : 'lazy'} />
+    {ordered.map(([key, project], index) => (
+      <ProjectCard project={project} id={`project-${key}`} loading={index < 2 ? undefined : 'lazy'} />
     ))}
   </div>
 
   <p class="work-contact">
-    Reach out to <a href="mailto:contact@lizavetakuk.com">contact@<wbr>lizavetakuk.com</a> to team up and transform your challenges into wins.
+    Reach out to <a href="mailto:contact@lizavetakuk.com">contact@<wbr>lizavetakuk.com</a> to&nbsp;team&nbsp;up and transform your challenges into wins.
   </p>
 </section>

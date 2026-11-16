@@ -3,18 +3,21 @@ import type { Project } from '../data/projects';
 
 interface Props {
   project: Project;
+  id: string;
   loading?: 'lazy';
 }
 
-const { project, loading } = Astro.props;
+// The link is named by its title and destination; the longer sentence is its
+// description, so screen readers do not read every word of the card as a name.
+const { project, id, loading } = Astro.props;
 ---
 
-<a href={project.href} class="project-card" target="_blank" rel="noopener">
+<a href={project.href} class="project-card" target="_blank" rel="noopener" aria-labelledby={`${id}-title ${id}-cta`} aria-describedby={`${id}-description`}>
   <img loading={loading} src={project.image} alt="" width="1100" height="782" class="project-image">
   <div class="project-body">
-    <h3 class="project-title">{project.title}</h3>
-    <p class="project-description">{project.description}</p>
-    <span class="project-cta">
+    <h3 class="project-title" id={`${id}-title`}>{project.title}</h3>
+    <p class="project-description" id={`${id}-description`}>{project.description}</p>
+    <span class="project-cta" id={`${id}-cta`}>
       Case study on Behance&nbsp;<span aria-hidden="true">↗</span>
       <span class="visually-hidden">(opens in new tab)</span>
     </span>
